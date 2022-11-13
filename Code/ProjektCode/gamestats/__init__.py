@@ -1,0 +1,2 @@
+from space_invader_stats import SpaceInvaderStats
+from tic_tac_toe_stats import TicTacToeStats
