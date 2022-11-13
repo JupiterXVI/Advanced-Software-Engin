@@ -1,8 +1,8 @@
 """
 imports
 """
-from playground import Playground
-from account import Account
+from .playground import Playground
+from .account import Account
 
 
 class Multiplayer(Playground):
