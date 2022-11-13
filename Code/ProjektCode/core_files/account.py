@@ -1,10 +1,9 @@
 """
 imports
 """
-#from playground import Playground
-from singleplayer import Singleplayer
 
-class Account:
+
+class Account():
     """
     global variables
     """
@@ -39,18 +38,15 @@ class Account:
         self.age = new_age
 
     def get_age(self):
-        return slef.age
+        return self.age
 
     def set_admin(self, is_admin):
         self.is_admin = is_admin
 
-    def save_user_data():
+# die funktionen sollen vermutlich nicht hier her
+    def save_user_data(self):
         pass 
 
-    def save_user_stats():
+    def save_user_stats(self):
         pass
-
-print('--------------------------')
-b = Singleplayer("a")
-b.hallo()
-
+    

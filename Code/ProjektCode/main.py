@@ -1,14 +1,14 @@
-from PyQt5 import QtWidgets
-from PyQt5.QtWidgets import QApplication, QMainWindow
-import sys
+from core_files.account import Account
+from adapter import get_connection
 
-def window():
-    app = QApplication(sys.argv)
-    win = QMainWindow()
-    win.setGeometry(200, 200, 300, 300)
-    win.setWindowTitle("Titel of App")
+def test_from_import_core_files():
+    a = Account(1, "Tim", "timpw", "14", False)
+    print(a.get_name())
 
-    win.show()
-    sys.exit(app.exec_())
+def test_from_import_adapter():
+    get_connection()
 
-window()
+if __name__ == "__main__":
+    print("started main file...")
+    test_from_import_core_files()
+    test_from_import_adapter()
