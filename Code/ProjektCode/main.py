@@ -11,10 +11,11 @@ def test_from_import_core_files():
 def test_from_import_adapter():
     get_connection()
 
-if __name__ == "__main__":
-    print("started main file...")
-    #test_from_import_core_files()
-    #test_from_import_adapter()
-    menu = Menu(600, 600)
-    library = GameLibrary(menu)
-    library.open_main_menu()
+
+
+#test_from_import_core_files()
+#test_from_import_adapter()
+print("started main file...")
+menu = Menu(600, 600)
+library = GameLibrary(menu)
+library.open_main_menu()
