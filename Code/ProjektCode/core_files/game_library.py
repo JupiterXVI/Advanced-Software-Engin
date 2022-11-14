@@ -4,14 +4,16 @@ imports
 import os
 import sys
 sys.path.append(os.path.join(sys.path[0], '..'))
-from core_files.game import Game
-from core_files.playground import Playground
+from adapter import AllowToBuldMenu
+from core_files import Game
+from core_files import Playground
 
 class GameLibrary():
     """
     global variables
     """
-    def __init__(self):
+    def __init__(self, gui:  AllowToBuldMenu):
+        self.gui =  gui
         self.gamelist = []
 
     """
@@ -21,5 +23,13 @@ class GameLibrary():
         self.gamelist.append(new_game)
 
     def open_main_menu(self):
-        pass
-    
+        print("opening main menu...")
+        window = self.gui.create_window()
+        #self.gui.create_buttons()
+        #self.gui.set_styles()
+        
+
+
+
+if __name__ == "__main__":
+    pass
