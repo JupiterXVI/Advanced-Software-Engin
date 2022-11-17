@@ -1,6 +1,6 @@
 from core_files import Account
-from adapter import get_connection
 from core_files import GameLibrary
+from adapter import get_connection
 from gui import Menu
 
 

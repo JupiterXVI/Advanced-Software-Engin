@@ -3,12 +3,12 @@ imports
 """
 import psycopg2
 from configparser import ConfigParser
-import os
+from os import path as os_path
 
 """
 global variables
 """
-
+#Soll das zu einer eigenen Klasse werden?
 """
 functions
 """
@@ -17,7 +17,7 @@ def config(filename='\docker\docker_postgresql\player_db.ini', section='postgres
     parser = ConfigParser()
 
     # get path to config file
-    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    base_dir = os_path.dirname(os_path.dirname(os_path.abspath(__file__)))
     filename = base_dir+filename
     # read config file
     parser.read(filename)
@@ -52,7 +52,7 @@ def get_connection():
         # execute a statement
         print('PostgreSQL database version:')
         cur.execute('SELECT version()')
-
+        
         # display the PostgreSQL database server version
         db_version = cur.fetchone()
         print(db_version)

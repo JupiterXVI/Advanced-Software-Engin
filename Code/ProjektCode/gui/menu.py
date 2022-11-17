@@ -1,9 +1,9 @@
 """
 imports
 """
-import os
-import sys
-sys.path.append(os.path.join(sys.path[0], '..'))
+from os import path as os_path
+from sys import path as sys_path
+sys_path.append(os_path.join(sys_path[0], '..'))
 from adapter import AllowToBuldMenu
 import pygame
 

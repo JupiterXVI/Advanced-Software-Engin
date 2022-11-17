@@ -40,6 +40,7 @@ class Account():
     def get_age(self):
         return self.age
 
+# koherenz erhöhen durch auslagerung des Adminkontents in eigenes Element 
     def set_admin(self, is_admin):
         self.is_admin = is_admin
 
