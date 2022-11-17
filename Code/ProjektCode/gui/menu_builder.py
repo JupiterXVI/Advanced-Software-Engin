@@ -7,29 +7,56 @@ sys_path.append(os_path.join(sys_path[0], '..'))
 from adapter import AllowToBuldMenu
 import pygame
 
-class Menu(AllowToBuldMenu):
+class MenuBuilder(AllowToBuldMenu):
     """
     global variables
     """
-    def __init__(self, width, height):
-        self.window_width = width
-        self.window_height = height
+    def __init__(self, window_info, window_elements):
+        self.window_width = window_info["width"]
+        self.window_height = window_info["height"]
+        self.window_titel = window_info["titel"]
+        self.window_elements = window_elements
 
     """
     functions
     """
     def create_window(self):
         window = pygame.display.set_mode((self.window_width, self.window_height))
-        pygame.display.set_caption('Spielebibliothek')
+        pygame.display.set_caption(self.window_titel)
         return window
         
         
-    def create_buttons(self):
-        pass
+    def create_window_elements(self):
+        for element in self.window_elements:
+            if element["form"] == "rectangle":
+                print("rect")
 
     def set_styles(self):
         pass
 
+
+class Button():
+    """
+    global variables
+    """
+    def __init__(self, pos_x, pos_y, width, height):
+        self.pos_x = pos_x
+        self.pos_y = pos_y
+        self.width = width
+        self.height = height
+        self.aktive = True
+
+    """
+    functions
+    """
+    def click(self):
+        if self.aktive:
+            pass
+        else:
+            pass        
+
+
+    
 """
 import pygame
 

@@ -9,7 +9,7 @@ class AllowToBuldMenu(ABC):
     def create_window(self):
         pass
         
-    def create_buttons(self):
+    def create_window_elements(self):
         pass
 
     def set_styles(self):

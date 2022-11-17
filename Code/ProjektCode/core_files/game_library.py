@@ -27,7 +27,7 @@ class GameLibrary():
     def open_main_menu(self):
         print("opening main menu...")
         window = self.gui.create_window()
-        #self.gui.create_buttons()
+        self.gui.create_window_elements()
         #self.gui.set_styles()
         
 
