@@ -7,6 +7,14 @@ Oberfläche: <br/>
 pygame
 
 _______________________________________________________________________
+Setup: <br/>
+Erstelle Virtaul Environment:
+- Navegiere in Ordner "Code"
+- > python -m venv env
+- > .\env\Skripts\activate
+- > pip install pygame
+- > pip install psycopg2
+<br/>
 Datenbank: <br/>
 postgresql - in docker container <br/>
 <br/>
