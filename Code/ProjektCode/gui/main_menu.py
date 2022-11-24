@@ -14,19 +14,37 @@ class MainMenu():
     }
 
     start_button = {
+        "name": "start_button",
         "form": "rectangle",
-        "pos_x": 50,
-        "pos_y": 50,
-        "width": 500,
-        "heigth": 100
+        "dimensions": [
+            50,  # pos_x
+            50,  # pos_y
+            500, # width
+            100  # heigth
+        ],
+        "color": [
+            255, # red
+            255, # green
+            255  # blue
+        ],
+        "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
     exit_button = {
+        "name": "exit_button",
         "form": "rectangle",
-        "pos_x": 50,
-        "pos_y": 200,
-        "width": 500,
-        "heigth": 100
+        "dimensions": [
+            50,  # pos_x
+            200, # pos_y
+            500, # width
+            100  # heigth
+        ],
+        "color": [
+            255, # red
+            255, # green
+            255  # blue
+        ],
+        "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
     image_paths = {
@@ -36,5 +54,5 @@ class MainMenu():
 
     window_elements = [
         start_button,
-        exit_button
+        exit_button,
     ]

@@ -1,5 +1,5 @@
 from core_files import Account
-from core_files import GameLibrary
+from core_files import GameLibraryMenu
 from adapter import get_connection
 from gui import MainMenu
 from gui import MenuBuilder
@@ -15,10 +15,10 @@ def test_from_import_adapter():
 
 
 print("started main file...")
-menu = MenuBuilder(MainMenu.window, MainMenu.window_elements)
-library = GameLibrary(menu)
-library.open_main_menu()
 #test_from_import_core_files()
 #test_from_import_adapter()
-#for x in range(10000):
-#    print(MainMenu.image_paths["start_button"])
+
+main_menu = MenuBuilder(MainMenu.window, MainMenu.window_elements)
+library = GameLibraryMenu(main_menu)
+library.open_main_menu()
+library.run_main_menu()

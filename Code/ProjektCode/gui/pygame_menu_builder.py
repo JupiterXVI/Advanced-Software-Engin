@@ -24,36 +24,45 @@ class MenuBuilder(AllowToBuldMenu):
         window = pygame.display.set_mode((self.window_width, self.window_height))
         pygame.display.set_caption(self.window_titel)
         return window
+
+    def terminate_window(self):
+        pygame.quit()
         
         
-    def create_window_elements(self):
+    def create_window_elements(self, window):
+        elements_added_to_window = {"item_name": [], "item": []}
         for element in self.window_elements:
+            intercaton_surface = pygame.Rect([0, 0, 0, 0])
             if element["form"] == "rectangle":
-                print("rect")
+                pygame.draw.rect(window, element["color"], element["dimensions"], element["line_thickness"])
+                intercaton_surface = pygame.Rect(element["dimensions"])
+            if element["form"] == "circle":
+                pygame.draw.circle(window, element["color"], element["position"], element["radius"], element["line_thickness"])
+                intercaton_surface = pygame.Rect(element["position"], element["radius"])
+            elements_added_to_window["item_name"].append(element["name"])
+            elements_added_to_window["item"].append(intercaton_surface)
+        return elements_added_to_window
 
     def set_styles(self):
         pass
 
+    def update_window(self):
+        pygame.display.update()
 
-class Button():
-    """
-    global variables
-    """
-    def __init__(self, pos_x, pos_y, width, height):
-        self.pos_x = pos_x
-        self.pos_y = pos_y
-        self.width = width
-        self.height = height
-        self.aktive = True
+    def check_click(self):
+        if pygame.mouse.get_pressed()[0] == 1:
+            return True
+        return False
 
-    """
-    functions
-    """
-    def click(self):
-        if self.aktive:
-            pass
-        else:
-            pass        
+    def check_events(self, intercaton_surfaces):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                return "quit"
+        for index, item in enumerate(intercaton_surfaces["item"]):
+            if item.collidepoint(pygame.mouse.get_pos()):
+                if self.check_click():
+                    return intercaton_surfaces["item_name"][index]
+            
 
 
     

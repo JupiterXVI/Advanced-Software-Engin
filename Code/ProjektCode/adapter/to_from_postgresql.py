@@ -52,6 +52,7 @@ def get_connection():
         # execute a statement
         print('PostgreSQL database version:')
         cur.execute('SELECT version()')
+        cur.execute('SELECT * from player')
         
         # display the PostgreSQL database server version
         db_version = cur.fetchone()

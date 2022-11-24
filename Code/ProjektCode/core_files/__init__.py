@@ -4,4 +4,4 @@ from .singleplayer import Singleplayer
 from .multiplayer import Multiplayer
 from .statistic import Statistic
 from .game import Game
-from .game_library import GameLibrary
+from .game_library_menu import GameLibraryMenu
