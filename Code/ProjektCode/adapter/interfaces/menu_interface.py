@@ -12,10 +12,10 @@ class AllowToBuldMenu(ABC):
     def terminate_window(self):
         pass
         
-    def create_window_elements(self):
+    def create_window_interaction_elements(self):
         pass
 
-    def set_styles(self):
+    def set_element_styles(self, window):
         pass
 
     def update_window(self):

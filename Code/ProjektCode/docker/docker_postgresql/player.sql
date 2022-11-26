@@ -6,9 +6,6 @@ CREATE TABLE player(
     is_admin BOOLEAN NOT NULL
 );
 
-INSERT INTO player(username, password, age, is_admin) 
-VALUES('Tim', 'passwd', '12', FALSE);
-
 CREATE TABLE game(
     game_id serial PRIMARY KEY, 
     game VARCHAR (50) NOT NULL,
@@ -28,3 +25,9 @@ CREATE TABLE gamestats(
     wins INT NOT NULL,
     losses INT NOT NULL
 );
+
+INSERT INTO player(username, password, age, is_admin) 
+VALUES('Tim', 'passwd', '12', FALSE);
+
+INSERT INTO player(username, password, age, is_admin) 
+VALUES('Julia', 'penta', '14', FALSE);

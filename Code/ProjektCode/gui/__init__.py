@@ -1,2 +1,2 @@
-from .pygame_menu_builder import MenuBuilder
-from .main_menu import MainMenu
+from .gui_specifications import MainMenu
+from .game_library_menu import GameLibraryMenu

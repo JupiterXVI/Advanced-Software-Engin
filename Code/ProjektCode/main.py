@@ -1,24 +1,40 @@
+"""
+imports
+"""
+from adapter import MenuBuilder
+from adapter import PostgreSqlAdapter
+from adapter import Timer
 from core_files import Account
-from core_files import GameLibraryMenu
-from adapter import get_connection
+from gui import GameLibraryMenu
 from gui import MainMenu
-from gui import MenuBuilder
 
 
-def test_from_import_core_files():
-    a = Account(1, "Tim", "timpw", "14", False)
-    print(a.get_name())
+class Main():
+    """
+    global variables
+    """
+    def __init__(self):
+        pass
 
-def test_from_import_adapter():
-    get_connection()
+    """
+    functions
+    """
+    def test_database():
+        print(PostgreSqlAdapter().get_player_table())
+        player1 = Account(3, 'Bob', 'changeme', '15', False, PostgreSqlAdapter())
+        print(PostgreSqlAdapter().get_player_table())
+        player1.set_age(5)
+        player1.save_account_data()
+        print(PostgreSqlAdapter().get_player_table())
 
+    def start():
+        print("started main file...")
+        timer = Timer()
+        main_menu = MenuBuilder(MainMenu.window, MainMenu.window_elements)
+        library = GameLibraryMenu(main_menu)
+        library.open_main_menu()
+        library.run_main_menu(timer)
 
-
-print("started main file...")
-#test_from_import_core_files()
-#test_from_import_adapter()
-
-main_menu = MenuBuilder(MainMenu.window, MainMenu.window_elements)
-library = GameLibraryMenu(main_menu)
-library.open_main_menu()
-library.run_main_menu()
+if __name__ == "__main__":
+    Main.test_database()
+    Main.start()
