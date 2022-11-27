@@ -94,6 +94,7 @@ class PostgreSqlAdapter(DatabaseAccess):
 
     def close_connection(self, conn, cursor):
         try:
+            print('Closing database connecting...')
             conn.commit()
             # close the communication with the PostgreSQL
             cursor.close()

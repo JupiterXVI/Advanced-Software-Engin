@@ -19,9 +19,19 @@ class MainMenu(): # muss ggf keine klasse ein
     start_button = {
         "name": "start_button",
         "form": "rectangle",
-        "dimensions": [
+        "text": {
+            "content": "START",
+            "color": [
+                0, # red
+                0, # green
+                0  # blue
+            ],
+        },
+        "position":[
             50,  # pos_x
-            50,  # pos_y
+            50 # pos_y
+        ],
+        "dimensions": [
             500, # width
             100  # heigth
         ],
@@ -36,9 +46,19 @@ class MainMenu(): # muss ggf keine klasse ein
     exit_button = {
         "name": "exit_button",
         "form": "rectangle",
-        "dimensions": [
+        "text": {
+            "content": "EXIT",
+            "color": [
+                0, # red
+                0, # green
+                0  # blue
+            ],
+        },
+        "position":[
             50,  # pos_x
-            200, # pos_y
+            200 # pos_y
+        ],
+        "dimensions": [
             500, # width
             100  # heigth
         ],
@@ -53,9 +73,19 @@ class MainMenu(): # muss ggf keine klasse ein
     option_button = {
         "name": "option_button",
         "form": "rectangle",
-        "dimensions": [
+        "text": {
+            "content": "OPTION",
+            "color": [
+                0, # red
+                0, # green
+                0  # blue
+            ],
+        },
+        "position":[
             50,  # pos_x
-            350, # pos_y
+            350 # pos_y
+        ],
+        "dimensions": [
             500, # width
             100  # heigth
         ],

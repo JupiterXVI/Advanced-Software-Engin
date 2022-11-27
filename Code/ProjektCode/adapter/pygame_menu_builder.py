@@ -12,6 +12,7 @@ class MenuBuilder(AllowToBuldMenu):
     global variables
     """
     def __init__(self, window_info, window_elements):
+        pygame.init()
         # information for the gui-window
         self.window_width = window_info["width"]
         self.window_height = window_info["height"]
@@ -19,6 +20,8 @@ class MenuBuilder(AllowToBuldMenu):
         self.window_color = window_info["color"]
         # list of elements which make up the contence
         self.window_elements = window_elements
+        # font for text written on the menu
+        self.font = pygame.font.Font('freesansbold.ttf', 35)
 
     """
     functions
@@ -37,10 +40,10 @@ class MenuBuilder(AllowToBuldMenu):
     # draws them on the given window and returns a list of interactable surfaces aproximate to the drawn elemnets
     def create_window_interaction_elements(self):
         elements_added_to_window = {"item_name": [], "item": []}
-        for element in self.window_elements:
+        for element in reversed(self.window_elements):
             intercaton_surface = pygame.Rect([0, 0, 0, 0])
             if element["form"] == "rectangle":
-                intercaton_surface = pygame.Rect(element["dimensions"])
+                intercaton_surface = pygame.Rect( element["position"], element["dimensions"])
             if element["form"] == "circle":
                 rect_size = 2*element["radius"]
                 pos_x = element["position"][0] - element["radius"]
@@ -49,17 +52,19 @@ class MenuBuilder(AllowToBuldMenu):
             elements_added_to_window["item_name"].append(element["name"])
             elements_added_to_window["item"].append(intercaton_surface)
         return elements_added_to_window
-#element["position"], 2*element["radius"], 2*element["radius"]
+
     # this funktion takes the given elements and their styles specifications and changes them acordingly
     def set_element_styles(self, window):
         window.fill(self.window_color)
         for element in self.window_elements:
             if element["form"] == "rectangle":
-                pygame.draw.rect(window, element["color"], element["dimensions"], element["line_thickness"])
+                pygame.draw.rect(window, element["color"],[element["position"] ,element["dimensions"]], element["line_thickness"])
+                text = self.font.render(element["text"]["content"], True, element["text"]["color"])
+                text_box = text.get_rect()
+                text_box.center = (element["position"][0] + (element["dimensions"][0] / 2) , element["position"][1] + (element["dimensions"][1] / 2))
+                window.blit(text, text_box)
             if element["form"] == "circle":
                 pygame.draw.circle(window, element["color"], element["position"], element["radius"], element["line_thickness"])
-
-        
 
     # this funktion refresches the gui, so newly drawn objekts can be seen 
     def update_window(self):
