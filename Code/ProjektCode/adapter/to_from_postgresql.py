@@ -4,9 +4,9 @@ imports
 import psycopg2
 from os import path as os_path
 from configparser import ConfigParser
-#from .interfaces import DatabaseAccess
+from .interfaces import DatabaseAccess
 
-class PostgreSqlAdapter():
+class PostgreSqlAdapter(DatabaseAccess):
     """
     global variables
     """

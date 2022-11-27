@@ -60,6 +60,8 @@ class GameLibraryMenu():
                 print("exit")
             if action == "option_button":
                 print("option")
+            if action == "circle_button":
+                print("circle")
 
             frame_checker.allow_passes_per_second(60)
         self.close_main_menu()

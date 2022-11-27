@@ -42,11 +42,14 @@ class MenuBuilder(AllowToBuldMenu):
             if element["form"] == "rectangle":
                 intercaton_surface = pygame.Rect(element["dimensions"])
             if element["form"] == "circle":
-                intercaton_surface = pygame.Rect(element["position"], element["radius"])
+                rect_size = 2*element["radius"]
+                pos_x = element["position"][0] - element["radius"]
+                pos_y =element["position"][1] - element["radius"]
+                intercaton_surface = pygame.Rect([pos_x, pos_y, rect_size, rect_size])
             elements_added_to_window["item_name"].append(element["name"])
             elements_added_to_window["item"].append(intercaton_surface)
         return elements_added_to_window
-
+#element["position"], 2*element["radius"], 2*element["radius"]
     # this funktion takes the given elements and their styles specifications and changes them acordingly
     def set_element_styles(self, window):
         window.fill(self.window_color)

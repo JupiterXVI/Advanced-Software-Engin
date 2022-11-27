@@ -67,6 +67,22 @@ class MainMenu(): # muss ggf keine klasse ein
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
+    circle_button = {
+        "name": "circle_button",
+        "form": "circle",
+        "position": [
+            300,  # pos_x
+            500 # pos_y
+        ],
+        "radius": 20,
+        "color": [
+            180, # red
+            220, # green
+            220  # blue
+        ],
+        "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
+    }
+
     image_paths = {
         "start_button": sys_path[0] + "\image\start_btn.png",
         "exit_button": sys_path[0] + "\image\exit_btn.png"
@@ -76,7 +92,8 @@ class MainMenu(): # muss ggf keine klasse ein
     window_elements = [
         start_button,
         exit_button,
-        option_button
+        option_button,
+        circle_button
     ]
 
 if __name__ == "__main__":
