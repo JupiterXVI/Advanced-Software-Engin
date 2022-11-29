@@ -1,7 +1,7 @@
 """
 imports
 """
-from sys import path as sys_path
+#from sys import path as sys_path
 
 # This class discribes the struckture of the main menu
 # which can be accessed form outside
@@ -106,17 +106,17 @@ class MainMenu(): # muss ggf keine klasse ein
         ],
         "radius": 20,
         "color": [
-            180, # red
+            220, # red
             220, # green
-            220  # blue
+            180  # blue
         ],
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
-    image_paths = {
-        "start_button": sys_path[0] + "\image\start_btn.png",
-        "exit_button": sys_path[0] + "\image\exit_btn.png"
-    }
+    #image_paths = {
+    #    "start_button": sys_path[0] + "\image\start_btn.png",
+    #    "exit_button": sys_path[0] + "\image\exit_btn.png"
+    #}
 
     # list which contains all element directories
     window_elements = [

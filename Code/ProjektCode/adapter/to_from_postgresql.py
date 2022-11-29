@@ -110,8 +110,9 @@ class PostgreSqlAdapter(DatabaseAccess):
             conn, cursor = self.get_connection()
             print("Add Player: {0}, {1}, {2}, {3}, {4}".format(player_id, username, password, age, is_admin))
             # execure statment
-            cursor.execute("""INSERT INTO player(player_id, username, password, age, is_admin) 
-                            VALUES({0}, '{1}', '{2}', '{3}', {4});""".format(player_id, username, password, age, is_admin))
+            sql = "INSERT INTO player(player_id, username, password, age, is_admin) VALUES(%s, %s, %s, %s, %s);"
+            cursor.execute(sql, (player_id, username, password, age, is_admin,))
+            # execure statment))
             self.close_connection(conn, cursor)
 
         except (Exception, psycopg2.DatabaseError) as error:
@@ -123,12 +124,8 @@ class PostgreSqlAdapter(DatabaseAccess):
             conn, cursor = self.get_connection()
             print("Update Player: {0} with {1}, {2}, {3}, {4}".format(player_id, username, password, age, is_admin))
             # execure statment
-            cursor.execute("""UPDATE player SET 
-                                username = '{1}',
-                                password = '{2}',
-                                age = '{3}',
-                                is_admin = {4}
-                               WHERE player_id = {0};""".format(player_id, username, password, age, is_admin))
+            sql = "UPDATE player SET username = %s, password = %s, age = %s, is_admin = %s WHERE player_id = %s;"
+            cursor.execute(sql, (username, password, age, is_admin, player_id,))
             self.close_connection(conn, cursor)
 
         except (Exception, psycopg2.DatabaseError) as error:
@@ -159,7 +156,8 @@ class PostgreSqlAdapter(DatabaseAccess):
             print("Player with ID: {0}".format(player_id))
             player = 0
             # execure statment
-            cursor.execute('SELECT * FROM player WHERE player_id = "{0}"'.format(player_id))
+            sql = "SELECT * FROM player WHERE player_id = %s;"
+            cursor.execute(sql, (player_id,))
             player = cursor.fetchone()
             self.close_connection(conn, cursor)
             
@@ -192,7 +190,8 @@ class PostgreSqlAdapter(DatabaseAccess):
             print("Game with ID: {0}".format(game_id))
             game = 0
             # execure statment
-            cursor.execute('SELECT * FROM game WHERE game_id = {0}'.format(game_id))
+            sql = "SELECT * FROM game WHERE game_id = %s;"
+            cursor.execute(sql, (game_id,))
             game = cursor.fetchone()
             self.close_connection(conn, cursor)
             
@@ -222,10 +221,11 @@ class PostgreSqlAdapter(DatabaseAccess):
     def get_game_stat(self, player_id, game_id):
         try:
             conn, cursor = self.get_connection()
-            print("Statistic of game {0} from player: {1}".format(game_id, game_id))
+            print("Statistic of game {0} from player: {1}".format(game_id, player_id))
             player_game_stats = 0
             # execure statment
-            cursor.execute('SELECT * FROM gamestats WHERE player_id = {0} AND game_id = {1}'.format(player_id, game_id))
+            sql = "SELECT * FROM gamestats WHERE player_id = %s AND game_id = %s;"
+            cursor.execute(sql, (player_id, game_id,))
             player_game_stats = cursor.fetchone()
             self.close_connection(conn, cursor)
             

@@ -36,5 +36,5 @@ class Main():
         library.run_main_menu(timer)
 
 if __name__ == "__main__":
-    # Main.test_database()
-    Main.start()
+    Main.test_database()
+    # Main.start()
