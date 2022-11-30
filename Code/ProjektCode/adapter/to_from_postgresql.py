@@ -131,6 +131,18 @@ class PostgreSqlAdapter(DatabaseAccess):
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
 
+    
+    def delete_account(self, player_id):
+        try:
+            conn, cursor = self.get_connection()
+            print("Delete Player: {0}".format(player_id))
+            # execure statment
+            sql = "DELETE FROM player WHERE player_id = %s;"
+            cursor.execute(sql, (player_id,))
+            self.close_connection(conn, cursor)
+
+        except (Exception, psycopg2.DatabaseError) as error:
+            print(error)
 
     #
     def get_player_table(self):

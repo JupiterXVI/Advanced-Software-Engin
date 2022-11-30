@@ -26,8 +26,11 @@ CREATE TABLE gamestats(
     losses INT NOT NULL
 );
 
-INSERT INTO player(username, password, age, is_admin) 
-VALUES('Tim', 'passwd', '12', FALSE);
+INSERT INTO player(player_id, username, password, age, is_admin) 
+VALUES(0, 'admin', 'admin', '99', TRUE);
 
 INSERT INTO player(username, password, age, is_admin) 
-VALUES('Julia', 'penta', '14', FALSE);
+VALUES('Anonymous1', '', '12', FALSE);
+
+INSERT INTO player(username, password, age, is_admin) 
+VALUES('Anonymous2', '', '12', FALSE);
