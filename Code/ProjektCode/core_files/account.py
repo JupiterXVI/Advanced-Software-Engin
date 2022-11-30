@@ -1,6 +1,7 @@
 """
 imports
 """
+from adapter import DatabaseAccess
 
 
 class Account():
@@ -9,16 +10,25 @@ class Account():
     """
     # bei erstellen eines Objekts der Klasse werden die Angaben durch den Spieler getroffen und in die Datenbank geschoben
     # können bei bedarf aus datenbank erfragt werden
-    def __init__(self, player_id, name, password, age, is_admin):
+    def __init__(self, player_id, name, password, age, is_admin, datamanager: DatabaseAccess):
         self.player_id = player_id
         self.name = name
         self.password = password
         self.age = age
         self.is_admin = is_admin
+        self.datamanager = datamanager
+        self.add_account()
+
 
     """
     functions
     """
+    def add_account(self):
+        self.datamanager.add_account(self.player_id, self.name, self.password, self.age, self.is_admin)
+
+    def save_account_data(self):
+        self.datamanager.update_account(self.player_id, self.name, self.password, self.age, self.is_admin)
+
     def get_id(self):
         return self.player_id
 
@@ -45,9 +55,6 @@ class Account():
         self.is_admin = is_admin
 
 # die funktionen sollen vermutlich nicht hier her
-    def save_user_data(self):
-        pass 
-
     def save_user_stats(self):
         pass
     
