@@ -1,0 +1,2 @@
+class ChooseGameMenu():
+    hallo = "hallo"

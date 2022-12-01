@@ -10,17 +10,17 @@ class MainMenu(): # muss ggf keine klasse ein
     global variables
     """
     window = {
-        "width": 600,
-        "height": 600,
+        "width": 900,
+        "height": 900,
         "titel": "Spielebibliothek",
         "color": (30, 30, 30)
     }
 
-    start_button = {
-        "name": "start_button",
+    choose_game_button = {
+        "name": "choose_game_button",
         "form": "rectangle",
         "text": {
-            "content": "START",
+            "content": "Spiel wählen",
             "color": [
                 0, # red
                 0, # green
@@ -28,8 +28,8 @@ class MainMenu(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            50,  # pos_x
-            50 # pos_y
+            200,  # pos_x
+            200 # pos_y
         ],
         "dimensions": [
             500, # width
@@ -43,11 +43,12 @@ class MainMenu(): # muss ggf keine klasse ein
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
-    exit_button = {
-        "name": "exit_button",
+    
+    account_button = {
+        "name": "account_button",
         "form": "rectangle",
         "text": {
-            "content": "EXIT",
+            "content": "Benutzerverwaltung",
             "color": [
                 0, # red
                 0, # green
@@ -55,34 +56,7 @@ class MainMenu(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            50,  # pos_x
-            200 # pos_y
-        ],
-        "dimensions": [
-            500, # width
-            100  # heigth
-        ],
-        "color": [
-            180, # red
-            220, # green
-            180  # blue
-        ],
-        "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
-    }
-
-    option_button = {
-        "name": "option_button",
-        "form": "rectangle",
-        "text": {
-            "content": "OPTION",
-            "color": [
-                0, # red
-                0, # green
-                0  # blue
-            ],
-        },
-        "position":[
-            50,  # pos_x
+            200,  # pos_x
             350 # pos_y
         ],
         "dimensions": [
@@ -97,12 +71,40 @@ class MainMenu(): # muss ggf keine klasse ein
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
+    exit_button = {
+        "name": "exit_button",
+        "form": "rectangle",
+        "text": {
+            "content": "Beenden",
+            "color": [
+                0, # red
+                0, # green
+                0  # blue
+            ],
+        },
+        "position":[
+            200,  # pos_x
+            500 # pos_y
+        ],
+        "dimensions": [
+            500, # width
+            100  # heigth
+        ],
+        "color": [
+            180, # red
+            220, # green
+            180  # blue
+        ],
+        "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
+    }
+
+
     circle_button = {
         "name": "circle_button",
         "form": "circle",
         "position": [
-            300,  # pos_x
-            500 # pos_y
+            450,  # pos_x
+            650 # pos_y
         ],
         "radius": 20,
         "color": [
@@ -120,9 +122,9 @@ class MainMenu(): # muss ggf keine klasse ein
 
     # list which contains all element directories
     window_elements = [
-        start_button,
+        choose_game_button,
+        account_button,
         exit_button,
-        option_button,
         circle_button
     ]
 

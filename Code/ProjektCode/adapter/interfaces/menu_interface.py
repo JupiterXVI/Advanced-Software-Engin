@@ -3,23 +3,13 @@ Interfaces zur Estellung eines Menüs
 """
 from abc import ABC, abstractmethod
 
-
-class AllowToBuldMenu(ABC):
+class Menu(ABC):
     @abstractmethod
-    def create_window(self):
+    def open_menu(self):
         pass
 
-    def terminate_window(self):
+    def run_menu(self):
         pass
-        
-    def create_window_interaction_elements(self):
-        pass
-
-    def set_element_styles(self, window):
-        pass
-
-    def update_window(self):
-        pass
-
-    def check_events(self):
+    
+    def close_menu(self):
         pass

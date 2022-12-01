@@ -9,6 +9,7 @@ from gui import GameLibraryMenu
 from gui import MainMenu
 
 
+
 class Main():
     """
     global variables
@@ -30,12 +31,14 @@ class Main():
     def start():
         print("started main file...")
         timer = Timer()
-        main_menu = MenuBuilder(MainMenu.window, MainMenu.window_elements)
-        library = GameLibraryMenu(main_menu)
-        library.open_main_menu()
-        library.run_main_menu(timer)
+        main_menu = MenuBuilder(MainMenu.window)
+        main_menu.set_window_elements(MainMenu.window_elements)
+        library_menu = GameLibraryMenu(main_menu)
+        library_menu.open_menu()
+        library_menu.run_menu(timer)
+
+        
 
 if __name__ == "__main__":
     # Main.test_database()
     Main.start()
-    
