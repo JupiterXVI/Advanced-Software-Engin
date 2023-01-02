@@ -11,13 +11,13 @@ class MenuBuilder(AllowToBuldMenu):
     """
     global variables
     """
-    def __init__(self, window_info):
+    def __init__(self):
         pygame.init()
         # information for the gui-window
-        self.window_width = window_info["width"]
-        self.window_height = window_info["height"]
-        self.window_titel = window_info["titel"]
-        self.window_color = window_info["color"]
+        self.window_width = "width"
+        self.window_height = "height"
+        self.window_titel = "titel"
+        self.window_color = "color"
         # list of elements which make up the contence
         self.window_elements = "list of elements in menu"
         # font for text written on the menu
@@ -27,6 +27,15 @@ class MenuBuilder(AllowToBuldMenu):
     """
     functions
     """
+    def set_window_info(self, window_info):
+        self.window_width = window_info["width"]
+        self.window_height = window_info["height"]
+        self.window_titel = window_info["titel"]
+        self.window_color = window_info["color"]
+
+    def set_window_elements(self, window_elements):
+        self.window_elements = window_elements
+
     # this funktion creates a window with a given sice and setz its title
     def create_window(self):
         window = pygame.display.set_mode((self.window_width, self.window_height))
@@ -35,9 +44,6 @@ class MenuBuilder(AllowToBuldMenu):
 
     def clear_window(self):
         self.window.fill(self.window_color)
-
-    def set_window_elements(self, window_elements):
-        self.window_elements = window_elements
 
     # this funktion closes the the game and therefor all windows
     def terminate_window(self):
@@ -85,14 +91,14 @@ class MenuBuilder(AllowToBuldMenu):
 
     # this funktion checks if the menubar was used or one of the interactable surfaces was ckicked
     # and returns the name of the interaction
-    def check_events(self, intercaton_surfaces):
+    def check_events(self, interaction_surfaces):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return "quit"
-        for index, item in enumerate(intercaton_surfaces["item"]):
+        for index, item in enumerate(interaction_surfaces["item"]):
             if item.collidepoint(pygame.mouse.get_pos()):
                 if self.check_click():
-                    return intercaton_surfaces["item_name"][index]
+                    return interaction_surfaces["item_name"][index]
         return "no action"
 
 

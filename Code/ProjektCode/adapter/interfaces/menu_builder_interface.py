@@ -6,6 +6,12 @@ from abc import ABC, abstractmethod
 
 class AllowToBuldMenu(ABC):
     @abstractmethod
+    def set_window_info(self, window_info):
+        pass
+
+    def set_window_elements(self, window_elements):
+        pass
+
     def create_window(self):
         pass
 

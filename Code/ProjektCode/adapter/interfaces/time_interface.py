@@ -11,3 +11,6 @@ class Timeable(ABC):
 
     def blocking_wait_seconds(self, seconds):
         pass
+
+    def blocking_wait_milliseconds(self, milliseconds):
+        pass

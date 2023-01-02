@@ -6,8 +6,10 @@ from adapter import PostgreSqlAdapter
 from adapter import Timer
 from core_files import Account
 from gui import GameLibraryMenu
-from gui import MainMenu
+from gui import ChooseGameMenu
+from gui import ManageAccountMenu
 
+import pathlib
 
 
 class Main():
@@ -31,13 +33,16 @@ class Main():
     def start():
         print("started main file...")
         timer = Timer()
-        main_menu = MenuBuilder(MainMenu.window)
-        main_menu.set_window_elements(MainMenu.window_elements)
-        library_menu = GameLibraryMenu(main_menu)
+        gui_builder = MenuBuilder()
+        choose_game_menu = ChooseGameMenu(gui_builder, timer)
+        manage_account_menu = ManageAccountMenu(gui_builder, timer)
+        library_menu = GameLibraryMenu(gui_builder, choose_game_menu, manage_account_menu, timer)
         library_menu.open_menu()
-        library_menu.run_menu(timer)
+        library_menu.run_menu()
 
-        
+    def test():
+        print(pathlib.Path.cwd().parent)
+
 
 if __name__ == "__main__":
     # Main.test_database()

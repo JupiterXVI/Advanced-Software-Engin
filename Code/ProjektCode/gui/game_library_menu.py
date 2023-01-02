@@ -7,9 +7,8 @@ sys_path.append(os_path.join(sys_path[0], '..'))
 from adapter import Menu
 from adapter import AllowToBuldMenu
 from adapter import Timeable
-from core_files import Game
-from core_files import Playground
-from gui import ChooseGame
+from gui import MainMenu
+
 
 # this class is the zentral menu from which the user can access the games and other options,
 # as well as the zentrall data forwareder between games and the playground
@@ -17,13 +16,20 @@ class GameLibraryMenu(Menu):
     """
     global variables
     """
-    def __init__(self, gui:  AllowToBuldMenu):
+    def __init__(self, gui: AllowToBuldMenu, choose_game: Menu, manage_account: Menu, timer: Timeable):
         # objekt of a class which can visualize the menus/games
         self.gui =  gui    # ggf in eigene Klasse
-        # list of game objekts
-        self.gamelist = [] # ggf in eigene Klasse
+        self.choose_game = choose_game
+        self.manage_account = manage_account
+        self.timer = timer
+        #   
+        self.newly_created = True
         # list of interactables on the main menu
         self.menu_interactables = []
+        
+        # list of game objekts
+        self.gamelist = [] # ggf in eigene Klasse
+        
 
 
     """
@@ -37,8 +43,13 @@ class GameLibraryMenu(Menu):
     # -> eine Liste mit bilding-functions um das Menu stück für Stück zu bauen
     # this funktion uses the gui objekt to create a menu form the class parameters
     def open_menu(self):
-        print("opening main menu...")
-        self.gui.create_window()
+        if self.newly_created:
+            print("first time opening main menu...")
+            self.gui.set_window_info(MainMenu.window)
+            self.gui.set_window_elements(MainMenu.window_elements)
+            self.gui.create_window()
+            self.newly_created = False
+        self.gui.set_window_elements(MainMenu.window_elements)
         self.menu_interactables = self.gui.create_window_interaction_elements()
         self.gui.set_element_styles()
     
@@ -48,20 +59,24 @@ class GameLibraryMenu(Menu):
         self.gui.terminate_window()
 
     # this funktion is the loop to run the main menu, checking for user interaktion
-    def run_menu(self, frame_checker: Timeable):
+    def run_menu(self):
         print("running main menu...")
         main_menu_active = True
         action = "waiting for action"
         while main_menu_active:
             self.gui.update_window()
             action = self.gui.check_events(self.menu_interactables)
+            # print(action)  # Debugging
             if action != "no action":
                 if action == "quit":               # kommt man von diesem if wald weg?
                     main_menu_active = False
                 if action == "choose_game_button":
                     self.gui.clear_window()
-                    choose_game = ChooseGame(self.gui)
-                    choose_game.open_menu()
+                    self.menu_interactables = []
+                    self.choose_game.open_menu()
+                    self.choose_game.run_menu()
+                    self.open_menu()
+                    self.timer.blocking_wait_milliseconds(800)
                 if action == "account_button":
                     print("account")
                 if action == "exit_button":
@@ -69,7 +84,7 @@ class GameLibraryMenu(Menu):
                     main_menu_active = False
                 if action == "circle_button":
                     print("circle")
-            frame_checker.allow_passes_per_second(60)
+            self.timer.allow_passes_per_second(90)
         self.close_menu()
 
 
