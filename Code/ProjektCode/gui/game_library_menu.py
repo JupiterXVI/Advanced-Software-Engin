@@ -79,6 +79,12 @@ class GameLibraryMenu(Menu):
                     self.timer.blocking_wait_milliseconds(800)
                 if action == "account_button":
                     print("account")
+                    self.gui.clear_window()
+                    self.menu_interactables = []
+                    self.manage_account.open_menu()
+                    self.manage_account.run_menu()
+                    self.open_menu()
+                    self.timer.blocking_wait_milliseconds(800)
                 if action == "exit_button":
                     print("exit")
                     main_menu_active = False

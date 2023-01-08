@@ -7,7 +7,7 @@ from adapter import AllowToBuldMenu
 from adapter import Timeable
 from gui import ChooseGame
 
-class ChooseGameMenu(Menu):
+class ChooseGameMenu(Menu):   # mit vererbung könnten die __init__, open- close_menu funktionen ausgelassen werden
     def __init__(self, gui: AllowToBuldMenu, timer: Timeable):
         self.gui = gui
         self.timer = timer
