@@ -11,16 +11,24 @@ from gui import EditAccount
 from core_files import Account
 
 class EditAccountMenu(Menu):   # mit vererbung könnten die __init__, open- close_menu funktionen ausgelassen werden
-    def __init__(self, gui: AllowToBuldMenu, timer: Timeable, account: str):
+    def __init__(self, gui: AllowToBuldMenu, timer: Timeable, account: Account):
         self.gui = gui
         self.timer = timer
         self.menu_interactables = "list of interactables"
+        self.account = account
 
-        #problems:
-        # einholen der werte von Account
+        # TODO:
+        # Großbuchstaben
         # speichern der Werte
 
-    def get_account_value():
+    def get_account_values_on_screen(self):
+        EditAccount.input_username["text"]["content"] = str(self.account.get_name())
+        EditAccount.input_password["text"]["content"] =  str(self.account.get_password())
+        EditAccount.input_password_repeat["text"]["content"] =  str(self.account.get_password())
+        EditAccount.input_age["text"]["content"] =  str(self.account.get_age())
+        EditAccount.input_admin["text"]["content"] =  str(self.account.get_admin())
+
+    def pass_canges_to_account(self):
         pass
 
     def enter_text(self, text_field):
@@ -42,6 +50,10 @@ class EditAccountMenu(Menu):   # mit vererbung könnten die __init__, open- clos
             if action != "no action":
                 still_tiyping = False
 
+    def check_password(self):
+        if EditAccount.input_password["text"]["content"] == EditAccount.input_password_repeat["text"]["content"]:
+            return True
+        return False
 
     def open_menu(self):
         self.gui.set_window_elements(EditAccount.window_elements)
@@ -50,15 +62,17 @@ class EditAccountMenu(Menu):   # mit vererbung könnten die __init__, open- clos
         
 
     def run_menu(self):
+        self.get_account_values_on_screen()
+        self.gui.set_element_styles()
         self.timer.blocking_wait_milliseconds(800)
-        choose_menu_active = True
+        editing = True
         action = "waiting for action"
-        while choose_menu_active:
+        while editing:
             self.gui.update_window()
             action = self.gui.check_events(self.menu_interactables)
             if action != "no action":
                 if action == "quit":               # kommt man von diesem if wald weg?
-                    choose_menu_active = False
+                    editing = False
                 if action == "input_username":
                     self.enter_text(EditAccount.input_username)
                 if action == "input_password":
@@ -70,11 +84,14 @@ class EditAccountMenu(Menu):   # mit vererbung könnten die __init__, open- clos
                 if action == "input_admin":
                     self.enter_text(EditAccount.input_admin)
                 if action == "save_button":
-                    print("save")
-                    choose_menu_active = False
+                    if self.check_password():
+                        print("save")
+                        # self.account.save_account_data()
+                        editing = False
                 if action == "cancel_button":
                     print("cancel")
-                    choose_menu_active = False
+                    # self.account.refresh_account_data()
+                    editing = False
             self.timer.allow_passes_per_second(90)
         self.close_menu()
 
