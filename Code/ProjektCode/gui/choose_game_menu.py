@@ -29,7 +29,7 @@ class ChooseGameMenu(Menu):   # mit vererbung könnten die __init__, open- close
             action = self.gui.check_events(self.menu_interactables)
             if action != "no action":
                 if action == "quit":               # kommt man von diesem if wald weg?
-                    choose_menu_active = False
+                    self.gui.terminate_window()
                 if action == "space_invaders_button":
                     print("Space Invaders")
                 if action == "tic_tac_toe_button":

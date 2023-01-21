@@ -69,7 +69,7 @@ class GameLibraryMenu(Menu):
             # print(action)  # Debugging
             if action != "no action":
                 if action == "quit":               # kommt man von diesem if wald weg?
-                    main_menu_active = False
+                    self.gui.terminate_window()
                 if action == "choose_game_button":
                     self.gui.clear_window()
                     self.menu_interactables = []

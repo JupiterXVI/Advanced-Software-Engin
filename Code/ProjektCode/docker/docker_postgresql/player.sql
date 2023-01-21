@@ -1,6 +1,6 @@
 CREATE TABLE player(
     player_id serial PRIMARY KEY,
-    username VARCHAR(50) UNIQUE NOT NULL,
+    username VARCHAR(50) NOT NULL,
     password VARCHAR(50) NOT NULL,
     age VARCHAR(50) NOT NULL,
     is_admin BOOLEAN NOT NULL
@@ -29,8 +29,11 @@ CREATE TABLE gamestats(
 INSERT INTO player(player_id, username, password, age, is_admin) 
 VALUES(0, 'admin', 'admin', '99', TRUE);
 
-INSERT INTO player(username, password, age, is_admin) 
-VALUES('Anonymous1', '', '12', FALSE);
+INSERT INTO player(player_id, username, password, age, is_admin) 
+VALUES(1, 'Anonymous1', '', '12', FALSE);
+
+INSERT INTO player(player_id, username, password, age, is_admin) 
+VALUES(2, 'Anonymous2', '', '12', FALSE);
 
 INSERT INTO player(username, password, age, is_admin) 
-VALUES('Anonymous2', '', '12', FALSE);
+VALUES('Tim', '!geiheim1', '16', FALSE);

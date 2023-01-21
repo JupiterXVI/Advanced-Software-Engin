@@ -16,20 +16,26 @@ class EditAccountMenu(Menu):   # mit vererbung könnten die __init__, open- clos
         self.timer = timer
         self.menu_interactables = "list of interactables"
         self.account = account
+        self.save_changes = False
 
         # TODO:
         # Großbuchstaben
-        # speichern der Werte
 
     def get_account_values_on_screen(self):
         EditAccount.input_username["text"]["content"] = str(self.account.get_name())
         EditAccount.input_password["text"]["content"] =  str(self.account.get_password())
-        EditAccount.input_password_repeat["text"]["content"] =  str(self.account.get_password())
+        EditAccount.input_password_repeat["text"]["content"] =  str("")
         EditAccount.input_age["text"]["content"] =  str(self.account.get_age())
         EditAccount.input_admin["text"]["content"] =  str(self.account.get_admin())
 
     def pass_canges_to_account(self):
-        pass
+        self.account.set_name(EditAccount.input_username["text"]["content"])
+        self.account.set_password(EditAccount.input_password["text"]["content"])
+        self.account.set_age(EditAccount.input_age["text"]["content"])
+        if EditAccount.input_admin["text"]["content"] in ["True", "true", "T", "t", "1"]:
+            self.account.set_admin(True)
+        else:
+            self.account.set_admin(False)
 
     def enter_text(self, text_field):
         self.timer.blocking_wait_milliseconds(800)
@@ -40,7 +46,7 @@ class EditAccountMenu(Menu):   # mit vererbung könnten die __init__, open- clos
             self.gui.update_window()
             self.timer.allow_passes_per_second(90)
             if action == "quit":               # kommt man von diesem if wald weg?
-                still_tiyping = False
+                self.gui.terminate_window()
             if re.search("^.$", action):
                 text_field["text"]["content"] = text_field["text"]["content"]+action
                 continue
@@ -50,10 +56,11 @@ class EditAccountMenu(Menu):   # mit vererbung könnten die __init__, open- clos
             if action != "no action":
                 still_tiyping = False
 
-    def check_password(self):
-        if EditAccount.input_password["text"]["content"] == EditAccount.input_password_repeat["text"]["content"]:
+    def check_valid_change(self):
+        if EditAccount.input_password["text"]["content"] == EditAccount.input_password_repeat["text"]["content"] and EditAccount.input_username["text"]["content"] != str(""):
             return True
         return False
+
 
     def open_menu(self):
         self.gui.set_window_elements(EditAccount.window_elements)
@@ -72,7 +79,7 @@ class EditAccountMenu(Menu):   # mit vererbung könnten die __init__, open- clos
             action = self.gui.check_events(self.menu_interactables)
             if action != "no action":
                 if action == "quit":               # kommt man von diesem if wald weg?
-                    editing = False
+                    self.gui.terminate_window()
                 if action == "input_username":
                     self.enter_text(EditAccount.input_username)
                 if action == "input_password":
@@ -82,18 +89,22 @@ class EditAccountMenu(Menu):   # mit vererbung könnten die __init__, open- clos
                 if action == "input_age":
                     self.enter_text(EditAccount.input_age)
                 if action == "input_admin":
-                    self.enter_text(EditAccount.input_admin)
+                    # self.enter_text(EditAccount.input_admin)
+                    pass
                 if action == "save_button":
-                    if self.check_password():
+                    if self.check_valid_change():
                         print("save")
-                        # self.account.save_account_data()
+                        self.pass_canges_to_account()
+                        self.save_changes = True
                         editing = False
                 if action == "cancel_button":
                     print("cancel")
-                    # self.account.refresh_account_data()
                     editing = False
             self.timer.allow_passes_per_second(90)
         self.close_menu()
+
+    def has_been_changed(self):
+        return self.save_changes
 
     def close_menu(self):
         self.gui.clear_window()

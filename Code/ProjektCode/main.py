@@ -4,7 +4,6 @@ imports
 from adapter import MenuBuilder
 from adapter import PostgreSqlAdapter
 from adapter import Timer
-#from core_files import Account
 from core_files import AccountList
 from gui import GameLibraryMenu
 from gui import ChooseGameMenu

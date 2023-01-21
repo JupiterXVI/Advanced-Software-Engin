@@ -16,19 +16,11 @@ class Account():
         self.password = password
         self.age = age
         self.is_admin = is_admin
-        #self.datamanager = datamanager
-        #self.add_account()
 
 
     """
     functions
     """
-    #def add_account(self):
-    #    self.datamanager.add_account(self.player_id, self.name, self.password, self.age, self.is_admin)
-
-    #def save_account_data(self):
-    #    self.datamanager.update_account(self.player_id, self.name, self.password, self.age, self.is_admin)
-
     def refresh_account_data(self):
         pass
 
