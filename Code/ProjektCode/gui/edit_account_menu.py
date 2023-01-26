@@ -18,9 +18,6 @@ class EditAccountMenu(Menu):   # mit vererbung könnten die __init__, open- clos
         self.account = account
         self.save_changes = False
 
-        #TODO:
-        #- markiere welches Feld beschrieben wird
-
     def get_account_values_on_screen(self):
         EditAccount.input_username["text"]["content"] = str(self.account.get_name())
         EditAccount.input_password["text"]["content"] =  str(self.account.get_password())
