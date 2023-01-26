@@ -18,8 +18,8 @@ class EditAccountMenu(Menu):   # mit vererbung könnten die __init__, open- clos
         self.account = account
         self.save_changes = False
 
-        # TODO:
-        # Großbuchstaben
+        #TODO:
+        #- markiere welches Feld beschrieben wird
 
     def get_account_values_on_screen(self):
         EditAccount.input_username["text"]["content"] = str(self.account.get_name())
@@ -37,7 +37,16 @@ class EditAccountMenu(Menu):   # mit vererbung könnten die __init__, open- clos
         else:
             self.account.set_admin(False)
 
+    def text_fiel_active(self, active, text_field):
+        if active:
+            for color_index in range(3):
+                text_field["color"][color_index] += 30
+        else:
+            for color_index in range(3):
+                text_field["color"][color_index] -= 30
+
     def enter_text(self, text_field):
+        self.text_fiel_active(True, text_field)
         self.timer.blocking_wait_milliseconds(800)
         still_tiyping = True
         while still_tiyping:
@@ -55,6 +64,7 @@ class EditAccountMenu(Menu):   # mit vererbung könnten die __init__, open- clos
                 continue
             if action != "no action":
                 still_tiyping = False
+        self.text_fiel_active(False, text_field)
 
     def check_valid_change(self):
         if EditAccount.input_password["text"]["content"] == EditAccount.input_password_repeat["text"]["content"] and EditAccount.input_username["text"]["content"] != str(""):
