@@ -20,6 +20,7 @@ class MenuBuilder(AllowToBuldMenu):
         self.window_color = "color"
         # list of elements which make up the contence
         self.window_elements = "list of elements in menu"
+        self.game_elements = "list of elements in game"
         # font for text written on the menu
         self.font = pygame.font.Font('freesansbold.ttf', 35)
         self.window = "pygame_window_object"
@@ -70,6 +71,31 @@ class MenuBuilder(AllowToBuldMenu):
     def set_element_styles(self):
         self.window.fill(self.window_color)
         for element in self.window_elements:
+            if element["form"] == "rectangle":
+                pygame.draw.rect(self.window, element["color"],[element["position"] ,element["dimensions"]], element["line_thickness"])
+                text = self.font.render(element["text"]["content"], True, element["text"]["color"])
+                text_box = text.get_rect()
+                text_box.center = (element["position"][0] + (element["dimensions"][0] / 2) , element["position"][1] + (element["dimensions"][1] / 2))
+                self.window.blit(text, text_box)
+            if element["form"] == "circle":
+                pygame.draw.circle(self.window, element["color"], element["position"], element["radius"], element["line_thickness"])
+
+    def create_game_elements(self):
+        elements_added_to_game = {"item_name": [], "item": []}
+        for element in reversed(self.game_elements):
+            image = pygame.image.load( element["graphic"] ).convert_alpha()
+            intercaton_surface = pygame.Rect( element["position"])
+            points = element["value"]
+            speed = element["speed"]
+            cooldown = element["laser_cooldown"]
+            form = element["shape"]
+            style = element["style"]
+        return elements_added_to_game
+        
+    def set_element_styles(self):
+        self.window.fill(self.window_color)
+        for element in self.game_elements:
+            #todo
             if element["form"] == "rectangle":
                 pygame.draw.rect(self.window, element["color"],[element["position"] ,element["dimensions"]], element["line_thickness"])
                 text = self.font.render(element["text"]["content"], True, element["text"]["color"])
