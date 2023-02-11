@@ -10,6 +10,10 @@ from gui import ChooseGameMenu
 from gui import ManageAccountMenu
 
 import pathlib
+from core_files import Playground
+from core_files import GameList
+from games import TicTacToe
+from games import ChooseGraphicTTT
 
 
 class Main():
@@ -42,8 +46,18 @@ class Main():
 
     def test():
         print(pathlib.Path.cwd().parent)
+        #start game
+        gui_builder = MenuBuilder()
+
+        gui_builder.set_window_info(ChooseGraphicTTT.tic_tac_toe_window)
+        gui_builder.create_window()
+
+        game_list = GameList(PostgreSqlAdapter())
+        game_list.add_game(TicTacToe())
+        playground = Playground(game_list.games, gui_builder)
+        playground.play(game_id = 1 -1)
 
 
 if __name__ == "__main__":
-    # Main.test_database()
-    Main.start()
+    Main.test()
+    # Main.start()

@@ -10,35 +10,46 @@ class ChooseGraphicTTT(): # muss ggf keine klasse ein
         "width": 900,
         "height": 900,
         "titel": "Tic Tac Toe",
-        "graphic": "../graphics/tic_tac_toe/Board.png",
+        "graphic": "./ProjektCode/games/graphics/tic_tac_toe/images/Board.png",
         "position":[
             200,  # pos_x
             200 # pos_y
         ],
-        "color": (255, 255, 255)
+        "color": (0, 0, 0)
     }
 
     tic_tac_toe_o = {
         "name": "tic_tac_toe_o",
-        "graphic": "../graphics/tic_tac_toe/O.png",
+        "graphic": "./ProjektCode/games/graphics/tic_tac_toe/images/O.png",
         "position":[
-            200,  # pos_x
-            200 # pos_y
+            100,  # pos_x
+            200 # pos_y 
         ],
+        "dimensions": [
+            20, # width
+            20  # heigth
+        ],
+        "who_offten_needed": 5
     }
 
     tic_tac_toe_x = {
         "name": "tic_tac_toe_x",
-        "graphic": "../graphics/tic_tac_toe/X.png",
+        "graphic": "./ProjektCode/games/graphics/tic_tac_toe/images/X.png",
         "position":[
             200,  # pos_x
             200 # pos_y
         ],
+        "dimensions": [
+            20, # width
+            20  # heigth
+        ],
+        "who_offten_needed": 5
+        
     }
 
     tic_tac_toe_o_winning = {
         "name": "tic_tac_toe_o_winning",
-        "graphic": "../graphics/tic_tac_toe/WinningO.png",
+        "graphic": "./ProjektCode/games/graphics/tic_tac_toe/images/WinningO.png",
         "position":[
             200,  # pos_x
             200 # pos_y
@@ -47,7 +58,7 @@ class ChooseGraphicTTT(): # muss ggf keine klasse ein
 
     tic_tac_toe_x_winning = {
         "name": "tic_tac_toe_x_winning",
-        "graphic": "../graphics/tic_tac_toe/WinningX.png",
+        "graphic": "./ProjektCode/games/graphics/tic_tac_toe/images/WinningX.png",
         "position":[
             200,  # pos_x
             200 # pos_y
@@ -59,8 +70,8 @@ class ChooseGraphicTTT(): # muss ggf keine klasse ein
     game_elements = [
         tic_tac_toe_o,
         tic_tac_toe_x,
-        tic_tac_toe_o_winning,
-        tic_tac_toe_x_winning
+        #tic_tac_toe_o_winning,
+        #tic_tac_toe_x_winning
     ]
 
 if __name__ == "__main__":

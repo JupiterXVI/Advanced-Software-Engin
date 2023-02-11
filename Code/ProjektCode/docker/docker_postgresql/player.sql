@@ -34,3 +34,9 @@ VALUES('Anonymous1', '', '12', FALSE);
 
 INSERT INTO player(username, password, age, is_admin) 
 VALUES('Anonymous2', '', '12', FALSE);
+
+INSERT INTO game(game, game_description) 
+VALUES('TicTacToe', 'Two Player take rounds selecting spaces in a 3x3 grid. Goal is to be the first who places three symboles in a row.');
+
+INSERT INTO game(game, game_description)
+VALUES('Space Invaders', 'Fly a space ship through a alian attack and earn points shooting them');

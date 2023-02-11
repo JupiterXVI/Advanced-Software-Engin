@@ -27,17 +27,11 @@ class GameLibraryMenu(Menu):
         # list of interactables on the main menu
         self.menu_interactables = []
         
-        # list of game objekts
-        self.gamelist = [] # ggf in eigene Klasse
         
-
 
     """
     functions
     """
-    # this funktion adds a given game objekt to a list of game obekts
-    def add_game_to_library(self, new_game): # ggf in eigene Klasse
-        self.gamelist.append(new_game)
 
     # hier könnte man auch noch open/closed-Principle verwenden
     # -> eine Liste mit bilding-functions um das Menu stück für Stück zu bauen

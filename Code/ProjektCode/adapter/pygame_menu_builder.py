@@ -37,6 +37,9 @@ class MenuBuilder(AllowToBuldMenu):
     def set_window_elements(self, window_elements):
         self.window_elements = window_elements
 
+    def set_game_elements(self, game_elements):
+        self.game_elements = game_elements
+
     # this funktion creates a window with a given sice and setz its title
     def create_window(self):
         window = pygame.display.set_mode((self.window_width, self.window_height))
@@ -83,18 +86,26 @@ class MenuBuilder(AllowToBuldMenu):
     def create_game_elements(self):
         elements_added_to_game = {"item_name": [], "item": []}
         for element in reversed(self.game_elements):
-            image = pygame.image.load( element["graphic"] ).convert_alpha()
-            intercaton_surface = pygame.Rect( element["position"])
-            points = element["value"]
-            speed = element["speed"]
-            cooldown = element["laser_cooldown"]
-            form = element["shape"]
-            style = element["style"]
+            for pice in range(element["who_offten_needed"]):
+                image = pygame.image.load(element["graphic"] ) #.convert_alpha()
+                intercaton_surface = pygame.Rect(element["position"], element["dimensions"])
+                #points = element["value"]
+                #speed = element["speed"]
+                #cooldown = element["laser_cooldown"]
+                #form = element["shape"]
+                #style = element["style"]
+                #properties = []
+                elements_added_to_game["item_name"].append(f"{element['name']}_{pice}")
+                elements_added_to_game["item"].append([intercaton_surface, image])
         return elements_added_to_game
         
-    def set_element_styles(self):
+    def set_game_element_styles(self, added_elemets):
         self.window.fill(self.window_color)
-        for element in self.game_elements:
+        index = 0
+        for element in added_elemets["item"]:
+            self.window.blit(element[1], element[0].center)
+            index += 1
+            """
             #todo
             if element["form"] == "rectangle":
                 pygame.draw.rect(self.window, element["color"],[element["position"] ,element["dimensions"]], element["line_thickness"])
@@ -104,6 +115,7 @@ class MenuBuilder(AllowToBuldMenu):
                 self.window.blit(text, text_box)
             if element["form"] == "circle":
                 pygame.draw.circle(self.window, element["color"], element["position"], element["radius"], element["line_thickness"])
+                """
 
     # this funktion refresches the gui, so newly drawn objekts can be seen 
     def update_window(self):
