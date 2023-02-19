@@ -4,9 +4,10 @@ imports
 from os import path as os_path
 from sys import path as sys_path
 sys_path.append(os_path.join(sys_path[0], '..'))
+from time import sleep
+
 from adapter import Menu
 from adapter import AllowToBuldMenu
-from adapter import Timeable
 from gui import ManageAccount
 from gui import EditAccountMenu
 from core_files import AccountList
@@ -15,9 +16,8 @@ class ManageAccountMenu(Menu):
     """
     global variables
     """
-    def __init__(self, gui: AllowToBuldMenu, timer: Timeable, account_list: AccountList):
+    def __init__(self, gui: AllowToBuldMenu, account_list: AccountList):
         self.gui = gui
-        self.timer = timer
         self.menu_interactables = "list of interactables"
         self.account_list = account_list
         self.anonyme_user_count = 2
@@ -29,7 +29,9 @@ class ManageAccountMenu(Menu):
     def open_menu(self):
         self.gui.set_window_elements(ManageAccount.window_elements)
         self.menu_interactables = self.gui.create_window_interaction_elements()
+        self.get_account_list_on_screan()
         self.gui.set_element_styles()
+        self.gui.update_window()
 
 
     def get_account_list_on_screan(self): # kake, aber in einer liste hat es nicht funktionert
@@ -63,7 +65,7 @@ class ManageAccountMenu(Menu):
             self.account_list.add_account("", "", "", False)
             print(len(self.account_list.account))
             edit_account = len(self.account_list.account)-1
-        work_on_account = EditAccountMenu(self.gui, self.timer, self.account_list.account[edit_account])
+        work_on_account = EditAccountMenu(self.gui, self.account_list.account[edit_account])
         self.gui.clear_window()
         self.menu_interactables = []
         work_on_account.open_menu()
@@ -73,7 +75,7 @@ class ManageAccountMenu(Menu):
         elif self.account_list.account[edit_account].get_name() == str(""):
             self.account_list.delete_account(edit_account)
         self.open_menu()
-        self.timer.blocking_wait_milliseconds(800)
+        sleep(Menu.blocking_wait_seconds)
     
 
     def delete_account(self, account_index):
@@ -82,7 +84,7 @@ class ManageAccountMenu(Menu):
         
 
     def run_menu(self):
-        self.timer.blocking_wait_milliseconds(800)
+        sleep(Menu.blocking_wait_seconds)
         choose_menu_active = True
         action = "waiting for action"
         while choose_menu_active:
@@ -116,7 +118,7 @@ class ManageAccountMenu(Menu):
                 if action == "back_button":
                     print("back")
                     choose_menu_active = False
-            self.timer.allow_passes_per_second(90)
+            sleep(Menu.allow_passes_per_second)
         self.close_menu()
 
 

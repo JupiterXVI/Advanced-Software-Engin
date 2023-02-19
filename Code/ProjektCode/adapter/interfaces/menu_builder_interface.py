@@ -12,6 +12,9 @@ class AllowToBuldMenu(ABC):
     def set_window_elements(self, window_elements):
         pass
 
+    def set_game_elements(self, game_elements):
+        pass
+
     def create_window(self):
         pass
 
@@ -25,6 +28,12 @@ class AllowToBuldMenu(ABC):
         pass
 
     def set_element_styles(self):
+        pass
+
+    def create_game_elements(self):
+        pass
+
+    def set_game_element_styles(self):
         pass
 
     def update_window(self):

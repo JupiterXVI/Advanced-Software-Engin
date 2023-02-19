@@ -10,7 +10,7 @@ class ChooseGraphicSI(): # muss ggf keine klasse ein
         "width": 900,
         "height": 900,
         "titel": "Space Invadors",
-        "graphic": "../graphics/space_invadors/tv.png",
+        "graphic": "/images/tv.png",
         "position":[
             200,  # pos_x
             200 # pos_y
@@ -20,7 +20,7 @@ class ChooseGraphicSI(): # muss ggf keine klasse ein
 
     space_invaders_player = {
         "name": "space_invaders_player",
-        "graphic": "../graphics/space_invadors/player.png",
+        "graphic": "/images/player.png",
         "position":[
             200,  # pos_x
             200 # pos_y
@@ -31,7 +31,7 @@ class ChooseGraphicSI(): # muss ggf keine klasse ein
 
     space_invaders_extra = {
         "name": "space_invaders_player",
-        "graphic": "../graphics/space_invadors/extra.png",
+        "graphic": "/images/extra.png",
         "position":[
             200,  # pos_x
             200 # pos_y
@@ -42,7 +42,7 @@ class ChooseGraphicSI(): # muss ggf keine klasse ein
 
     space_invaders_green = {
         "name": "space_invaders_player",
-        "graphic": "../graphics/space_invadors/green.png",
+        "graphic": "/images/green.png",
         "position":[
             200,  # pos_x
             200 # pos_y
@@ -53,7 +53,7 @@ class ChooseGraphicSI(): # muss ggf keine klasse ein
 
     space_invaders_red = {
         "name": "space_invaders_player",
-        "graphic": "../graphics/space_invadors/red.png",
+        "graphic": "/images/red.png",
         "position":[
             200,  # pos_x
             200 # pos_y
@@ -64,7 +64,7 @@ class ChooseGraphicSI(): # muss ggf keine klasse ein
 
     space_invaders_yellow = {
         "name": "space_invaders_player",
-        "graphic": "../graphics/space_invadors/yellow.png",
+        "graphic": "/images/yellow.png",
         "position":[
             200,  # pos_x
             200 # pos_y

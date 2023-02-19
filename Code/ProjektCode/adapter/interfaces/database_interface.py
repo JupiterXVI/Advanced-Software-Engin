@@ -24,7 +24,7 @@ class DatabaseAccess(ABC):
     def get_game_table(self):
         pass
 
-    def get_game(self, game_id):
+    def get_game(self, game_name):
         pass
 
     def get_game_stat_table(self):
