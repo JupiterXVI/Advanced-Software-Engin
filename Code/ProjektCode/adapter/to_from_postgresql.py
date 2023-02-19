@@ -196,14 +196,14 @@ class PostgreSqlAdapter(DatabaseAccess):
         return games
 
 
-    def get_game(self, game_id):
+    def get_game(self, game_name):
         try:
             conn, cursor = self.get_connection()
-            print("Game with ID: {0}".format(game_id))
+            print("Game with Name: {0}".format(game_name))
             game = 0
             # execure statment
-            sql = "SELECT * FROM game WHERE game_id = %s;"
-            cursor.execute(sql, (game_id,))
+            sql = "SELECT * FROM game WHERE game = %s;"
+            cursor.execute(sql, (game_name,))
             game = cursor.fetchone()
             self.close_connection(conn, cursor)
             

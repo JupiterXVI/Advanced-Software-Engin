@@ -87,7 +87,7 @@ class MenuBuilder(AllowToBuldMenu):
         elements_added_to_game = {"item_name": [], "item": []}
         for element in reversed(self.game_elements):
             for pice in range(element["who_offten_needed"]):
-                image = pygame.image.load(element["graphic"] ) #.convert_alpha()
+                image = pygame.image.load(element["graphic"] )
                 intercaton_surface = pygame.Rect(element["position"], element["dimensions"])
                 #points = element["value"]
                 #speed = element["speed"]
@@ -105,17 +105,6 @@ class MenuBuilder(AllowToBuldMenu):
         for element in added_elemets["item"]:
             self.window.blit(element[1], element[0].center)
             index += 1
-            """
-            #todo
-            if element["form"] == "rectangle":
-                pygame.draw.rect(self.window, element["color"],[element["position"] ,element["dimensions"]], element["line_thickness"])
-                text = self.font.render(element["text"]["content"], True, element["text"]["color"])
-                text_box = text.get_rect()
-                text_box.center = (element["position"][0] + (element["dimensions"][0] / 2) , element["position"][1] + (element["dimensions"][1] / 2))
-                self.window.blit(text, text_box)
-            if element["form"] == "circle":
-                pygame.draw.circle(self.window, element["color"], element["position"], element["radius"], element["line_thickness"])
-                """
 
     # this funktion refresches the gui, so newly drawn objekts can be seen 
     def update_window(self):

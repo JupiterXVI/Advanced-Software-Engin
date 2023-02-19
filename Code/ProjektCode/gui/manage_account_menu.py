@@ -6,16 +6,14 @@ from sys import path as sys_path
 sys_path.append(os_path.join(sys_path[0], '..'))
 from adapter import Menu
 from adapter import AllowToBuldMenu
-from adapter import Timeable
 from gui import ManageAccount
 
 class ManageAccountMenu(Menu):
     """
     global variables
     """
-    def __init__(self, gui: AllowToBuldMenu, timer: Timeable):
+    def __init__(self, gui: AllowToBuldMenu):
         self.gui = gui
-        self.timer = timer
         
     """
     functions

@@ -4,9 +4,9 @@ imports
 from os import path as os_path
 from sys import path as sys_path
 sys_path.append(os_path.join(sys_path[0], '..'))
+from time import sleep 
 from adapter import Menu
 from adapter import AllowToBuldMenu
-from adapter import Timeable
 from gui import MainMenu
 
 
@@ -16,12 +16,11 @@ class GameLibraryMenu(Menu):
     """
     global variables
     """
-    def __init__(self, gui: AllowToBuldMenu, choose_game: Menu, manage_account: Menu, timer: Timeable):
+    def __init__(self, gui: AllowToBuldMenu, choose_game: Menu, manage_account: Menu):
         # objekt of a class which can visualize the menus/games
         self.gui =  gui    # ggf in eigene Klasse
         self.choose_game = choose_game
         self.manage_account = manage_account
-        self.timer = timer
         #   
         self.newly_created = True
         # list of interactables on the main menu
@@ -46,6 +45,7 @@ class GameLibraryMenu(Menu):
         self.gui.set_window_elements(MainMenu.window_elements)
         self.menu_interactables = self.gui.create_window_interaction_elements()
         self.gui.set_element_styles()
+        self.gui.update_window()
     
     # this funktion closes the created menu window
     def close_menu(self):
@@ -70,7 +70,7 @@ class GameLibraryMenu(Menu):
                     self.choose_game.open_menu()
                     self.choose_game.run_menu()
                     self.open_menu()
-                    self.timer.blocking_wait_milliseconds(800)
+                    sleep(Menu.blocking_wait_seconds)
                 if action == "account_button":
                     print("account")
                 if action == "exit_button":
@@ -78,7 +78,7 @@ class GameLibraryMenu(Menu):
                     main_menu_active = False
                 if action == "circle_button":
                     print("circle")
-            self.timer.allow_passes_per_second(90)
+            sleep(Menu.allow_passes_per_second)
         self.close_menu()
 
 
