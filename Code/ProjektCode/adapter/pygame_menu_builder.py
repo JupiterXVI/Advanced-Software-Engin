@@ -115,12 +115,20 @@ class MenuBuilder(AllowToBuldMenu):
             return True
         return False
 
+    def check_key_tap(self, event):
+        if event.key == pygame.K_BACKSPACE:
+            return "backspace"
+        else:
+            return str(event.unicode)
+
     # this funktion checks if the menubar was used or one of the interactable surfaces was ckicked
     # and returns the name of the interaction
     def check_events(self, interaction_surfaces):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return "quit"
+            if event.type == pygame.KEYDOWN:
+                return self.check_key_tap(event)
         for index, item in enumerate(interaction_surfaces["item"]):
             if item.collidepoint(pygame.mouse.get_pos()):
                 if self.check_click():

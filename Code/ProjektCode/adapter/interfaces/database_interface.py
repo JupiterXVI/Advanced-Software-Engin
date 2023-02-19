@@ -6,7 +6,10 @@ from abc import ABC, abstractmethod
 
 class DatabaseAccess(ABC):
     @abstractmethod
-    def add_account(self, player_id, username, password, age, is_admin):
+    def add_account(self, username, password, age, is_admin):
+        pass
+
+    def last_added_account(self):
         pass
 
     def update_account(self, player_id, username, password, age, is_admin):
@@ -27,5 +30,8 @@ class DatabaseAccess(ABC):
     def get_game_stat_table(self):
         pass
 
-    def  get_game_stat(self, player_id, game_id):
+    def get_game_stat(self, player_id, game_id):
+        pass
+
+    def delete_account(self, player_id):
         pass

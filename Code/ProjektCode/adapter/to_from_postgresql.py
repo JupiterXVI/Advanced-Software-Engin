@@ -91,11 +91,19 @@ class PostgreSqlAdapter(DatabaseAccess):
 
         return conn, cur
 
+    def commit_action(self, conn):
+        try:
+            print('Save changes...')
+            conn.commit()
+
+        except (Exception, psycopg2.DatabaseError) as error:
+            print(error)
+
 
     def close_connection(self, conn, cursor):
         try:
+            self.commit_action(conn)
             print('Closing database connecting...')
-            conn.commit()
             # close the communication with the PostgreSQL
             cursor.close()
 
@@ -105,18 +113,32 @@ class PostgreSqlAdapter(DatabaseAccess):
 
 
     """-------------------------extern--------------------------"""
-    def add_account(self, player_id, username, password, age, is_admin):
+    def add_account(self, username, password, age, is_admin):
         try:
             conn, cursor = self.get_connection()
-            print("Add Player: {0}, {1}, {2}, {3}, {4}".format(player_id, username, password, age, is_admin))
+            print("Add Player: {0}, {1}, {2}, {3}".format(username, password, age, is_admin))
             # execure statment
-            sql = "INSERT INTO player(player_id, username, password, age, is_admin) VALUES(%s, %s, %s, %s, %s);"
-            cursor.execute(sql, (player_id, username, password, age, is_admin,))
-            # execure statment))
+            sql = "INSERT INTO player(username, password, age, is_admin) VALUES(%s, %s, %s, %s);"
+            cursor.execute(sql, (username, password, age, is_admin,))
+            self.commit_action(conn)
             self.close_connection(conn, cursor)
 
         except (Exception, psycopg2.DatabaseError) as error:
             print(error)
+        
+    
+    def last_added_account(self):
+        id_of_added_account = -1
+        try:
+            conn, cursor = self.get_connection()
+            cursor.execute('SELECT MAX(player_id) FROM player')
+            id_of_added_account = cursor.fetchone()[0]
+            self.close_connection(conn, cursor)
+
+        except (Exception, psycopg2.DatabaseError) as error:
+            print(error)
+
+        return id_of_added_account
 
 
     def update_account(self, player_id, username, password, age, is_admin):
