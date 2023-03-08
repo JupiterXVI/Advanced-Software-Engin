@@ -3,8 +3,7 @@ imports
 """
 from adapter import MenuBuilder
 from adapter import PostgreSqlAdapter
-from core_files import AccountList
-from adapter import Menu
+from core_files import AccountList  
 
 from gui import GameLibraryMenu
 from gui import ChooseGameMenu
@@ -50,5 +49,5 @@ class Main():
 
 
 if __name__ == "__main__":
-    # Main.test()
-    Main.start()
+    Main.test()
+    # Main.start()

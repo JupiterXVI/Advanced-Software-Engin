@@ -26,3 +26,12 @@ class Game():
 
     def pause(self):
         print(self.name + " has been paused")
+
+    def player_act(self):
+        pass
+
+    def check_point(self):
+        pass
+
+    def check_win(self):
+        pass

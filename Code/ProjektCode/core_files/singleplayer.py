@@ -5,7 +5,6 @@ from os import path as os_path
 from sys import path as sys_path
 sys_path.append(os_path.join(sys_path[0], '..'))
 from core_files.playground import Playground
-from core_files.account import Account
 
 
 class Singleplayer(Playground):

@@ -29,21 +29,17 @@ CREATE TABLE gamestats(
 INSERT INTO player(player_id, username, password, age, is_admin) 
 VALUES(0, 'admin', 'admin', '99', TRUE);
 
-INSERT INTO player(player_id, username, password, age, is_admin) 
-VALUES(1, 'Anonymous1', '', '12', FALSE);
-
-INSERT INTO player(player_id, username, password, age, is_admin) 
-VALUES(2, 'Anonymous2', '', '12', FALSE);
+INSERT INTO player(username, password, age, is_admin) 
+VALUES('Anonymous1', '', '12', FALSE);
 
 INSERT INTO player(username, password, age, is_admin) 
-<<<<<<< HEAD
-VALUES('Tim', '!geiheim1', '16', FALSE);
-=======
 VALUES('Anonymous2', '', '12', FALSE);
+
+INSERT INTO player(username, password, age, is_admin) 
+VALUES('Tim', '!geiheim1', '16', FALSE);
 
 INSERT INTO game(game, game_description) 
 VALUES('TicTacToe', 'Two Player take rounds selecting spaces in a 3x3 grid. Goal is to be the first who places three symboles in a row.');
 
 INSERT INTO game(game, game_description)
 VALUES('Space Invaders', 'Fly a space ship through a alian attack and earn points shooting them');
->>>>>>> gamegraphics

@@ -1,7 +1,6 @@
 """
 imports
 """
-from adapter import DatabaseAccess
 
 
 class Account():

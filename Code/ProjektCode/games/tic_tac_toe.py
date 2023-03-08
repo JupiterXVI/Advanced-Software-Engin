@@ -20,10 +20,30 @@ class TicTacToe(Game):
             player_count = 2, 
             game_elements = ChooseGraphicTTT.game_elements
             )
+        #
+        self.field = [['','',''],['','',''],['','','']]
 
     """
     functions
     """
-    def start(self):
-        print("\nStart TicTacTo\n")
+    def choose_field(self):
+         pass
+
+    def check_for_win(self):
+        for column in range(2):
+            if self.field[column][0] == self.field[column][1] and self.field[column][0] == self.field[column][2]:
+                return True
+            row = column
+            if self.field[0][row] == self.field[1][row] and self.field[0][row] == self.field[2][row]:
+                return True
+        if self.field[1][1] == self.field[2][2] and self.field[1][1] == self.field[3][3]:
+                return True
+        if self.field[3][1] == self.field[2][2] and self.field[3][1] == self.field[1][3]:
+                return True
+        return False
+    
+    def player_act(self):
+        self.choose_field()
+
+
         

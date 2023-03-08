@@ -5,7 +5,6 @@ imports
 import os
 import sys
 sys.path.append(os.path.join(sys.path[0], '..'))
-from core_files.account import Account
 from adapter import AllowToBuldMenu
 
 
@@ -21,6 +20,9 @@ class Playground():
     """
     functions
     """
+    def choose_player(self):
+        pass
+
     def play(self, game_id):
         game = self.game_list[game_id]
         self.open_menu(game)

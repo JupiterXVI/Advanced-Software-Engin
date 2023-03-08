@@ -10,7 +10,6 @@ class ChooseGraphicTTT(): # muss ggf keine klasse ein
         "width": 900,
         "height": 900,
         "titel": "Tic Tac Toe",
-        "graphic": "./ProjektCode/games/graphics/tic_tac_toe/images/Board.png",
         "position":[
             200,  # pos_x
             200 # pos_y
@@ -18,12 +17,26 @@ class ChooseGraphicTTT(): # muss ggf keine klasse ein
         "color": (0, 0, 0)
     }
 
+    tic_tac_toe_board = {
+        "name": "tic_tac_toe_board",
+        "graphic": "./ProjektCode/games/graphics/tic_tac_toe/images/Board.png",
+        "position":[
+            -390,  # pos_x
+            -390 # pos_y 
+        ],
+        "dimensions": [
+            900, # width
+            900  # heigth
+        ],
+        "who_offten_needed": 1
+    }
+
     tic_tac_toe_o = {
         "name": "tic_tac_toe_o",
         "graphic": "./ProjektCode/games/graphics/tic_tac_toe/images/O.png",
         "position":[
-            100,  # pos_x
-            200 # pos_y 
+            355,  # pos_x
+            350 # pos_y 
         ],
         "dimensions": [
             20, # width
@@ -36,8 +49,8 @@ class ChooseGraphicTTT(): # muss ggf keine klasse ein
         "name": "tic_tac_toe_x",
         "graphic": "./ProjektCode/games/graphics/tic_tac_toe/images/X.png",
         "position":[
-            200,  # pos_x
-            200 # pos_y
+            80,  # pos_x
+            75 # pos_y
         ],
         "dimensions": [
             20, # width
@@ -68,10 +81,11 @@ class ChooseGraphicTTT(): # muss ggf keine klasse ein
 
         # list which contains all element directories
     game_elements = [
+        #tic_tac_toe_o_winning,
+        #tic_tac_toe_x_winning,
         tic_tac_toe_o,
         tic_tac_toe_x,
-        #tic_tac_toe_o_winning,
-        #tic_tac_toe_x_winning
+        tic_tac_toe_board
     ]
 
 if __name__ == "__main__":
