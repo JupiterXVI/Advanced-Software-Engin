@@ -93,8 +93,8 @@ class ManageAccountMenu(Menu):
             self.gui.update_window()
             action = self.gui.check_events(self.menu_interactables)
             if action != "no action":
-                if action == "quit":               # kommt man von diesem if wald weg?
-                    self.gui.terminate_window()      # Sicher auch mit liste möglich
+                if action == "quit":               
+                    self.gui.terminate_window()      
                 if action == "account_1_name":
                     self.edit_account(1+self.anonyme_user_count)
                 if action == "account_1_delete":

@@ -1,18 +1,14 @@
 """
 imports
 """
-from adapter import MenuBuilder
-from adapter import PostgreSqlAdapter
-from core_files import AccountList  
+from adapter import MenuBuilder, PostgreSqlAdapter
+from core_files import AccountList, Playground, GameList
+from gui import GameLibraryMenu, MainMenu, ChooseGameMenu, ManageAccountMenu
+from games import TicTacToe, ChooseGraphicTTT
 
-from gui import GameLibraryMenu
-from gui import ChooseGameMenu
-from gui import ManageAccountMenu
-
-from core_files import Playground
-from core_files import GameList
-from games import TicTacToe
-from games import ChooseGraphicTTT
+from time import sleep
+from threading import Thread
+from communication import Sender, Resiver
 
 
 class Main():
@@ -47,7 +43,45 @@ class Main():
         #start game
         playground.play(game_id = 1 -1)
 
+    def test_messaging():
+        main_sender = Sender()
+        main_resever = Resiver()
+        gui_builder = MenuBuilder()
+
+        main_sender.add_listener(gui_builder.resiver)
+        gui_builder.sender.add_listener(main_resever)
+
+        Thread(target=gui_builder.run).start()
+        sleep(3)
+
+        main_sender.set_event('send_window_info', {'function':'set_window_info', 'parameter':MainMenu.window})
+        main_sender.send()
+        sleep(1)
+
+        main_sender.set_event('send_element_info', {'function':'set_window_elements', 'parameter':MainMenu.window_elements})
+        main_sender.send()
+        sleep(1)
+        
+        main_sender.set_event('create_window', {'function':'create_window', 'parameter':''})
+        main_sender.send()
+        sleep(1)
+
+        main_sender.set_event('create_interaction', {'function':'create_window_interaction_elements', 'parameter':''})
+        main_sender.send()
+        sleep(1)
+
+        main_sender.set_event('modifie_element_style', {'function':'set_element_styles', 'parameter':''})
+        main_sender.send()
+        sleep(1)
+
+        main_sender.set_event('show_elements_on _window', {'function':'update_window', 'parameter':''})
+        main_sender.send()
+        
+        print("done")
+
+
 
 if __name__ == "__main__":
-    Main.test()
-    # Main.start()
+    # Main.test()
+    Main.start()
+    # Main.test_messaging()

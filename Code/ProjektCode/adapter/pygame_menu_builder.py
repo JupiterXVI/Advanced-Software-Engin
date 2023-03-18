@@ -1,8 +1,14 @@
 """
 imports
 """
-from .interfaces import AllowToBuldMenu
+from os import path as os_path
+from sys import path as sys_path
+sys_path.append(os_path.join(sys_path[0], '..'))
+
+from adapter import AllowToBuldMenu
 import pygame
+from communication import Sender, Resiver
+
 
 # class used to build menu objekts
 # - gui/menu builder using the pygame library
@@ -13,6 +19,13 @@ class MenuBuilder(AllowToBuldMenu):
     """
     def __init__(self):
         pygame.init()
+        # communication between objects
+        self.sender = Sender()
+        self.resiver = Resiver()
+        self.run_forever = True
+        self.funktion_with_parameters = [
+            'set_window_info','set_window_elements',
+            'set_game_elements','check_events']
         # information for the gui-window
         self.window_width = "width"
         self.window_height = "height"
@@ -28,6 +41,21 @@ class MenuBuilder(AllowToBuldMenu):
     """
     functions
     """
+    def run(self):
+        while(self.run_forever):
+            if self.resiver.event_reseved:
+                self.react_to_request(request=self.resiver.info)
+            if self.window != "pygame_window_object":
+                self.update_window()
+
+    def react_to_request(self, request):
+        if request["function"] in self.funktion_with_parameters:
+            eval(f"self.{request['function']}")(request['parameter'])
+        else:
+            eval(f"self.{request['function']}")()
+            
+
+
     def set_window_info(self, window_info):
         self.window_width = window_info["width"]
         self.window_height = window_info["height"]
@@ -89,12 +117,6 @@ class MenuBuilder(AllowToBuldMenu):
             for pice in range(element["who_offten_needed"]):
                 image = pygame.image.load(element["graphic"] )
                 intercaton_surface = pygame.Rect(element["position"], element["dimensions"])
-                #points = element["value"]
-                #speed = element["speed"]
-                #cooldown = element["laser_cooldown"]
-                #form = element["shape"]
-                #style = element["style"]
-                #properties = []
                 elements_added_to_game["item_name"].append(f"{element['name']}_{pice}")
                 elements_added_to_game["item"].append([intercaton_surface, image])
         return elements_added_to_game

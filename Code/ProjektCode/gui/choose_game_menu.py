@@ -28,7 +28,7 @@ class ChooseGameMenu(Menu):
             self.gui.update_window()
             action = self.gui.check_events(self.menu_interactables)
             if action != "no action":
-                if action == "quit":               # kommt man von diesem if wald weg?
+                if action == "quit":               
                     self.gui.terminate_window()
                 if action == "space_invaders_button":
                     print("Space Invaders")
