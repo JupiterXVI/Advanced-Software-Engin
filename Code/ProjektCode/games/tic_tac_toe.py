@@ -7,7 +7,7 @@ sys_path.append(os_path.join(sys_path[0], '..'))
 from core_files.game import Game
 from games.graphics import ChooseGraphicTTT
 
-
+DIMENSION = 3
 
 class TicTacToe(Game):
     """
@@ -18,32 +18,157 @@ class TicTacToe(Game):
             game_id = 1, 
             name = "TicTacToe", 
             player_count = 2, 
-            game_elements = ChooseGraphicTTT.game_elements
             )
-        #
-        self.field = [['','',''],['','',''],['','','']]
+        self.board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+        self.active_player = 'X'
+        self.win = {
+            'winner':"no winner",
+            'orientation':"not set",
+            'line': 0
+        }
+        self.funktion_with_parameters = [
+            'calcualte_coordinates','position_active_symbol'
+        ]
+        
 
     """
     functions
     """
+    def run(self):
+        while True:
+            while self.resiver.event_reseved:
+                message = self.resiver.get_message()
+                if message['category'] == "game":
+                    self.react_to_request(request=message['info'])
+
+    def react_to_request(self, request):
+        if request["function"] in self.funktion_with_parameters:
+            eval(f"self.{request['function']}")(request['parameter'])
+        else:
+            eval(f"self.{request['function']}")()
+
+
     def choose_field(self):
          pass
-
-    def check_for_win(self):
-        for column in range(2):
-            if self.field[column][0] == self.field[column][1] and self.field[column][0] == self.field[column][2]:
-                return True
-            row = column
-            if self.field[0][row] == self.field[1][row] and self.field[0][row] == self.field[2][row]:
-                return True
-        if self.field[1][1] == self.field[2][2] and self.field[1][1] == self.field[3][3]:
-                return True
-        if self.field[3][1] == self.field[2][2] and self.field[3][1] == self.field[1][3]:
-                return True
-        return False
     
+
+    def calcualte_coordinates(self, general_position):
+        x = int(general_position[0]/300)
+        y = int(general_position[1]/300)
+        array_position = (x,y)
+        print(array_position)
+        return array_position
+    
+
+    def position_active_symbol(self, general_position):
+        array_position = self.calcualte_coordinates(general_position)
+
+        if (self.board[array_position[1]][array_position[0]] != 'O' and 
+            #self.board[array_position[1]][array_position[0]] != 'o' and
+            #self.board[array_position[1]][array_position[0]] != 'x' and
+            self.board[array_position[1]][array_position[0]] != 'X'):
+            self.board[array_position[1]][array_position[0]] = self.active_player
+            #print("new x")
+            return True
+        else:
+            #print("no new x")
+            return False
+        
+
+    def change_symbols(self):
+        if self.active_player == 'O':
+            self.active_player = 'X'
+        else:
+            self.active_player = 'O'
+
+
+    def draw_board(self):
+        self.sender.set_event(category="gui",name="draw_board", info={'function':'load_image_on_screen', 'parameter': ChooseGraphicTTT.tic_tac_toe_board})
+        self.sender.send()
+
+
+    def draw_symbols(self):
+        for row in range(DIMENSION):
+            for col in range(DIMENSION):
+                if self.board[row][col] != 0:
+                    symbol = "no symbol"
+                    if self.board[row][col] == 'O':
+                        symbol = ChooseGraphicTTT.tic_tac_toe_o
+                        self.board[row][col] = 'o'
+                    elif self.board[row][col] == 'X':
+                        print(self.board)
+                        # self.board[row][col] = 'x'
+                        #print(self.board)
+                        symbol = ChooseGraphicTTT.tic_tac_toe_x
+                    symbol['position'] = ChooseGraphicTTT.positions[row][col]
+                    self.sender.set_event(category="gui", name="draw_symbol", info={'function':'load_image_on_screen', 'parameter': symbol})
+                    self.sender.send()
+
+
+    def check_win(self):
+        for row in range(DIMENSION):
+            if((self.board[row][0] == self.board[row][1] == self.board[row][2]) and (self.board[row][0] != 0)):
+                self.win['winner'] = self.board[row][0]
+                self.win['orientation'] = "horizontal"
+                self.win['line'] = row
+
+        for col in range(DIMENSION):
+            if((self.board[0][col] == self.board[1][col] == self.board[2][col]) and (self.board[0][col] != 0)):
+                self.win['winner'] =  self.board[0][col]
+                self.win['orientation'] = "vertical"
+                self.win['line'] = col
+   
+        if (self.board[0][0] == self.board[1][1] == self.board[2][2]) and (self.board[0][0] != 0):
+            self.win['winner'] =  self.board[0][0]
+            self.win['orientation'] = "diagonal_tl-br"
+          
+        if (self.board[0][2] == self.board[1][1] == self.board[2][0]) and (self.board[0][2] != 0):
+            self.win['winner'] =  self.board[0][2]
+            self.win['orientation'] = "diagonal_bl-tr"
+    
+        if self.win['winner'] == "no winner":
+            for row in range(DIMENSION):
+                for col in range(DIMENSION):
+                    if self.board[row][col] != 'X' and self.board[row][col] != 'O':
+                        return "no winner"
+            return "DRAW"
+        
+        self.update_window
+    
+
     def player_act(self):
         self.choose_field()
 
 
-        
+    def update_window(self):
+        self.sender.set_event(category="gui", name="update_window", info={'function':'update_window', 'parameter':''})
+        self.sender.send()
+
+
+    def draw_win(self):
+        winner_image = "not yet chosen"
+        if self.win['winner'] == 'X':
+            winner_image = ChooseGraphicTTT.tic_tac_toe_x_winning
+        else:
+            winner_image = ChooseGraphicTTT.tic_tac_toe_o_winning
+
+        if (self.win['orientation'] == 'horizontal'):
+            for col in range(DIMENSION):
+                winner_image['position'] = ChooseGraphicTTT.positions[self.win['line']][col]
+                self.sender.set_event(category="gui", name="ttt_win", info={'function':'load_image_on_screen', 'parameter': winner_image})
+                self.sender.send()
+        elif(self.win['orientation'] == 'vertical'): 
+            for row in range(DIMENSION):
+                winner_image['position'] = ChooseGraphicTTT.positions[row][self.win['line']]
+                self.sender.set_event(category="gui", name="ttt_win", info={'function':'load_image_on_screen', 'parameter': winner_image})
+                self.sender.send()
+        elif(self.win['orientation'] == 'diagonal_tl-br'): 
+            for i in range(DIMENSION): 
+                winner_image['position'] = ChooseGraphicTTT.positions[i][i]
+                self.sender.set_event(category="gui", name="ttt_win", info={'function':'load_image_on_screen', 'parameter':winner_image})
+                self.sender.send()
+        elif(self.win['orientation'] == 'diagonal_bl-tr'): 
+            for i in range(DIMENSION): 
+                winner_image['position'] = ChooseGraphicTTT.positions[2-i][i]
+                self.sender.set_event(category="gui", name="ttt_win", info={'function':'load_image_on_screen', 'parameter':winner_image})
+                self.sender.send()

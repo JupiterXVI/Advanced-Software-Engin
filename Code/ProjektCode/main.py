@@ -1,6 +1,8 @@
 """
 imports
 """
+from sys import exit
+
 from adapter import MenuBuilder, PostgreSqlAdapter
 from core_files import AccountList, Playground, GameList
 from gui import GameLibraryMenu, MainMenu, ChooseGameMenu, ManageAccountMenu
@@ -44,41 +46,70 @@ class Main():
         playground.play(game_id = 1 -1)
 
     def test_messaging():
+        window_open = "not Initialized"
         main_sender = Sender()
         main_resever = Resiver()
         gui_builder = MenuBuilder()
-
         main_sender.add_listener(gui_builder.resiver)
         gui_builder.sender.add_listener(main_resever)
-
         Thread(target=gui_builder.run).start()
-        sleep(3)
 
-        main_sender.set_event('send_window_info', {'function':'set_window_info', 'parameter':MainMenu.window})
-        main_sender.send()
-        sleep(1)
-
-        main_sender.set_event('send_element_info', {'function':'set_window_elements', 'parameter':MainMenu.window_elements})
-        main_sender.send()
-        sleep(1)
-        
-        main_sender.set_event('create_window', {'function':'create_window', 'parameter':''})
-        main_sender.send()
-        sleep(1)
-
-        main_sender.set_event('create_interaction', {'function':'create_window_interaction_elements', 'parameter':''})
-        main_sender.send()
-        sleep(1)
-
-        main_sender.set_event('modifie_element_style', {'function':'set_element_styles', 'parameter':''})
-        main_sender.send()
-        sleep(1)
-
-        main_sender.set_event('show_elements_on _window', {'function':'update_window', 'parameter':''})
+        main_sender.set_event(category='gui',name='send_window_info', info={'function':'set_window_info', 'parameter':MainMenu.window})
         main_sender.send()
         
-        print("done")
+        main_sender.set_event(category='gui', name='send_element_info', info={'function':'set_window_elements', 'parameter':MainMenu.window_elements})
+        main_sender.send()
+    
+        main_sender.set_event(category='gui', name='create_window', info={'function':'create_window', 'parameter':''})
+        main_sender.send()
+        window_open = True
+        
+        ttt = TicTacToe()
+        main_sender.add_listener(ttt.resiver)
+        ttt.sender.add_listener(gui_builder.resiver)
+        Thread(target=ttt.run).start()
+        
+        main_sender.set_event(category='game', name='draw_board', info={'function':'draw_board', 'parameter':''})
+        main_sender.send()
 
+        main_sender.set_event(category='game', name='draw_board', info={'function':'draw_board', 'parameter':''})
+        main_sender.send()
+
+        #main_sender.set_event(category='gui', name='show_board', info={'function':'update_window', 'parameter':''})
+        #main_sender.send() 
+
+        """
+        main_sender.set_event(category='gui', name='create_interaction', info={'function':'create_window_interaction_elements', 'parameter':''})
+        main_sender.send()
+        
+        main_sender.set_event(category='gui', name='modifie_element_style', info={'function':'set_element_styles', 'parameter':''})
+        main_sender.send()
+        
+        main_sender.set_event(category='gui', name='show_elements_on _window', info={'function':'update_window', 'parameter':''})
+        main_sender.send()
+        print("wait on main menu")
+        #sleep(2)
+
+        #main_sender.set_event(category='gui', name='clear_screen', info={'function':'clear_window', 'parameter':''})
+        #main_sender.send()
+        #sleep(1)
+        """
+
+        while window_open:
+            if main_resever.event_reseved:
+                message = main_resever.get_message()
+                print(message)
+
+                if message['category'] == 'input':
+                    main_sender.set_event(category='game', name='position', info={'function':'position_active_symbol', 'parameter':message['info']})
+                    main_sender.send()
+                    main_sender.set_event(category='game', name='symboles', info={'function':'draw_symbols', 'parameter':''})
+                    main_sender.send()
+
+        # muss mit Mülleimer geschlossen werden
+
+    def message_relay(self):
+        pass
 
 
 if __name__ == "__main__":

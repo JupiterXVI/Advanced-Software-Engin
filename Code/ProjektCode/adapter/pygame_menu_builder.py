@@ -2,7 +2,7 @@
 imports
 """
 from os import path as os_path
-from sys import path as sys_path
+from sys import exit, path as sys_path
 sys_path.append(os_path.join(sys_path[0], '..'))
 
 from adapter import AllowToBuldMenu
@@ -25,15 +25,11 @@ class MenuBuilder(AllowToBuldMenu):
         self.run_forever = True
         self.funktion_with_parameters = [
             'set_window_info','set_window_elements',
-            'set_game_elements','check_events']
+            'set_game_elements','load_image_on_screen']
         # information for the gui-window
-        self.window_width = "width"
-        self.window_height = "height"
-        self.window_titel = "titel"
-        self.window_color = "color"
+        self.window_info = "not set"
         # list of elements which make up the contence
         self.window_elements = "list of elements in menu"
-        self.game_elements = "list of elements in game"
         # font for text written on the menu
         self.font = pygame.font.Font('freesansbold.ttf', 35)
         self.window = "pygame_window_object"
@@ -43,8 +39,14 @@ class MenuBuilder(AllowToBuldMenu):
     """
     def run(self):
         while(self.run_forever):
-            if self.resiver.event_reseved:
-                self.react_to_request(request=self.resiver.info)
+            while self.resiver.event_reseved:
+                message = self.resiver.get_message()
+                if message['category'] == 'gui':
+                    self.react_to_request(request=message['info'])
+            window_event = self.check_events()
+            if window_event != "no action":
+                self.sender.set_event(category= "input", name="window_event", info=window_event)
+                self.sender.send()
             if self.window != "pygame_window_object":
                 self.update_window()
 
@@ -56,30 +58,26 @@ class MenuBuilder(AllowToBuldMenu):
             
 
 
+
     def set_window_info(self, window_info):
-        self.window_width = window_info["width"]
-        self.window_height = window_info["height"]
-        self.window_titel = window_info["titel"]
-        self.window_color = window_info["color"]
+        self.window_info = window_info
 
     def set_window_elements(self, window_elements):
         self.window_elements = window_elements
 
-    def set_game_elements(self, game_elements):
-        self.game_elements = game_elements
-
     # this funktion creates a window with a given sice and setz its title
     def create_window(self):
-        window = pygame.display.set_mode((self.window_width, self.window_height))
-        pygame.display.set_caption(self.window_titel)
+        window = pygame.display.set_mode(size=(self.window_info["width"], self.window_info["height"]))
+        pygame.display.set_caption(self.window_info["titel"])
         self.window = window
 
     def clear_window(self):
-        self.window.fill(self.window_color)
+        self.window.fill(self.window_info["color"])
 
     # this funktion closes the the game and therefor all windows
     def terminate_window(self):
         pygame.quit()
+        exit()
 
     # this funktion uses the element list given at initilization, checks the form of the element,
     # draws them on the given window and returns a list of interactable surfaces aproximate to the drawn elemnets
@@ -100,43 +98,35 @@ class MenuBuilder(AllowToBuldMenu):
 
     # this funktion takes the given elements and their styles specifications and changes them acordingly
     def set_element_styles(self):
-        self.window.fill(self.window_color)
+        self.clear_window()
         for element in self.window_elements:
             if element["form"] == "rectangle":
                 pygame.draw.rect(self.window, element["color"],[element["position"] ,element["dimensions"]], element["line_thickness"])
                 text = self.font.render(element["text"]["content"], True, element["text"]["color"])
                 text_box = text.get_rect()
-                text_box.center = (element["position"][0] + (element["dimensions"][0] / 2) , element["position"][1] + (element["dimensions"][1] / 2))
+                text_box.center = (element["position"][0] + (element["dimensions"][0]/2) , element["position"][1] + (element["dimensions"][1]/2))
                 self.window.blit(text, text_box)
             if element["form"] == "circle":
                 pygame.draw.circle(self.window, element["color"], element["position"], element["radius"], element["line_thickness"])
 
-    def create_game_elements(self):
-        elements_added_to_game = {"item_name": [], "item": []}
-        for element in reversed(self.game_elements):
-            for pice in range(element["who_offten_needed"]):
-                image = pygame.image.load(element["graphic"] )
-                intercaton_surface = pygame.Rect(element["position"], element["dimensions"])
-                elements_added_to_game["item_name"].append(f"{element['name']}_{pice}")
-                elements_added_to_game["item"].append([intercaton_surface, image])
-        return elements_added_to_game
-        
-    def set_game_element_styles(self, added_elemets):
-        self.window.fill(self.window_color)
-        index = 0
-        for element in added_elemets["item"]:
-            self.window.blit(element[1], element[0].center)
-            index += 1
+    def load_image_on_screen(self, game_element):
+            image = pygame.image.load(game_element["graphic"] )
+            intercaton_surface = pygame.Rect(game_element["position"], game_element["dimensions"])
+            image = pygame.image.load(game_element["graphic"] )
+            self.window.blit(image, intercaton_surface.center)
+
 
     # this funktion refresches the gui, so newly drawn objekts can be seen 
     def update_window(self):
         pygame.display.update()
 
     # this funktion checks if the right mous button was cklicked
+    """
     def check_click(self):
         if pygame.mouse.get_pressed()[0] == 1:
             return True
         return False
+    """
 
     def check_key_tap(self, event):
         if event.key == pygame.K_BACKSPACE:
@@ -146,17 +136,18 @@ class MenuBuilder(AllowToBuldMenu):
 
     # this funktion checks if the menubar was used or one of the interactable surfaces was ckicked
     # and returns the name of the interaction
-    def check_events(self, interaction_surfaces):
+    def check_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                return "quit"
+                self.sender.set_event(category="exit", name="window_event", info="window_closed")
+                self.sender.send()
+                self.terminate_window()
             if event.type == pygame.KEYDOWN:
                 return self.check_key_tap(event)
-        for index, item in enumerate(interaction_surfaces["item"]):
-            if item.collidepoint(pygame.mouse.get_pos()):
-                if self.check_click():
-                    return interaction_surfaces["item_name"][index]
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                return pygame.mouse.get_pos()
         return "no action"
+        
 
 
 

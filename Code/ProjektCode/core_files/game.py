@@ -1,16 +1,18 @@
 """
 imports
 """
+from communication import Sender, Resiver
 
 class Game():
     """
     global variables
     """
-    def __init__(self, game_id, name, player_count, game_elements):
+    def __init__(self, game_id, name, player_count):
         self.game_id = game_id
         self.name = name
         self.player_count = player_count
-        self.game_elements = game_elements
+        self.sender = Sender()
+        self.resiver = Resiver()
 
     """
     functions

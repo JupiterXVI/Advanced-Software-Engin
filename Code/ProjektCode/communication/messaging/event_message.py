@@ -3,10 +3,19 @@ from .distributer import Distributor
 class Event(Distributor): 
   
     
-    def __init__(self, name =''): 
+    def __init__(self, category =''): 
         Distributor.__init__(self) 
-        self._name = name 
-        self._information = "no event"
+        self._category = category
+        self._name = 'no event' 
+        self._info = "no event"
+
+    @property
+    def category(self):
+        return self._category
+    
+    @category.setter
+    def category(self, value):
+        self._category = value
   
     @property
     def name(self):
@@ -17,12 +26,12 @@ class Event(Distributor):
         self._name = value
 
     @property
-    def information(self): 
-        return self._information 
+    def info(self): 
+        return self._info
   
-    @information.setter 
-    def information(self, info): 
-        self._information = info
+    @info.setter 
+    def info(self, info): 
+        self._info = info
     
     def send(self):
         self.message_to_observers()

@@ -31,7 +31,6 @@ class GameLibraryMenu(Menu):
     """
     functions
     """
-
     # hier könnte man auch noch open/closed-Principle verwenden
     # -> eine Liste mit bilding-functions um das Menu stück für Stück zu bauen
     # this funktion uses the gui objekt to create a menu form the class parameters
