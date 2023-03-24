@@ -105,6 +105,10 @@ class Main():
                     main_sender.send()
                     main_sender.set_event(category='game', name='symboles', info={'function':'draw_symbols', 'parameter':''})
                     main_sender.send()
+                    main_sender.set_event(category='game', name='change_player', info={'function':'change_symbols', 'parameter':''})
+                    main_sender.send()
+                    main_sender.set_event(category='game', name='check_win', info={'function':'check_win', 'parameter':''})
+                    main_sender.send()
 
         # muss mit Mülleimer geschlossen werden
 
@@ -114,5 +118,5 @@ class Main():
 
 if __name__ == "__main__":
     # Main.test()
-    Main.start()
-    # Main.test_messaging()
+    # Main.start()
+    Main.test_messaging()

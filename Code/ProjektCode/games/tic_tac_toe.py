@@ -63,15 +63,10 @@ class TicTacToe(Game):
     def position_active_symbol(self, general_position):
         array_position = self.calcualte_coordinates(general_position)
 
-        if (self.board[array_position[1]][array_position[0]] != 'O' and 
-            #self.board[array_position[1]][array_position[0]] != 'o' and
-            #self.board[array_position[1]][array_position[0]] != 'x' and
-            self.board[array_position[1]][array_position[0]] != 'X'):
+        if self.board[array_position[1]][array_position[0]] not in ['O','o','X','x']:
             self.board[array_position[1]][array_position[0]] = self.active_player
-            #print("new x")
             return True
         else:
-            #print("no new x")
             return False
         
 
@@ -90,15 +85,13 @@ class TicTacToe(Game):
     def draw_symbols(self):
         for row in range(DIMENSION):
             for col in range(DIMENSION):
-                if self.board[row][col] != 0:
+                if self.board[row][col] not in [0, "x", "o"]:
                     symbol = "no symbol"
                     if self.board[row][col] == 'O':
-                        symbol = ChooseGraphicTTT.tic_tac_toe_o
                         self.board[row][col] = 'o'
+                        symbol = ChooseGraphicTTT.tic_tac_toe_o
                     elif self.board[row][col] == 'X':
-                        print(self.board)
-                        # self.board[row][col] = 'x'
-                        #print(self.board)
+                        self.board[row][col] = 'x'
                         symbol = ChooseGraphicTTT.tic_tac_toe_x
                     symbol['position'] = ChooseGraphicTTT.positions[row][col]
                     self.sender.set_event(category="gui", name="draw_symbol", info={'function':'load_image_on_screen', 'parameter': symbol})
@@ -129,11 +122,13 @@ class TicTacToe(Game):
         if self.win['winner'] == "no winner":
             for row in range(DIMENSION):
                 for col in range(DIMENSION):
-                    if self.board[row][col] != 'X' and self.board[row][col] != 'O':
+                    if self.board[row][col] != 'x' and self.board[row][col] != 'o':
                         return "no winner"
             return "DRAW"
         
-        self.update_window
+        print(f"The winner is: {self.win['winner']} !!!")
+
+        # self.update_window
     
 
     def player_act(self):
@@ -146,8 +141,10 @@ class TicTacToe(Game):
 
 
     def draw_win(self):
+        if self.win['winner'] == "no winner":
+            return
         winner_image = "not yet chosen"
-        if self.win['winner'] == 'X':
+        if self.win['winner'] in ['X','x']:
             winner_image = ChooseGraphicTTT.tic_tac_toe_x_winning
         else:
             winner_image = ChooseGraphicTTT.tic_tac_toe_o_winning
