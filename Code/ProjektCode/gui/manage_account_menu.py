@@ -7,7 +7,7 @@ sys_path.append(os_path.join(sys_path[0], '..'))
 from time import sleep
 
 from adapter import Menu
-from adapter import AllowToBuldMenu
+from adapter import GuiBuilder
 from gui import ManageAccount
 from gui import EditAccountMenu
 from core_files import AccountList
@@ -16,7 +16,7 @@ class ManageAccountMenu(Menu):
     """
     global variables
     """
-    def __init__(self, gui: AllowToBuldMenu, account_list: AccountList):
+    def __init__(self, gui: GuiBuilder, account_list: AccountList):
         self.gui = gui
         self.menu_interactables = "list of interactables"
         self.account_list = account_list

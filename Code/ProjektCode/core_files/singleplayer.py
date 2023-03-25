@@ -1,22 +1,21 @@
 """
 imports
 """
-from os import path as os_path
-from sys import path as sys_path
-sys_path.append(os_path.join(sys_path[0], '..'))
-from core_files.playground import Playground
 
-
-class Singleplayer(Playground):
+class Singleplayer():
     """
     global variables
     """
     def __init__(self, game):
-        super().__init__(game)
+        self.game = game
+        self.active_player = "no player set"
 
     """
     functions
     """
+    def play(self):
+        pass
+
     def set_aktive_player(self, aktive_player):
         self.active_player = aktive_player
 

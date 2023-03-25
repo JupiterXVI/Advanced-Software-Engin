@@ -1,7 +1,7 @@
 """
 imports
 """
-from communication import Sender, Resiver
+from communication import Sender, Reseiver
 
 class Game():
     """
@@ -12,7 +12,7 @@ class Game():
         self.name = name
         self.player_count = player_count
         self.sender = Sender()
-        self.resiver = Resiver()
+        self.reseiver = Reseiver()
 
     """
     functions

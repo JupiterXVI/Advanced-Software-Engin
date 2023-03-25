@@ -6,12 +6,12 @@ from re import search
 from time import sleep
 
 from adapter import Menu
-from adapter import AllowToBuldMenu
+from adapter import GuiBuilder
 from gui import EditAccount
 from core_files import Account
 
 class EditAccountMenu(Menu):   # mit vererbung könnten die __init__, open- close_menu funktionen ausgelassen werden
-    def __init__(self, gui: AllowToBuldMenu, account: Account):
+    def __init__(self, gui: GuiBuilder, account: Account):
         self.gui = gui
         self.menu_interactables = "list of interactables"
         self.account = account

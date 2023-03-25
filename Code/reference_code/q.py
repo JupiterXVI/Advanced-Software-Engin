@@ -1,2 +1,2 @@
-for x in range(3):
-    print(x)
+print(str(1))
+eval("2+3")

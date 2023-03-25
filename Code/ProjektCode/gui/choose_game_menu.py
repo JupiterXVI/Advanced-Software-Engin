@@ -4,11 +4,11 @@ sys_path.append(os_path.join(sys_path[0], '..'))
 from time import sleep
 
 from adapter import Menu
-from adapter import AllowToBuldMenu
+from adapter import GuiBuilder
 from gui import ChooseGame
 
 class ChooseGameMenu(Menu):
-    def __init__(self, gui: AllowToBuldMenu):
+    def __init__(self, gui: GuiBuilder):
         self.gui = gui
         self.menu_interactables = "list of interactables"
 

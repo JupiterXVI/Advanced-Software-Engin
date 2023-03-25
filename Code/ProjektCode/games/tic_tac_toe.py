@@ -4,6 +4,7 @@ imports
 from os import path as os_path
 from sys import path as sys_path
 sys_path.append(os_path.join(sys_path[0], '..'))
+from adapter import GuiBuilder
 from core_files.game import Game
 from games.graphics import ChooseGraphicTTT
 
@@ -36,8 +37,8 @@ class TicTacToe(Game):
     """
     def run(self):
         while True:
-            while self.resiver.event_reseved:
-                message = self.resiver.get_message()
+            while self.reseiver.event_reseved:
+                message = self.reseiver.get_message()
                 if message['category'] == "game":
                     self.react_to_request(request=message['info'])
 
@@ -78,8 +79,7 @@ class TicTacToe(Game):
 
 
     def draw_board(self):
-        self.sender.set_event(category="gui",name="draw_board", info={'function':'load_image_on_screen', 'parameter': ChooseGraphicTTT.tic_tac_toe_board})
-        self.sender.send()
+        self.sender.send(category="gui",name="draw_board", info={'function':GuiBuilder.load_image_on_screen.__name__, 'parameter': ChooseGraphicTTT.tic_tac_toe_board})
 
 
     def draw_symbols(self):
@@ -94,8 +94,7 @@ class TicTacToe(Game):
                         self.board[row][col] = 'x'
                         symbol = ChooseGraphicTTT.tic_tac_toe_x
                     symbol['position'] = ChooseGraphicTTT.positions[row][col]
-                    self.sender.set_event(category="gui", name="draw_symbol", info={'function':'load_image_on_screen', 'parameter': symbol})
-                    self.sender.send()
+                    self.sender.send(category="gui", name="draw_symbol", info={'function':GuiBuilder.load_image_on_screen.__name__, 'parameter': symbol})
 
 
     def check_win(self):
@@ -136,8 +135,7 @@ class TicTacToe(Game):
 
 
     def update_window(self):
-        self.sender.set_event(category="gui", name="update_window", info={'function':'update_window', 'parameter':''})
-        self.sender.send()
+        self.sender.send(category="gui", name="update_window", info={'function':GuiBuilder.update_window.__name__, 'parameter':''})
 
 
     def draw_win(self):
@@ -152,20 +150,16 @@ class TicTacToe(Game):
         if (self.win['orientation'] == 'horizontal'):
             for col in range(DIMENSION):
                 winner_image['position'] = ChooseGraphicTTT.positions[self.win['line']][col]
-                self.sender.set_event(category="gui", name="ttt_win", info={'function':'load_image_on_screen', 'parameter': winner_image})
-                self.sender.send()
+                self.sender.send(category="gui", name="ttt_win", info={'function':GuiBuilder.load_image_on_screen.__name__, 'parameter': winner_image})
         elif(self.win['orientation'] == 'vertical'): 
             for row in range(DIMENSION):
                 winner_image['position'] = ChooseGraphicTTT.positions[row][self.win['line']]
-                self.sender.set_event(category="gui", name="ttt_win", info={'function':'load_image_on_screen', 'parameter': winner_image})
-                self.sender.send()
+                self.sender.send(category="gui", name="ttt_win", info={'function':GuiBuilder.load_image_on_screen.__name__, 'parameter': winner_image})
         elif(self.win['orientation'] == 'diagonal_tl-br'): 
             for i in range(DIMENSION): 
                 winner_image['position'] = ChooseGraphicTTT.positions[i][i]
-                self.sender.set_event(category="gui", name="ttt_win", info={'function':'load_image_on_screen', 'parameter':winner_image})
-                self.sender.send()
+                self.sender.send(category="gui", name="ttt_win", info={'function':GuiBuilder.load_image_on_screen.__name__, 'parameter': winner_image})
         elif(self.win['orientation'] == 'diagonal_bl-tr'): 
             for i in range(DIMENSION): 
                 winner_image['position'] = ChooseGraphicTTT.positions[2-i][i]
-                self.sender.set_event(category="gui", name="ttt_win", info={'function':'load_image_on_screen', 'parameter':winner_image})
-                self.sender.send()
+                self.sender.send(category="gui", name="ttt_win", info={'function':GuiBuilder.load_image_on_screen.__name__, 'parameter': winner_image})

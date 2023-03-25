@@ -1,6 +1,6 @@
 from communication import Listener
 
-class Resiver(Listener):
+class Reseiver(Listener):
     def __init__(self) -> None:
         self._event_reseved = False
         self.message_queue = []
@@ -15,7 +15,6 @@ class Resiver(Listener):
         
     def listen(self, send_event):
         print(f'event: {send_event.name} has been reseved')
-        #print(f'info: {send_event.info}')
         self.message_queue.append({'category':send_event.category, 'name': send_event.name, 'info': send_event.info})
 
     def get_message(self):

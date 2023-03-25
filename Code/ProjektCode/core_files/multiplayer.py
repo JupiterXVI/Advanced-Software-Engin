@@ -1,11 +1,8 @@
 """
 imports
 """
-from .playground import Playground
 
-
-
-class Multiplayer(Playground):
+class Multiplayer():
     """
     global variables
     """

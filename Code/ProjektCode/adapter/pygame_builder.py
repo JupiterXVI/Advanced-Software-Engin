@@ -5,15 +5,15 @@ from os import path as os_path
 from sys import exit, path as sys_path
 sys_path.append(os_path.join(sys_path[0], '..'))
 
-from adapter import AllowToBuldMenu
+from adapter import GuiBuilder
 import pygame
-from communication import Sender, Resiver
+from communication import Sender, Reseiver
 
 
 # class used to build menu objekts
 # - gui/menu builder using the pygame library
 # - takes information about the window and its contence and creates it using those specifications
-class MenuBuilder(AllowToBuldMenu):
+class PygameBuilder(GuiBuilder):
     """
     global variables
     """
@@ -21,7 +21,7 @@ class MenuBuilder(AllowToBuldMenu):
         pygame.init()
         # communication between objects
         self.sender = Sender()
-        self.resiver = Resiver()
+        self.reseiver = Reseiver()
         self.run_forever = True
         self.funktion_with_parameters = [
             'set_window_info','set_window_elements',
@@ -39,14 +39,13 @@ class MenuBuilder(AllowToBuldMenu):
     """
     def run(self):
         while(self.run_forever):
-            while self.resiver.event_reseved:
-                message = self.resiver.get_message()
+            while self.reseiver.event_reseved:
+                message = self.reseiver.get_message()
                 if message['category'] == 'gui':
                     self.react_to_request(request=message['info'])
             window_event = self.check_events()
             if window_event != "no action":
-                self.sender.set_event(category= "input", name="window_event", info=window_event)
-                self.sender.send()
+                self.sender.send(category= "input", name="window_event", info=window_event)
             if self.window != "pygame_window_object":
                 self.update_window()
 
@@ -56,7 +55,6 @@ class MenuBuilder(AllowToBuldMenu):
         else:
             eval(f"self.{request['function']}")()
             
-
 
 
     def set_window_info(self, window_info):
@@ -139,8 +137,7 @@ class MenuBuilder(AllowToBuldMenu):
     def check_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                self.sender.set_event(category="exit", name="window_event", info="window_closed")
-                self.sender.send()
+                self.sender.send(category="exit", name="window_event", info="window_closed")
                 self.terminate_window()
             if event.type == pygame.KEYDOWN:
                 return self.check_key_tap(event)

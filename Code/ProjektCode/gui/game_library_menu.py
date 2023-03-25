@@ -6,7 +6,7 @@ from sys import path as sys_path
 sys_path.append(os_path.join(sys_path[0], '..'))
 from time import sleep 
 from adapter import Menu
-from adapter import AllowToBuldMenu
+from adapter import GuiBuilder
 from gui import MainMenu
 
 
@@ -16,7 +16,7 @@ class GameLibraryMenu(Menu):
     """
     global variables
     """
-    def __init__(self, gui: AllowToBuldMenu, choose_game: Menu, manage_account: Menu):
+    def __init__(self, gui: GuiBuilder, choose_game: Menu, manage_account: Menu):
         # objekt of a class which can visualize the menus/games
         self.gui =  gui    # ggf in eigene Klasse
         self.choose_game = choose_game
