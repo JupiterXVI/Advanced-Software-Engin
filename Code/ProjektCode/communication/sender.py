@@ -12,6 +12,9 @@ class Sender():
     def add_listener(self, listener):
         self.e_message.attach_to_event(listener)
 
+    def remove_listener(self, listener):
+        self.e_message.detach_from_event(listener)
+
     def send(self, category, name, info):
         self.set_event(category, name, info)
         self.e_message.send()

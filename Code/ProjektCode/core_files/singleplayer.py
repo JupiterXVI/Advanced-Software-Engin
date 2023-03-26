@@ -1,6 +1,7 @@
 """
 imports
 """
+from adapter import GuiBuilder
 
 class Singleplayer():
     """
@@ -25,9 +26,4 @@ class Singleplayer():
 
 # führe nur aus wenn die Datei direckt ausgeführt wird
 if __name__ == "__main__":
-    s = Singleplayer('SpaceInvaders')
-    a = s.get_test_account()
-    print(s.active_player)
-    s.set_aktive_player(a)
-    print(s.active_player)
-    s.player_act()  
+    print("this is the singleplayer file")

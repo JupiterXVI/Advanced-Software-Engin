@@ -38,10 +38,12 @@ class Main():
         gui_builder.set_window_info(ChooseGraphicTTT.tic_tac_toe_window)
         gui_builder.create_window()
         """
+        gui_builder = PygameBuilder()
+        Thread(target=gui_builder.run).start()
         # get TicTacToe in playground
         game_list = GameList(PostgreSqlAdapter())
         game_list.add_game(TicTacToe())
-        playground = Playground(game_list.games)
+        playground = Playground(game_list.games, gui_builder)
         #start game
         playground.play(game_id = 1 -1)
 
@@ -64,8 +66,8 @@ class Main():
         ttt.sender.add_listener(gui_builder.reseiver)
         Thread(target=ttt.run).start()
         
-        main_sender.send(category='game', name='draw_board', info={'function':'draw_board', 'parameter':''})
-        main_sender.send(category='game', name='draw_board', info={'function':'draw_board', 'parameter':''})
+        main_sender.send(category='game', name='setup values', info={'function':'game_setup_values', 'parameter':''})
+        main_sender.send(category='game', name='setup grafics', info={'function':'game_setup_grafics', 'parameter':''})
 
         while window_open:
             if main_reseiver.event_reseved:
@@ -77,6 +79,7 @@ class Main():
                     main_sender.send(category='game', name='symboles', info={'function':'draw_symbols', 'parameter':''})
                     main_sender.send(category='game', name='change_player', info={'function':'change_symbols', 'parameter':''})
                     main_sender.send(category='game', name='check_win', info={'function':'check_win', 'parameter':''})
+ 
 
         # muss mit Mülleimer geschlossen werden
 
@@ -85,6 +88,6 @@ class Main():
 
 
 if __name__ == "__main__":
-    # Main.test()
+    Main.test()
     # Main.start()
-    Main.test_messaging()
+    # Main.test_messaging()

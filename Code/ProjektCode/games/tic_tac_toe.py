@@ -20,6 +20,18 @@ class TicTacToe(Game):
             name = "TicTacToe", 
             player_count = 2, 
             )
+        self.board = "no boerd initiliced"
+        self.active_player = 'not set'
+        self.win = "not set"
+        self.funktion_with_parameters = [
+            'player_act','calcualte_coordinates','position_active_symbol'
+        ]
+        
+
+    """
+    functions
+    """
+    def game_setup_values(self):
         self.board = [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
         self.active_player = 'X'
         self.win = {
@@ -27,14 +39,14 @@ class TicTacToe(Game):
             'orientation':"not set",
             'line': 0
         }
-        self.funktion_with_parameters = [
-            'calcualte_coordinates','position_active_symbol'
-        ]
-        
 
-    """
-    functions
-    """
+
+    def game_setup_grafics(self):
+        self.sender.send(category="gui",name="set window info", info={'function':GuiBuilder.set_window_info.__name__, 'parameter': ChooseGraphicTTT.tic_tac_toe_window})
+        self.sender.send(category="gui",name="clear window", info={'function':GuiBuilder.clear_window.__name__, 'parameter': ''})
+        self.sender.send(category="gui",name="draw board", info={'function':GuiBuilder.load_image_on_screen.__name__, 'parameter': ChooseGraphicTTT.tic_tac_toe_board})
+
+
     def run(self):
         while True:
             while self.reseiver.event_reseved:
@@ -42,44 +54,37 @@ class TicTacToe(Game):
                 if message['category'] == "game":
                     self.react_to_request(request=message['info'])
 
-    def react_to_request(self, request):
-        if request["function"] in self.funktion_with_parameters:
-            eval(f"self.{request['function']}")(request['parameter'])
-        else:
-            eval(f"self.{request['function']}")()
 
+    def player_act(self, player_action):
+        array_position = self.calcualte_coordinates(player_action)
+        validity = False
+        if self.position_active_symbol(array_position):
+            self.draw_symbols()
+            self.change_symbols()
+            validity = True
+        self.sender.send(category='action_validity', name='is player action valid', info=validity)
 
-    def choose_field(self):
-         pass
-    
 
     def calcualte_coordinates(self, general_position):
         x = int(general_position[0]/300)
         y = int(general_position[1]/300)
         array_position = (x,y)
-        print(array_position)
         return array_position
-    
 
-    def position_active_symbol(self, general_position):
-        array_position = self.calcualte_coordinates(general_position)
 
-        if self.board[array_position[1]][array_position[0]] not in ['O','o','X','x']:
-            self.board[array_position[1]][array_position[0]] = self.active_player
+    def position_active_symbol(self, position):
+        if self.board[position[1]][position[0]] not in ['O','o','X','x']:
+            self.board[position[1]][position[0]] = self.active_player
             return True
         else:
             return False
-        
+
 
     def change_symbols(self):
         if self.active_player == 'O':
             self.active_player = 'X'
         else:
             self.active_player = 'O'
-
-
-    def draw_board(self):
-        self.sender.send(category="gui",name="draw_board", info={'function':GuiBuilder.load_image_on_screen.__name__, 'parameter': ChooseGraphicTTT.tic_tac_toe_board})
 
 
     def draw_symbols(self):
@@ -119,23 +124,18 @@ class TicTacToe(Game):
             self.win['orientation'] = "diagonal_bl-tr"
     
         if self.win['winner'] == "no winner":
+            self.sender.send(category="win", name="who has won", info={'win':False, 'waiting_on_win':False, 'player_points':[0,0]})
             for row in range(DIMENSION):
                 for col in range(DIMENSION):
                     if self.board[row][col] != 'x' and self.board[row][col] != 'o':
                         return "no winner"
-            return "DRAW"
-        
-        print(f"The winner is: {self.win['winner']} !!!")
-
-        # self.update_window
-    
-
-    def player_act(self):
-        self.choose_field()
-
-
-    def update_window(self):
-        self.sender.send(category="gui", name="update_window", info={'function':GuiBuilder.update_window.__name__, 'parameter':''})
+        else:
+            points = [0,0]
+            if self.win['winner'] in ['X','x']:
+                points = [1,0]
+            else:
+                points = [0,1]
+            self.sender.send(category="win", name="who has won", info={'win':True, 'waiting_on_win':False, 'player_points':points})
 
 
     def draw_win(self):

@@ -21,11 +21,11 @@ class GameList():
     """
     def add_game(self, game: Game):
         self.add_to_list(game)
-        self.add_to_database(game)
+        #self.add_to_database(game)
 
     def add_to_list(self,  game: Game):
         self.games.append(game)
 
-    def add_to_database(self):
+    def add_to_database(self, game):
         self.datamanager.get_game()
         #...
