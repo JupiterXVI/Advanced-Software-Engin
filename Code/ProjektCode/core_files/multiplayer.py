@@ -55,9 +55,9 @@ class Multiplayer():
         Thread(target=self.game.run).start()
         self.select_player()
         # AUSLAGERN - Estellen des Fensters
-        self.sender.send(category='gui',name='send_window_info', info={'function':GuiBuilder.set_window_info.__name__, 'parameter':MainMenu.window})
-        self.sender.send(category='gui', name='send_element_info', info={'function':GuiBuilder.set_window_elements.__name__, 'parameter':MainMenu.window_elements})
-        self.sender.send(category='gui', name='create_window', info={'function':GuiBuilder.create_window.__name__, 'parameter':''})
+        self.sender.send(category='gui',name='send window_info', info={'function':GuiBuilder.set_window_info.__name__, 'parameter':MainMenu.window})
+        self.sender.send(category='gui', name='send element_info', info={'function':GuiBuilder.set_window_elements.__name__, 'parameter':MainMenu.window_elements})
+        self.sender.send(category='gui', name='create window', info={'function':GuiBuilder.create_window.__name__, 'parameter':''})
         
         # set game info
         self.win_info = {'win':False, 'waiting_on_win':True, 'player_points':[]}
@@ -71,10 +71,12 @@ class Multiplayer():
                 # waiting on responce about action validity
                 while not self.valid_player_action:
                     if self.player_is_acting:
-                        print(f"player{player} is acting")
                         self.sender.send(category='game', name='player act', info={'function':Game.player_act.__name__, 'parameter':self.player_action['info']})
                         self.player_is_acting = False
                     sleep(0.1)
+                    # allow to exit game
+                    if not self.game_is_running:
+                        return
                 self.valid_player_action = False
 
                 # waiting on responce about end of game
@@ -86,12 +88,13 @@ class Multiplayer():
                     break
                 self.win_info['waiting_on_win'] = True
         self.show_result()
-        
+
 
     def relay(self):
         self.sender.add_listener(self.game.reseiver)
         self.game.sender.add_listener(self.reseiver)
-        while True:
+        active_relay = True
+        while active_relay:
             while self.reseiver.event_reseved:
                 message = self.reseiver.get_message()
                 if message['category'] == "gui":
@@ -103,6 +106,11 @@ class Multiplayer():
                     self.valid_player_action = message['info']
                 elif message['category'] == "win":
                     self.win_info = message['info']
+                elif message['category'] == "exit":
+                    self.sender.send(category=message['category'], name=message['name'], info=message['info'])
+                    self.game_is_running = False
+                    active_relay = False
+                    print("closing relay thread")
 
 
 # führe nur aus wenn die Datei direckt ausgeführt wird

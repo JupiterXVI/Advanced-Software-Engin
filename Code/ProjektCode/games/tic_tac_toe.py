@@ -48,11 +48,15 @@ class TicTacToe(Game):
 
 
     def run(self):
-        while True:
+        active_game = True
+        while active_game:
             while self.reseiver.event_reseved:
                 message = self.reseiver.get_message()
                 if message['category'] == "game":
                     self.react_to_request(request=message['info'])
+                elif message['category'] == "exit":
+                    active_game = False
+                    print("closing game thread")
 
 
     def player_act(self, player_action):
@@ -62,7 +66,7 @@ class TicTacToe(Game):
             self.draw_symbols()
             self.change_symbols()
             validity = True
-        self.sender.send(category='action_validity', name='is player action valid', info=validity)
+        self.sender.send(category='action_validity', name='valid player action', info=validity)
 
 
     def calcualte_coordinates(self, general_position):
@@ -99,7 +103,7 @@ class TicTacToe(Game):
                         self.board[row][col] = 'x'
                         symbol = ChooseGraphicTTT.tic_tac_toe_x
                     symbol['position'] = ChooseGraphicTTT.positions[row][col]
-                    self.sender.send(category="gui", name="draw_symbol", info={'function':GuiBuilder.load_image_on_screen.__name__, 'parameter': symbol})
+                    self.sender.send(category="gui", name="draw symbol", info={'function':GuiBuilder.load_image_on_screen.__name__, 'parameter': symbol})
 
 
     def check_win(self):
@@ -124,7 +128,7 @@ class TicTacToe(Game):
             self.win['orientation'] = "diagonal_bl-tr"
     
         if self.win['winner'] == "no winner":
-            self.sender.send(category="win", name="who has won", info={'win':False, 'waiting_on_win':False, 'player_points':[0,0]})
+            self.sender.send(category="win", name="winning info", info={'win':False, 'waiting_on_win':False, 'player_points':[0,0]})
             for row in range(DIMENSION):
                 for col in range(DIMENSION):
                     if self.board[row][col] != 'x' and self.board[row][col] != 'o':
@@ -135,7 +139,7 @@ class TicTacToe(Game):
                 points = [1,0]
             else:
                 points = [0,1]
-            self.sender.send(category="win", name="who has won", info={'win':True, 'waiting_on_win':False, 'player_points':points})
+            self.sender.send(category="win", name="winning info", info={'win':True, 'waiting_on_win':False, 'player_points':points})
 
 
     def draw_win(self):
@@ -150,16 +154,16 @@ class TicTacToe(Game):
         if (self.win['orientation'] == 'horizontal'):
             for col in range(DIMENSION):
                 winner_image['position'] = ChooseGraphicTTT.positions[self.win['line']][col]
-                self.sender.send(category="gui", name="ttt_win", info={'function':GuiBuilder.load_image_on_screen.__name__, 'parameter': winner_image})
+                self.sender.send(category="gui", name="ttt win", info={'function':GuiBuilder.load_image_on_screen.__name__, 'parameter': winner_image})
         elif(self.win['orientation'] == 'vertical'): 
             for row in range(DIMENSION):
                 winner_image['position'] = ChooseGraphicTTT.positions[row][self.win['line']]
-                self.sender.send(category="gui", name="ttt_win", info={'function':GuiBuilder.load_image_on_screen.__name__, 'parameter': winner_image})
+                self.sender.send(category="gui", name="ttt win", info={'function':GuiBuilder.load_image_on_screen.__name__, 'parameter': winner_image})
         elif(self.win['orientation'] == 'diagonal_tl-br'): 
             for i in range(DIMENSION): 
                 winner_image['position'] = ChooseGraphicTTT.positions[i][i]
-                self.sender.send(category="gui", name="ttt_win", info={'function':GuiBuilder.load_image_on_screen.__name__, 'parameter': winner_image})
+                self.sender.send(category="gui", name="ttt win", info={'function':GuiBuilder.load_image_on_screen.__name__, 'parameter': winner_image})
         elif(self.win['orientation'] == 'diagonal_bl-tr'): 
             for i in range(DIMENSION): 
                 winner_image['position'] = ChooseGraphicTTT.positions[2-i][i]
-                self.sender.send(category="gui", name="ttt_win", info={'function':GuiBuilder.load_image_on_screen.__name__, 'parameter': winner_image})
+                self.sender.send(category="gui", name="ttt win", info={'function':GuiBuilder.load_image_on_screen.__name__, 'parameter': winner_image})

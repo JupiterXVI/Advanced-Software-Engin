@@ -38,30 +38,37 @@ class PygameBuilder(GuiBuilder):
     functions
     """
     def run(self):
-        while(self.run_forever):
+        while self.run_forever:
             while self.reseiver.event_reseved:
                 message = self.reseiver.get_message()
                 if message['category'] == 'gui':
                     self.react_to_request(request=message['info'])
+                if message['category'] == 'exit':
+                    self.terminate_window()
+                    exit(0)
             window_event = self.check_events()
             if window_event != "no action":
                 self.sender.send(category= "input", name="window_event", info=window_event)
             if self.window != "pygame_window_object":
                 self.update_window()
+        print("closing gui thread")
+        
+
 
     def react_to_request(self, request):
         if request["function"] in self.funktion_with_parameters:
             eval(f"self.{request['function']}")(request['parameter'])
         else:
             eval(f"self.{request['function']}")()
-            
 
 
     def set_window_info(self, window_info):
         self.window_info = window_info
 
+
     def set_window_elements(self, window_elements):
         self.window_elements = window_elements
+
 
     # this funktion creates a window with a given sice and setz its title
     def create_window(self):
@@ -69,13 +76,15 @@ class PygameBuilder(GuiBuilder):
         pygame.display.set_caption(self.window_info["titel"])
         self.window = window
 
+
     def clear_window(self):
         self.window.fill(self.window_info["color"])
+
 
     # this funktion closes the the game and therefor all windows
     def terminate_window(self):
         pygame.quit()
-        exit()
+
 
     # this funktion uses the element list given at initilization, checks the form of the element,
     # draws them on the given window and returns a list of interactable surfaces aproximate to the drawn elemnets
@@ -94,6 +103,7 @@ class PygameBuilder(GuiBuilder):
             elements_added_to_window["item"].append(intercaton_surface)
         return elements_added_to_window
 
+
     # this funktion takes the given elements and their styles specifications and changes them acordingly
     def set_element_styles(self):
         self.clear_window()
@@ -107,6 +117,7 @@ class PygameBuilder(GuiBuilder):
             if element["form"] == "circle":
                 pygame.draw.circle(self.window, element["color"], element["position"], element["radius"], element["line_thickness"])
 
+
     def load_image_on_screen(self, game_element):
             image = pygame.image.load(game_element["graphic"] )
             intercaton_surface = pygame.Rect(game_element["position"], game_element["dimensions"])
@@ -118,13 +129,6 @@ class PygameBuilder(GuiBuilder):
     def update_window(self):
         pygame.display.update()
 
-    # this funktion checks if the right mous button was cklicked
-    """
-    def check_click(self):
-        if pygame.mouse.get_pressed()[0] == 1:
-            return True
-        return False
-    """
 
     def check_key_tap(self, event):
         if event.key == pygame.K_BACKSPACE:
@@ -132,21 +136,20 @@ class PygameBuilder(GuiBuilder):
         else:
             return str(event.unicode)
 
+
     # this funktion checks if the menubar was used or one of the interactable surfaces was ckicked
     # and returns the name of the interaction
     def check_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.sender.send(category="exit", name="window_event", info="window_closed")
-                self.terminate_window()
+                self.run_forever = False
             if event.type == pygame.KEYDOWN:
                 return self.check_key_tap(event)
             if event.type == pygame.MOUSEBUTTONDOWN:
                 return pygame.mouse.get_pos()
         return "no action"
         
-
-
 
 if __name__ == "__main__":
     print("This file contains the class to build and run menus")
