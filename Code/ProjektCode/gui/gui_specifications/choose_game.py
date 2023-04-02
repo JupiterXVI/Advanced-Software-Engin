@@ -17,7 +17,7 @@ class ChooseGame(): # muss ggf keine klasse ein
     }
 
     space_invaders = {
-        "name": "space_invaders_button",
+        "name": "space_invaders",
         "form": "rectangle",
         "text": {
             "content": "Space Invaders",
@@ -45,7 +45,7 @@ class ChooseGame(): # muss ggf keine klasse ein
 
     
     tic_tac_toe = {
-        "name": "tic_tac_toe_button",
+        "name": "tic_tac_toe",
         "form": "rectangle",
         "text": {
             "content": "Tic Tac Toe",
@@ -72,7 +72,7 @@ class ChooseGame(): # muss ggf keine klasse ein
     }
 
     back_button = {
-        "name": "back_button",
+        "name": "main_menu",
         "form": "rectangle",
         "text": {
             "content": "Zurück",

@@ -10,12 +10,18 @@ from adapter import GuiBuilder
 from gui import EditAccount
 from core_files import Account
 
+from communication import Sender, Reseiver
+
 class EditAccountMenu(Menu):   # mit vererbung könnten die __init__, open- close_menu funktionen ausgelassen werden
-    def __init__(self, gui: GuiBuilder, account: Account):
-        self.gui = gui
+    def __init__(self):
+        #self.gui = gui #gebraucht?
         self.menu_interactables = "list of interactables"
-        self.account = account
+        self.account = "Not Set"
         self.save_changes = False
+
+        self.sender = Sender()
+        self.reseiver = Reseiver()
+
 
     def get_account_values_on_screen(self):
         EditAccount.input_username["text"]["content"] = str(self.account.get_name())
@@ -70,13 +76,33 @@ class EditAccountMenu(Menu):   # mit vererbung könnten die __init__, open- clos
         return False
 
 
-    def open_menu(self):
-        self.gui.set_window_elements(EditAccount.window_elements)
-        self.menu_interactables = self.gui.create_window_interaction_elements()
+    def change_menu(self):
+        #self.gui.set_window_elements(EditAccount.window_elements)
+        #self.menu_interactables = self.gui.create_window_interaction_elements()
         self.get_account_values_on_screen()
-        self.gui.set_element_styles()
-        self.gui.update_window()
+        #self.gui.set_element_styles()
+        #self.gui.update_window()
+        self.sender.send(category='gui', name='send element_info', info={'function':GuiBuilder.set_window_elements.__name__, 'parameter':EditAccount.window_elements})
+        self.sender.send(category='gui', name='set element style', info={'function':GuiBuilder.set_element_styles.__name__, 'parameter':''})
+
         
+
+    def get_button_from_position(self, position):
+        pass
+
+    def run(self):
+        menu_in_use = True
+        while menu_in_use:
+            while self.reseiver.event_reseved:
+                message = self.reseiver.get_message()
+                if message['category'] == "input":
+                    print(message)
+                elif message['category'] == "exit":
+                    menu_in_use = False
+                    print("closing menu thread")
+
+
+
 
     def run_menu(self):
         sleep(Menu.blocking_wait_seconds)

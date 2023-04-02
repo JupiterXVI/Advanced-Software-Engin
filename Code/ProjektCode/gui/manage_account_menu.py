@@ -12,26 +12,46 @@ from gui import ManageAccount
 from gui import EditAccountMenu
 from core_files import AccountList
 
+from communication import Sender, Reseiver
+
 class ManageAccountMenu(Menu):
     """
     global variables
     """
-    def __init__(self, gui: GuiBuilder, account_list: AccountList):
-        self.gui = gui
+    def __init__(self):
+        # self.gui = gui #gebraucht?
         self.menu_interactables = "list of interactables"
-        self.account_list = account_list
+        self.account_list = "not Set"
         self.anonyme_user_count = 2
+
+        self.sender = Sender()
+        self.reseiver = Reseiver()
 
         
     """
     functions
     """
-    def open_menu(self):
-        self.gui.set_window_elements(ManageAccount.window_elements)
-        self.menu_interactables = self.gui.create_window_interaction_elements()
-        self.get_account_list_on_screan()
-        self.gui.set_element_styles()
-        self.gui.update_window()
+    def change_menu(self):
+        #self.get_account_list_on_screan()
+        self.sender.send(category='gui', name='send element_info', info={'function':GuiBuilder.set_window_elements.__name__, 'parameter':ManageAccount.window_elements})
+        self.sender.send(category='gui', name='set element style', info={'function':GuiBuilder.set_element_styles.__name__, 'parameter':''})
+        #self.sender.send(category='gui', name='update', info={'function':GuiBuilder.update_window.__name__, 'parameter':''})
+
+
+    def get_button_from_position(self, position):
+        pass
+
+    def run(self):
+        menu_in_use = True
+        while menu_in_use:
+            while self.reseiver.event_reseved:
+                message = self.reseiver.get_message()
+                if message['category'] == "input":
+                    print(message)
+                elif message['category'] == "exit":
+                    self.sender.send(category='menu', name='exit menus', info={'function':'exit_event', 'parameter':"exit"})
+                    menu_in_use = False
+                    print("closing menu thread")
 
 
     def get_account_list_on_screan(self): # kake, aber in einer liste hat es nicht funktionert

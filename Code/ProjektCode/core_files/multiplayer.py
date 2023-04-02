@@ -54,6 +54,7 @@ class Multiplayer():
         Thread(target=self.relay).start()
         Thread(target=self.game.run).start()
         self.select_player()
+        
         # AUSLAGERN - Estellen des Fensters
         self.sender.send(category='gui',name='send window_info', info={'function':GuiBuilder.set_window_info.__name__, 'parameter':MainMenu.window})
         self.sender.send(category='gui', name='send element_info', info={'function':GuiBuilder.set_window_elements.__name__, 'parameter':MainMenu.window_elements})

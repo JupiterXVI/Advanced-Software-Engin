@@ -20,3 +20,6 @@ class Reseiver(Listener):
     def get_message(self):
         return self.message_queue.pop(0)
     
+    def empty_message_queue(self):
+        self.message_queue = []
+    

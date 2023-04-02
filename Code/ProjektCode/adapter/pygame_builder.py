@@ -2,13 +2,14 @@
 imports
 """
 from os import path as os_path
-from sys import exit, path as sys_path
+from sys import path as sys_path
 sys_path.append(os_path.join(sys_path[0], '..'))
 
 from adapter import GuiBuilder
 import pygame
 from communication import Sender, Reseiver
 
+from time import sleep
 
 # class used to build menu objekts
 # - gui/menu builder using the pygame library
@@ -44,8 +45,9 @@ class PygameBuilder(GuiBuilder):
                 if message['category'] == 'gui':
                     self.react_to_request(request=message['info'])
                 if message['category'] == 'exit':
-                    self.terminate_window()
-                    exit(0)
+                    # print("exit via message")
+                    print("closing gui thread")
+                    return
             window_event = self.check_events()
             if window_event != "no action":
                 self.sender.send(category= "input", name="window_event", info=window_event)
@@ -75,6 +77,7 @@ class PygameBuilder(GuiBuilder):
         window = pygame.display.set_mode(size=(self.window_info["width"], self.window_info["height"]))
         pygame.display.set_caption(self.window_info["titel"])
         self.window = window
+        self.clear_window()
 
 
     def clear_window(self):
@@ -115,7 +118,9 @@ class PygameBuilder(GuiBuilder):
                 text_box.center = (element["position"][0] + (element["dimensions"][0]/2) , element["position"][1] + (element["dimensions"][1]/2))
                 self.window.blit(text, text_box)
             if element["form"] == "circle":
-                pygame.draw.circle(self.window, element["color"], element["position"], element["radius"], element["line_thickness"])
+                pygame.draw.circle(self.window, element["color"],
+                                   (element["position"][0]+element["radius"], element["position"][1]+element["radius"]), 
+                                   element["radius"], element["line_thickness"])
 
 
     def load_image_on_screen(self, game_element):
@@ -142,8 +147,9 @@ class PygameBuilder(GuiBuilder):
     def check_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                self.sender.send(category="exit", name="window_event", info="window_closed")
+                self.sender.send(category="exit", name="exit_event", info="window_closed")
                 self.run_forever = False
+                # print("exit via event")
             if event.type == pygame.KEYDOWN:
                 return self.check_key_tap(event)
             if event.type == pygame.MOUSEBUTTONDOWN:

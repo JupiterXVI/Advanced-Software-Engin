@@ -9,6 +9,7 @@ from adapter import Menu
 from adapter import GuiBuilder
 from gui import MainMenu
 
+from communication import Sender, Reseiver
 
 # this class is the zentral menu from which the user can access the games and other options,
 # as well as the zentrall data forwareder between games and the playground
@@ -16,16 +17,18 @@ class GameLibraryMenu(Menu):
     """
     global variables
     """
-    def __init__(self, gui: GuiBuilder, choose_game: Menu, manage_account: Menu):
+    def __init__(self):
         # objekt of a class which can visualize the menus/games
-        self.gui =  gui    # ggf in eigene Klasse
-        self.choose_game = choose_game
-        self.manage_account = manage_account
+        self.gui =  "not set"#gui    # ggf in eigene Klasse
+        self.choose_game = "not set"#choose_game
+        self.manage_account = "not set" #manage_account
         #   
         self.newly_created = True
         # list of interactables on the main menu
         self.menu_interactables = []
-        
+
+        self.sender = Sender()
+        self.reseiver = Reseiver()
         
 
     """
@@ -34,22 +37,41 @@ class GameLibraryMenu(Menu):
     # hier könnte man auch noch open/closed-Principle verwenden
     # -> eine Liste mit bilding-functions um das Menu stück für Stück zu bauen
     # this funktion uses the gui objekt to create a menu form the class parameters
-    def open_menu(self):
-        if self.newly_created:
-            print("first time opening main menu...")
-            self.gui.set_window_info(MainMenu.window)
-            self.gui.set_window_elements(MainMenu.window_elements)
-            self.gui.create_window()
-            self.newly_created = False
-        self.gui.set_window_elements(MainMenu.window_elements)
-        self.menu_interactables = self.gui.create_window_interaction_elements()
-        self.gui.set_element_styles()
-        self.gui.update_window()
-    
-    # this funktion closes the created menu window
-    def close_menu(self):
-        print("closing main menu...")
-        self.gui.terminate_window()
+    def change_menu(self):
+        self.sender.send(category='gui', name='send element_info', info={'function':GuiBuilder.set_window_elements.__name__, 'parameter':MainMenu.window_elements})
+        self.sender.send(category='gui', name='set element style', info={'function':GuiBuilder.set_element_styles.__name__, 'parameter':''})
+
+
+    def run(self):
+        print("open game library")
+        menu_in_use = True
+        while menu_in_use:
+            while self.reseiver.event_reseved:
+                message = self.reseiver.get_message()
+                if message['category'] == "input":
+                    if self.check_menu_action(message['info']):
+                        menu_in_use = False
+                elif message['category'] == "exit":
+                    menu_in_use = False
+        print("closing game library")
+
+
+    def check_menu_action(self, action):
+        event = self.get_button_from_position(MainMenu.window_elements, action)
+        if event != "no button":
+            if event == "exit":
+                print("beenden Button")
+                self.sender.send(category="exit", name="exit_event", info="window_closed")
+            else:
+                self.sender.send(category='menu', name='change menu', info={'function':'button_event', 'parameter':event})
+            return True
+        
+
+
+
+
+
+
 
     # this funktion is the loop to run the main menu, checking for user interaktion
     def run_menu(self):

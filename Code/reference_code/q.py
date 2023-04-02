@@ -1,23 +1,10 @@
-from threading import Thread
-
-class Pint():
+class Test():
     def __init__(self):
-        self.printed = False
+        self.paraname = "bla1"
+        self.blub = 23
 
-    def printer(self):
-        for x in range(7):
-            print(x)
-        self.printed = True
-    
-    def do(self):
-        print("vor thread")
-        Thread(target=self.printer).start()
-        print("nach thread")
 
-        while not self.printed:
-            print("in while")
-
-        print("end")
-
-if __name__ == '__main__':
-    Pint().do()
+if __name__ == "__main__":
+    a = Test()
+    print(a.paraname)
+    print(a.paraname.__name__)

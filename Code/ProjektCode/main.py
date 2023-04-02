@@ -1,14 +1,17 @@
 """
 imports
 """
-from adapter import PygameBuilder, GuiBuilder, PostgreSqlAdapter
+from adapter import PygameBuilder, PostgreSqlAdapter
 from core_files import AccountList, Playground, GameList
-from gui import GameLibraryMenu, MainMenu, ChooseGameMenu, ManageAccountMenu
-from games import TicTacToe, ChooseGraphicTTT
+from gui import GameLibraryMenu, ChooseGameMenu, ManageAccountMenu, EditAccountMenu
+from games import TicTacToe
 
 from threading import Thread
-from communication import Sender, Reseiver
 
+from gui import MenuManager
+
+from gui import Window
+# from gui import Window
 
 class Main():
     """
@@ -32,7 +35,7 @@ class Main():
         library_menu.run_menu()
 
 
-    def test():
+    def test_game():
         gui_builder = PygameBuilder()
         Thread(target=gui_builder.run).start()
         # get TicTacToe in playground
@@ -44,6 +47,25 @@ class Main():
         print("end game")
 
 
+    def test_menu():
+        gui_builder = PygameBuilder()
+        Thread(target=gui_builder.run).start()
+
+        gl_menu = GameLibraryMenu()
+        cg_menu = ChooseGameMenu()
+        ma_menu = ManageAccountMenu()
+        ea_menu = EditAccountMenu()
+
+        # get TicTacToe in playground
+        menus = MenuManager(gui_builder, gl_menu, cg_menu, ma_menu, ea_menu)
+        Thread(target=menus.run_relay).start()
+        menus.setup_window(Window)
+        menus.open_menus()
+        print("end")
+
+
 if __name__ == "__main__":
-    Main.test()
+    # Main.test_game()
+    Main.test_menu()
+    
     # Main.start()

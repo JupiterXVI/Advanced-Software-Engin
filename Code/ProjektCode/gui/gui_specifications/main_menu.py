@@ -17,7 +17,7 @@ class MainMenu(): # muss ggf keine klasse ein
     }
 
     choose_game_button = {
-        "name": "choose_game_button",
+        "name": "choose_game",
         "form": "rectangle",
         "text": {
             "content": "Spiel wählen",
@@ -45,7 +45,7 @@ class MainMenu(): # muss ggf keine klasse ein
 
     
     account_button = {
-        "name": "account_button",
+        "name": "account",
         "form": "rectangle",
         "text": {
             "content": "Benutzerverwaltung",
@@ -72,7 +72,7 @@ class MainMenu(): # muss ggf keine klasse ein
     }
 
     exit_button = {
-        "name": "exit_button",
+        "name": "exit",
         "form": "rectangle",
         "text": {
             "content": "Beenden",
@@ -100,11 +100,15 @@ class MainMenu(): # muss ggf keine klasse ein
 
 
     circle_button = {
-        "name": "circle_button",
+        "name": "circle",
         "form": "circle",
         "position": [
-            450,  # pos_x
-            650 # pos_y
+            430,  # pos_x
+            630 # pos_y
+        ],
+        "dimensions": [
+            40, # width
+            40  # heigth
         ],
         "radius": 20,
         "color": [
