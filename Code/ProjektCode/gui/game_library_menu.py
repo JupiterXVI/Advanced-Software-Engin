@@ -18,15 +18,6 @@ class GameLibraryMenu(Menu):
     global variables
     """
     def __init__(self):
-        # objekt of a class which can visualize the menus/games
-        self.gui =  "not set"#gui    # ggf in eigene Klasse
-        self.choose_game = "not set"#choose_game
-        self.manage_account = "not set" #manage_account
-        #   
-        self.newly_created = True
-        # list of interactables on the main menu
-        self.menu_interactables = []
-
         self.sender = Sender()
         self.reseiver = Reseiver()
         
@@ -60,13 +51,11 @@ class GameLibraryMenu(Menu):
         event = self.get_button_from_position(MainMenu.window_elements, action)
         if event != "no button":
             if event == "exit":
-                print("beenden Button")
                 self.sender.send(category="exit", name="exit_event", info="window_closed")
             else:
                 self.sender.send(category='menu', name='change menu', info={'function':'button_event', 'parameter':event})
             return True
         
-
 
 
 

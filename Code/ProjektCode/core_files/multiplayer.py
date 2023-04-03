@@ -25,6 +25,7 @@ class Multiplayer():
         self.player_action = "no player action"
         self.sender = Sender()
         self.reseiver = Reseiver()
+        self.active_relay = "not started"
 
     """
     functions
@@ -54,11 +55,6 @@ class Multiplayer():
         Thread(target=self.relay).start()
         Thread(target=self.game.run).start()
         self.select_player()
-        
-        # AUSLAGERN - Estellen des Fensters
-        self.sender.send(category='gui',name='send window_info', info={'function':GuiBuilder.set_window_info.__name__, 'parameter':MainMenu.window})
-        self.sender.send(category='gui', name='send element_info', info={'function':GuiBuilder.set_window_elements.__name__, 'parameter':MainMenu.window_elements})
-        self.sender.send(category='gui', name='create window', info={'function':GuiBuilder.create_window.__name__, 'parameter':''})
         
         # set game info
         self.win_info = {'win':False, 'waiting_on_win':True, 'player_points':[]}
@@ -94,8 +90,8 @@ class Multiplayer():
     def relay(self):
         self.sender.add_listener(self.game.reseiver)
         self.game.sender.add_listener(self.reseiver)
-        active_relay = True
-        while active_relay:
+        self.active_relay = True
+        while self.active_relay:
             while self.reseiver.event_reseved:
                 message = self.reseiver.get_message()
                 if message['category'] == "gui":
@@ -107,12 +103,14 @@ class Multiplayer():
                     self.valid_player_action = message['info']
                 elif message['category'] == "win":
                     self.win_info = message['info']
-                elif message['category'] == "exit":
+                elif message['category'] in ["exit", "close_game"]:
                     self.sender.send(category=message['category'], name=message['name'], info=message['info'])
                     self.game_is_running = False
-                    active_relay = False
-                    print("closing relay thread")
+                    self.active_relay = False
+        print("\nclosing game relay thread\n")  #--> kommt der Thread zurück
 
+    def stop_relay(self):
+        self.active_relay = False
 
 # führe nur aus wenn die Datei direckt ausgeführt wird
 if __name__ == "__main__":

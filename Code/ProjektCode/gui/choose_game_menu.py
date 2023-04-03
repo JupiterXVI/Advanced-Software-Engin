@@ -11,9 +11,7 @@ from communication import Sender, Reseiver
 
 class ChooseGameMenu(Menu):
     def __init__(self):
-        #self.gui = gui #gebraucht?
-        self.menu_interactables = "list of interactables"
-        
+        self.chousen_game = "no game chousen"
         self.sender = Sender()
         self.reseiver = Reseiver()
 
@@ -40,36 +38,17 @@ class ChooseGameMenu(Menu):
     def check_menu_action(self, action):
         event = self.get_button_from_position(ChooseGame.window_elements, action)
         if event != "no button":
-            self.sender.send(category='menu', name='change menu', info={'function':'button_event', 'parameter':event})
+            if event == "main_menu":
+                self.sender.send(category='menu', name='change menu', info={'function':'button_event', 'parameter':event})
+            else:
+                self.set_chousen_game(event) 
+                self.sender.send(category='menu', name='game start', info={'function':'button_event', 'parameter':'game'})
             return True
         
 
+    def set_chousen_game(self, game):
+        self.chousen_game = game
+    
 
-
-
-
-
-    def run_menu(self):
-        sleep(Menu.blocking_wait_seconds)
-        choose_menu_active = True
-        action = "waiting for action"
-        while choose_menu_active:
-            self.gui.update_window()
-            action = self.gui.check_events(self.menu_interactables)
-            if action != "no action":
-                if action == "quit":               
-                    self.gui.terminate_window()
-                if action == "space_invaders_button":
-                    print("Space Invaders")
-                if action == "tic_tac_toe_button":
-                    print("Tic Tac Toe")
-                if action == "back_button":
-                    print("back")
-                    choose_menu_active = False
-            sleep(Menu.allow_passes_per_second)
-        self.close_menu()
-
-
-    def close_menu(self):
-        self.gui.clear_window()
-        self.menu_interactables = []
+    def get_chousen_game(self):
+        return self.chousen_game

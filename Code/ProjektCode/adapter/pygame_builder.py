@@ -81,7 +81,10 @@ class PygameBuilder(GuiBuilder):
 
 
     def clear_window(self):
-        self.window.fill(self.window_info["color"])
+        try:
+            self.window.fill(self.window_info["color"])
+        except:
+            "window is still string"
 
 
     # this funktion closes the the game and therefor all windows
@@ -111,16 +114,19 @@ class PygameBuilder(GuiBuilder):
     def set_element_styles(self):
         self.clear_window()
         for element in self.window_elements:
-            if element["form"] == "rectangle":
-                pygame.draw.rect(self.window, element["color"],[element["position"] ,element["dimensions"]], element["line_thickness"])
-                text = self.font.render(element["text"]["content"], True, element["text"]["color"])
-                text_box = text.get_rect()
-                text_box.center = (element["position"][0] + (element["dimensions"][0]/2) , element["position"][1] + (element["dimensions"][1]/2))
-                self.window.blit(text, text_box)
-            if element["form"] == "circle":
-                pygame.draw.circle(self.window, element["color"],
-                                   (element["position"][0]+element["radius"], element["position"][1]+element["radius"]), 
-                                   element["radius"], element["line_thickness"])
+            try:
+                if element["form"] == "rectangle":
+                    pygame.draw.rect(self.window, element["color"],[element["position"] ,element["dimensions"]], element["line_thickness"])
+                    text = self.font.render(element["text"]["content"], True, element["text"]["color"])
+                    text_box = text.get_rect()
+                    text_box.center = (element["position"][0] + (element["dimensions"][0]/2) , element["position"][1] + (element["dimensions"][1]/2))
+                    self.window.blit(text, text_box)
+                if element["form"] == "circle":
+                    pygame.draw.circle(self.window, element["color"],
+                                    (element["position"][0]+element["radius"], element["position"][1]+element["radius"]), 
+                                    element["radius"], element["line_thickness"])
+            except:
+                "window ist still string"
 
 
     def load_image_on_screen(self, game_element):

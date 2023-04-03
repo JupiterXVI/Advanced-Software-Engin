@@ -17,7 +17,7 @@ class TicTacToe(Game):
     def __init__(self):
         super().__init__(
             game_id = 1, 
-            name = "TicTacToe", 
+            name = "tic_tac_toe", 
             player_count = 2, 
             )
         self.board = "no boerd initiliced"
@@ -54,7 +54,7 @@ class TicTacToe(Game):
                 message = self.reseiver.get_message()
                 if message['category'] == "game":
                     self.react_to_request(request=message['info'])
-                elif message['category'] == "exit":
+                elif message['category'] in ["exit","close_game"]:
                     active_game = False
                     print("closing game thread")
 

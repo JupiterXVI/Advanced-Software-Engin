@@ -39,12 +39,19 @@ class Playground():
             #play_pattern.set_aktive_player(player)
         try:
             play_pattern.play()
+            self.clean_up(play_pattern)
         except:
             pass
+        
 
     def connect_to_gui(self, play_pattern):
         play_pattern.sender.add_listener(self.gui.reseiver)
         self.gui.sender.add_listener(play_pattern.reseiver)
+
+    def clean_up(self, play_pattern):
+        play_pattern.sender.send(category='close_game', name='close game', info={'function':'', 'parameter':''})
+        play_pattern.stop_relay()
+    
 
     def choose_player(self):
         pass
