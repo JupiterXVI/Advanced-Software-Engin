@@ -59,7 +59,7 @@ class Main():
                 # play the selected game
                 playground.play(game_id = game_index)
                 # allow for different game to be chousen
-                #cg_menu.set_chousen_game("no game chousen")
+                cg_menu.set_chousen_game("no game chousen")
 
         print("end")
 
