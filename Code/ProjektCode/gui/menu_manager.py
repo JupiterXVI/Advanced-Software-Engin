@@ -38,9 +38,11 @@ class MenuManager():
         self.sender.send(category='gui',name='send window_info', info={'function':GuiBuilder.set_window_info.__name__, 'parameter':Window.info})
         self.sender.send(category='gui', name='create window', info={'function':GuiBuilder.create_window.__name__, 'parameter':''})
 
+
     def clear_window(self):
         self.sender.send(category='gui',name='send window_info', info={'function':GuiBuilder.set_window_info.__name__, 'parameter':Window.info})
         self.sender.send(category="gui",name="clear window", info={'function':GuiBuilder.clear_window.__name__, 'parameter': ''})
+
 
     def open_menus(self):
         print("open manager")
@@ -52,7 +54,6 @@ class MenuManager():
                 active_menu.sender.add_listener(self.reseiver)
                 active_menu.change_menu()
                 active_menu.reseiver.empty_message_queue()
-
 
                 if not self.should_come_back_to_menu():
                     print("closing manager")
@@ -67,8 +68,8 @@ class MenuManager():
             except:
                 "no menu is set on menu close"
             active_menu = self.next_menu
-        self.set_next_menu("main_menu")
 
+        self.set_next_menu("main_menu")
         print("closing manager")
 
 
@@ -86,7 +87,6 @@ class MenuManager():
         elif menu == "exit":
             self.next_menu = "no menu"
             self.come_back_to_menu = False
-
 
 
     def run_relay(self):

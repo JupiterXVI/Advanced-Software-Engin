@@ -287,7 +287,7 @@ class ManageAccount(): # muss ggf keine klasse ein
     }
 
     back_button = {
-        "name": "back_button",
+        "name": "main_menu",
         "form": "rectangle",
         "text": {
             "content": "Zurück",
@@ -313,9 +313,6 @@ class ManageAccount(): # muss ggf keine klasse ein
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
-    #image_paths = {
-    #}
-
     # list which contains all element directories
     window_elements = [
         account_1_name,
@@ -332,4 +329,4 @@ class ManageAccount(): # muss ggf keine klasse ein
     ]
 
 if __name__ == "__main__":
-    print("This file contains the description elements for the game choice menu.")
+    print("This file contains the description elements for the account management menu.")

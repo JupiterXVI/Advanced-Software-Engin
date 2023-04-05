@@ -34,9 +34,15 @@ class Main():
 
         # connect menus and start up menu interaction
         gl_menu = GameLibraryMenu()
+
         cg_menu = ChooseGameMenu()
+
         ma_menu = ManageAccountMenu()
+        ac_list = AccountList(PostgreSqlAdapter())
+        ma_menu.set_account_list(ac_list)
+        
         ea_menu = EditAccountMenu()
+
         menus = MenuManager(gui_builder, gl_menu, cg_menu, ma_menu, ea_menu)
         Thread(target=menus.run_relay).start()
 

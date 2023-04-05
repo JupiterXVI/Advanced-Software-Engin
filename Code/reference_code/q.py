@@ -1,10 +1,13 @@
 class Test():
-    def __init__(self):
-        self.paraname = "bla1"
-        self.blub = 23
 
+    def skip():
+        if True:
+            print("1")
+            if True:
+                print("2")
+                
+            print("3")
+        print("4")
 
 if __name__ == "__main__":
-    a = Test()
-    print(a.paraname)
-    print(a.paraname.__name__)
+    Test.skip()
