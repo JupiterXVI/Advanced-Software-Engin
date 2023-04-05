@@ -16,8 +16,8 @@ class ManageAccount(): # muss ggf keine klasse ein
         "color": (30, 30, 30)
     }
 
-    account_1_name = {
-        "name": "account_1_name",
+    account_0_name = {
+        "name": "account_0_name",
         "form": "rectangle",
         "text": {
             "content": "account_1",
@@ -43,8 +43,8 @@ class ManageAccount(): # muss ggf keine klasse ein
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
-    account_1_delete = {
-        "name": "account_1_delete",
+    account_0_delete = {
+        "name": "account_0_delete",
         "form": "rectangle",
         "text": {
             "content": "X",
@@ -70,8 +70,8 @@ class ManageAccount(): # muss ggf keine klasse ein
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
-    account_2_name = {
-        "name": "account_2_name",
+    account_1_name = {
+        "name": "account_1_name",
         "form": "rectangle",
         "text": {
             "content": "account_2",
@@ -97,8 +97,8 @@ class ManageAccount(): # muss ggf keine klasse ein
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
-    account_2_delete = {
-        "name": "account_2_delete",
+    account_1_delete = {
+        "name": "account_1_delete",
         "form": "rectangle",
         "text": {
             "content": "X",
@@ -124,8 +124,8 @@ class ManageAccount(): # muss ggf keine klasse ein
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
-    account_3_name = {
-        "name": "account_3_name",
+    account_2_name = {
+        "name": "account_2_name",
         "form": "rectangle",
         "text": {
             "content": "account_3",
@@ -151,8 +151,8 @@ class ManageAccount(): # muss ggf keine klasse ein
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
-    account_3_delete = {
-        "name": "account_3_delete",
+    account_2_delete = {
+        "name": "account_2_delete",
         "form": "rectangle",
         "text": {
             "content": "X",
@@ -178,8 +178,8 @@ class ManageAccount(): # muss ggf keine klasse ein
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
-    account_4_name = {
-        "name": "account_4_name",
+    account_3_name = {
+        "name": "account_3_name",
         "form": "rectangle",
         "text": {
             "content": "account_4",
@@ -205,8 +205,8 @@ class ManageAccount(): # muss ggf keine klasse ein
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
-    account_4_delete = {
-        "name": "account_4_delete",
+    account_3_delete = {
+        "name": "account_3_delete",
         "form": "rectangle",
         "text": {
             "content": "X",
@@ -232,8 +232,8 @@ class ManageAccount(): # muss ggf keine klasse ein
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
-    account_5_name = {
-        "name": "account_5_name",
+    account_4_name = {
+        "name": "account_4_name",
         "form": "rectangle",
         "text": {
             "content": "account_5",
@@ -259,8 +259,8 @@ class ManageAccount(): # muss ggf keine klasse ein
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
-    account_5_delete = {
-        "name": "account_5_delete",
+    account_4_delete = {
+        "name": "account_4_delete",
         "form": "rectangle",
         "text": {
             "content": "X",
@@ -314,7 +314,18 @@ class ManageAccount(): # muss ggf keine klasse ein
     }
 
     # list which contains all element directories
+    account_button_list = [
+        account_0_name,
+        account_1_name,
+        account_2_name,
+        account_3_name,
+        account_4_name
+    ]
+
+
     window_elements = [
+        account_0_name,
+        account_0_delete,
         account_1_name,
         account_1_delete,
         account_2_name,
@@ -323,8 +334,6 @@ class ManageAccount(): # muss ggf keine klasse ein
         account_3_delete,
         account_4_name,
         account_4_delete,
-        account_5_name,
-        account_5_delete,
         back_button
     ]
 

@@ -9,7 +9,6 @@ from adapter import GuiBuilder
 import pygame
 from communication import Sender, Reseiver
 
-from time import sleep
 
 # class used to build menu objekts
 # - gui/menu builder using the pygame library

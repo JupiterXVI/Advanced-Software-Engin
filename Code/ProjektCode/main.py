@@ -39,6 +39,7 @@ class Main():
 
         ma_menu = ManageAccountMenu()
         ac_list = AccountList(PostgreSqlAdapter())
+        ac_list.get_accounts()
         ma_menu.set_account_list(ac_list)
         
         ea_menu = EditAccountMenu()
