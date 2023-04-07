@@ -1,13 +1,11 @@
-class Test():
+input_fields = {
+        "username" : "input_username",
+        "password" : "input_password",
+        "passwort_repeat" : "input_password_repeat",
+        "age" : "input_age",
+        "admin" : "input_admin"
+    }
 
-    def skip():
-        if True:
-            print("1")
-            if True:
-                print("2")
-                
-            print("3")
-        print("4")
-
-if __name__ == "__main__":
-    Test.skip()
+for field in input_fields:
+    print(field)
+    print(input_fields[field])

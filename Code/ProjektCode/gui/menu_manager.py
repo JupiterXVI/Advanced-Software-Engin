@@ -78,10 +78,12 @@ class MenuManager():
             self.next_menu = self.main_menu
         if menu == "choose_game":
             self.next_menu = self.choose_game
-        elif menu == "account":
+        elif menu == "manage_account":
+            self.manage_account.set_to_save_account(self.edit_account.get_to_save_account())
             self.next_menu = self.manage_account
         elif menu == "edit_account":
             self.next_menu = self.edit_account
+            self.edit_account.set_account(self.manage_account.get_selected_account())
         elif menu == "game":
             self.next_menu = "no menu"
         elif menu == "exit":

@@ -45,7 +45,7 @@ class MainMenu(): # muss ggf keine klasse ein
 
     
     account_button = {
-        "name": "account",
+        "name": "manage_account",
         "form": "rectangle",
         "text": {
             "content": "Benutzerverwaltung",

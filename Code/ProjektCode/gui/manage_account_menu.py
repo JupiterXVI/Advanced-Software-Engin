@@ -11,19 +11,19 @@ from gui import ManageAccount
 from communication import Sender, Reseiver
 from re import search, findall
 
-from gui import EditAccountMenu
 
 FIRST_AVAILABLE_USERS = 3
 POSSIBLE_USERS = 5
+
 
 class ManageAccountMenu(Menu):
     """
     global variables
     """
     def __init__(self):
-        # self.gui = gui #gebraucht?
-        self.menu_interactables = "list of interactables"
-        self.account_list = "not Set"
+        self.account_list = "not set"
+        self.save_account = False
+        self.selected_account = "no account selected"
         self.sender = Sender()
         self.reseiver = Reseiver()
 
@@ -32,13 +32,15 @@ class ManageAccountMenu(Menu):
     functions
     """
     def change_menu(self):
+        print("open manage accounts")
+        self.handle_previous_edit()
         self.get_account_list_on_screan()
         self.sender.send(category='gui', name='send element_info', info={'function':GuiBuilder.set_window_elements.__name__, 'parameter':ManageAccount.window_elements})
         self.sender.send(category='gui', name='set element style', info={'function':GuiBuilder.set_element_styles.__name__, 'parameter':''})
              
 
     def run(self):
-        print("open manage accounts")
+        print("start manage accounts")
         menu_in_use = True
         while menu_in_use:
             while self.reseiver.event_reseved:
@@ -46,10 +48,9 @@ class ManageAccountMenu(Menu):
                 if message['category'] == "input":
                     if self.check_menu_action(message['info']):
                         menu_in_use = False
-                    self.change_menu()
                 elif message['category'] == "exit":
                     menu_in_use = False
-        print("closing manage accounts")
+        print("stop manage accounts")
 
 
     def check_menu_action(self, action):
@@ -67,7 +68,7 @@ class ManageAccountMenu(Menu):
         return False
         
 
-    def get_account_list_on_screan(self): # kake, aber in einer liste hat es nicht funktionert
+    def get_account_list_on_screan(self):
         for account_index in range(POSSIBLE_USERS):
             try:
                 ManageAccount.account_button_list[account_index]['text']['content'] = self.account_list.account[FIRST_AVAILABLE_USERS + account_index].get_name()
@@ -81,24 +82,43 @@ class ManageAccountMenu(Menu):
 
     def edit_account(self, account_index):
         if account_index < len(self.account_list.account):
-            print(len(self.account_list.account))
-            edit_account = account_index
+            self.selected_account = self.account_list.account[account_index]
         else:
             self.account_list.add_account("", "", "", False)
-            print(len(self.account_list.account))
-            edit_account = len(self.account_list.account)-1
-        work_on_account = EditAccountMenu(self.gui, self.account_list.account[edit_account])
-        self.gui.clear_window()
-        self.menu_interactables = []
-        work_on_account.open_menu()
-        work_on_account.run_menu()
-        if work_on_account.has_been_changed():
-            self.account_list.save_account_data(self.account_list.account[edit_account])
-        elif self.account_list.account[edit_account].get_name() == str(""):
-            self.account_list.delete_account(edit_account)
-        self.open_menu()
-    
+            self.selected_account = self.account_list.account[len(self.account_list.account)-1]
+        self.sender.send(category='menu', name='change menu', info={'function':'button_event', 'parameter':"edit_account"})
+
+
+    def handle_previous_edit(self):
+        if type(self.selected_account) == type(""):
+            return
+        if self.save_account:
+            self.account_list.save_account_data(self.selected_account)
+        else:
+            self.account_list.delete_account(self.selected_account)
+        self.save_account = False
+        self.selected_account = "not selected"
+
 
     def delete_account(self, account_index):
         if account_index < len(self.account_list.account):
-            self.account_list.delete_account(account_index)
+            account = self.account_list.account[account_index]
+            self.account_list.delete_account(account)
+        self.update_menu_screen()
+
+
+    def update_menu_screen(self):
+        self.get_account_list_on_screan()
+        self.sender.send(category='gui', name='set element style', info={'function':GuiBuilder.set_element_styles.__name__, 'parameter':''})
+
+
+    def set_selected_account(self, account):
+        self.selected_account = account
+
+
+    def get_selected_account(self):
+        return self.selected_account
+
+
+    def set_to_save_account(self, should_save):
+        self.save_account = should_save

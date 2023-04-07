@@ -287,7 +287,7 @@ class EditAccount(): # muss ggf keine klasse ein
     }
 
     save_button = {
-        "name": "save_button",
+        "name": "save",
         "form": "rectangle",
         "text": {
             "content": "Speichern",
@@ -314,7 +314,7 @@ class EditAccount(): # muss ggf keine klasse ein
     }
 
     cancel_button = {
-        "name": "cancel_button",
+        "name": "cancel",
         "form": "rectangle",
         "text": {
             "content": "Abbrechen",
@@ -342,6 +342,13 @@ class EditAccount(): # muss ggf keine klasse ein
 
     #image_paths = {
     #}
+    input_fields = {
+        "input_username" : input_username,
+        "input_password" : input_password,
+        "input_passwort_repeat" : input_password_repeat,
+        "input_age" : input_age,
+        "input_admin" : input_admin
+    }
 
     # list which contains all element directories
     window_elements = [

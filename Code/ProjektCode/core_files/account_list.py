@@ -37,8 +37,7 @@ class AccountList():
         self.datamanager.update_account(account.player_id, account.name, account.password, account.age, account.is_admin)
 
     # remove account from local list and from database
-    def delete_account(self, account_intex):
-        to_be_deleted = self.account[account_intex]
-        self.datamanager.delete_account(to_be_deleted.get_id())
+    def delete_account(self, account):
+        self.datamanager.delete_account(account.get_id())
         self.get_accounts()
     
