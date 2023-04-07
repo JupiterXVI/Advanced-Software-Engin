@@ -5,7 +5,7 @@ imports
 
 # This class discribes the struckture of the main menu
 # which can be accessed form outside
-class ChooseGame(): # muss ggf keine klasse ein
+class WinScreen(): # muss ggf keine klasse ein
     """
     global variables
     """
@@ -36,7 +36,7 @@ class ChooseGame(): # muss ggf keine klasse ein
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
-
+    
     tic_tac_toe = {
         "name": "tic_tac_toe",
         "form": "rectangle",
@@ -92,7 +92,6 @@ class ChooseGame(): # muss ggf keine klasse ein
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
-
     # list which contains all element directories
     window_elements = [
         space_invaders,
@@ -104,7 +103,7 @@ class ChooseGame(): # muss ggf keine klasse ein
     """
     functions
     """
-
+    
 
 if __name__ == "__main__":
     print("This file contains the description elements for the game choice menu.")

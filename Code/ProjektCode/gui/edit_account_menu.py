@@ -1,8 +1,7 @@
-from os import path as os_path
-from sys import path as sys_path
-sys_path.append(os_path.join(sys_path[0], '..'))
-
-from adapter import Menu
+"""
+imports
+"""
+from core_files import Menu
 from adapter import GuiBuilder
 from gui import EditAccount
 from communication import Sender, Reseiver
@@ -15,9 +14,10 @@ COORDINATES = 2
 
 
 class EditAccountMenu(Menu):
-
+    """
+    global variables
+    """
     def __init__(self):
-        self.menu_interactables = "list of interactables"
         self.account = "not set"
         self.save_changes = False
         self.edit_mode = False
@@ -26,6 +26,9 @@ class EditAccountMenu(Menu):
         self.reseiver = Reseiver()
 
 
+    """
+    functions
+    """
     def change_menu(self):
         print("open edit account")
         self.get_current_account_values()

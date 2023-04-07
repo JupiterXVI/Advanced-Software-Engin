@@ -1,13 +1,16 @@
 """
 imports
 """
-from threading import Thread
+#from os import path as os_path
+#from sys import path as sys_path
+#sys_path.append(os_path.join(sys_path[0], '..'))
 
 from adapter import PygameBuilder, PostgreSqlAdapter
 from core_files import AccountList, Playground, GameList
-from gui import MenuManager, GameLibraryMenu, ChooseGameMenu, ManageAccountMenu, EditAccountMenu
+from gui import StartMenu, ChooseGameMenu, AccountSelectionMenu, WinScreenMenu, ManageAccountMenu, EditAccountMenu, MenuManager
 from games import TicTacToe
 
+from threading import Thread
 
 
 class Main():
@@ -33,9 +36,13 @@ class Main():
         playground = Playground(game_list.games, gui_builder)
 
         # connect menus and start up menu interaction
-        gl_menu = GameLibraryMenu()
+        st_menu = StartMenu()
 
         cg_menu = ChooseGameMenu()
+
+        # as_menu = AccountSelectionMenu()
+
+        # ws_menu = WinScreenMenu()
 
         ma_menu = ManageAccountMenu()
         ac_list = AccountList(PostgreSqlAdapter())
@@ -44,7 +51,7 @@ class Main():
         
         ea_menu = EditAccountMenu()
 
-        menus = MenuManager(gui_builder, gl_menu, cg_menu, ma_menu, ea_menu)
+        menus = MenuManager(gui_builder, st_menu, cg_menu, ma_menu, ea_menu) # as_menu, ws_menu
         Thread(target=menus.run_relay).start()
 
         # open gui window
@@ -63,14 +70,15 @@ class Main():
                     if games.get_name() == game:
                         break 
                     game_index += 1
-                # play the selected game
-                playground.play(game_id = game_index)
+                if game_index < len(game_list.games):
+                    # play the selected game
+                    playground.play(game_id = game_index)
+                else:
+                    print(f"{game} is currently not available")
                 # allow for different game to be chousen
                 cg_menu.set_chousen_game("no game chousen")
 
         print("end")
-
-
 
 
 if __name__ == "__main__":

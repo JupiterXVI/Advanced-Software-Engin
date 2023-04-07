@@ -1,11 +1,7 @@
 """
 imports
 """
-from os import path as os_path
-from sys import path as sys_path
-sys_path.append(os_path.join(sys_path[0], '..'))
-
-from adapter import Menu
+from core_files import Menu
 from adapter import GuiBuilder
 from communication import Sender, Reseiver
 from gui import Window
@@ -15,15 +11,15 @@ class MenuManager():
     """
     global variables
     """
-    def __init__(self, gui:GuiBuilder, main_menu:Menu, choose_game:Menu, manage_account:Menu, edit_account:Menu):
+    def __init__(self, gui:GuiBuilder, start_menu:Menu, choose_game:Menu, manage_account:Menu, edit_account:Menu):
         self.gui =  gui
         # objekt of a classes which can visualize the different menus
-        self.main_menu = main_menu
+        self.start_menu = start_menu
         self.choose_game = choose_game
         self.manage_account = manage_account
         self.edit_account = edit_account
         # menu which will be opend next, after cleanup of communication
-        self.next_menu = self.main_menu
+        self.next_menu = self.start_menu
         # allow communication via messaging
         self.sender = Sender()
         self.reseiver = Reseiver()
@@ -69,13 +65,13 @@ class MenuManager():
                 "no menu is set on menu close"
             active_menu = self.next_menu
 
-        self.set_next_menu("main_menu")
+        self.set_next_menu("start_menu")
         print("closing manager")
 
 
     def set_next_menu(self, menu):
-        if menu == "main_menu":
-            self.next_menu = self.main_menu
+        if menu == "start_menu":
+            self.next_menu = self.start_menu
         if menu == "choose_game":
             self.next_menu = self.choose_game
         elif menu == "manage_account":

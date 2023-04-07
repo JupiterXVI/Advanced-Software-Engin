@@ -10,6 +10,7 @@ class ChooseGraphicTTT(): # muss ggf keine klasse ein
                   [[75,360],[370,360],[645,360]],
                   [[75,645],[370,645],[645,645]] ]
 
+
     tic_tac_toe_window = {
         "width": 900,
         "height": 900,
@@ -20,6 +21,7 @@ class ChooseGraphicTTT(): # muss ggf keine klasse ein
         ],
         "color": (0, 0, 0)
     }
+
 
     tic_tac_toe_board = {
         "name": "tic_tac_toe_board",
@@ -35,6 +37,7 @@ class ChooseGraphicTTT(): # muss ggf keine klasse ein
         "who_offten_needed": 1
     }
 
+
     tic_tac_toe_o = {
         "name": "tic_tac_toe_o",
         "graphic": "./ProjektCode/games/graphics/tic_tac_toe/images/O.png",
@@ -45,6 +48,7 @@ class ChooseGraphicTTT(): # muss ggf keine klasse ein
         ],
         "who_offten_needed": 5
     }
+
 
     tic_tac_toe_x = {
         "name": "tic_tac_toe_x",
@@ -58,6 +62,7 @@ class ChooseGraphicTTT(): # muss ggf keine klasse ein
         
     }
 
+
     tic_tac_toe_o_winning = {
         "name": "tic_tac_toe_o_winning",
         "graphic": "./ProjektCode/games/graphics/tic_tac_toe/images/WinningO.png",
@@ -68,6 +73,7 @@ class ChooseGraphicTTT(): # muss ggf keine klasse ein
         ]
     }
 
+
     tic_tac_toe_x_winning = {
         "name": "tic_tac_toe_x_winning",
         "graphic": "./ProjektCode/games/graphics/tic_tac_toe/images/WinningX.png",
@@ -77,6 +83,12 @@ class ChooseGraphicTTT(): # muss ggf keine klasse ein
             30  # heigth
         ]
     }
+
+
+    """
+    functions
+    """
+
 
 if __name__ == "__main__":
     print("This file contains the description elements for the game graphics.")

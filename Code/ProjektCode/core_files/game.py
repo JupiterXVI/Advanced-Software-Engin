@@ -3,6 +3,7 @@ imports
 """
 from communication import Sender, Reseiver
 
+
 class Game():
     """
     global variables
@@ -15,23 +16,29 @@ class Game():
         self.reseiver = Reseiver()
         self.funktion_with_parameters = []
 
+
     """
     functions
     """
     def get_name(self):
         return self.name
 
+
     def get_player_count(self):
         return self.player_count
+
 
     def game_setup_values(self):
         print("setting all starter values")
 
+
     def game_setup_grafics():
         print("prepare game graphicaly")
 
+
     def run(self):
         print(self.name + " has been started")
+
 
     def react_to_request(self, request):
         if request["function"] in self.funktion_with_parameters:
@@ -39,8 +46,10 @@ class Game():
         else:
             eval(f"self.{request['function']}")()
 
+
     def player_act(self):
         pass
+
 
     def check_win(self):
         pass

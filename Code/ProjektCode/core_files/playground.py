@@ -1,10 +1,6 @@
 """
 imports
 """
-#import wird zum Testen benötigt
-import os
-import sys
-sys.path.append(os.path.join(sys.path[0], '..'))
 from adapter import GuiBuilder
 from core_files import Singleplayer, Multiplayer
 from communication import Sender, Reseiver
@@ -47,6 +43,7 @@ class Playground():
     def connect_to_gui(self, play_pattern):
         play_pattern.sender.add_listener(self.gui.reseiver)
         self.gui.sender.add_listener(play_pattern.reseiver)
+
 
     def clean_up(self, play_pattern):
         play_pattern.sender.send(category='close_game', name='close game', info={'function':'', 'parameter':''})

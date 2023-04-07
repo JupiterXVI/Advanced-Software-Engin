@@ -5,15 +5,15 @@ imports
 
 # This class discribes the struckture of the main menu
 # which can be accessed form outside
-class ChooseGame(): # muss ggf keine klasse ein
+class Start(): # muss ggf keine klasse ein
     """
     global variables
     """
-    space_invaders = {
-        "name": "space_invaders",
+    choose_game_button = {
+        "name": "choose_game",
         "form": "rectangle",
         "text": {
-            "content": "Space Invaders",
+            "content": "Spiel wählen",
             "color": [
                 0, # red
                 0, # green
@@ -29,19 +29,19 @@ class ChooseGame(): # muss ggf keine klasse ein
             100  # heigth
         ],
         "color": [
-            150, # red
-            150, # green
-            220  # blue
+            220, # red
+            180, # green
+            180  # blue
         ],
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
-
-    tic_tac_toe = {
-        "name": "tic_tac_toe",
+    
+    account_button = {
+        "name": "manage_account",
         "form": "rectangle",
         "text": {
-            "content": "Tic Tac Toe",
+            "content": "Benutzerverwaltung",
             "color": [
                 0, # red
                 0, # green
@@ -57,19 +57,18 @@ class ChooseGame(): # muss ggf keine klasse ein
             100  # heigth
         ],
         "color": [
-            100, # red
-            100, # green
-            100  # blue
+            180, # red
+            180, # green
+            220  # blue
         ],
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
-
-    back_button = {
-        "name": "start_menu",
+    exit_button = {
+        "name": "exit",
         "form": "rectangle",
         "text": {
-            "content": "Zurück",
+            "content": "Beenden",
             "color": [
                 0, # red
                 0, # green
@@ -85,27 +84,48 @@ class ChooseGame(): # muss ggf keine klasse ein
             100  # heigth
         ],
         "color": [
-            220, # red
-            150, # green
-            150  # blue
+            180, # red
+            220, # green
+            180  # blue
         ],
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
 
+    circle_button = {
+        "name": "circle",
+        "form": "circle",
+        "position": [
+            430,  # pos_x
+            630 # pos_y
+        ],
+        "dimensions": [
+            40, # width
+            40  # heigth
+        ],
+        "radius": 20,
+        "color": [
+            220, # red
+            220, # green
+            180  # blue
+        ],
+        "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
+    }
+
     # list which contains all element directories
     window_elements = [
-        space_invaders,
-        tic_tac_toe,
-        back_button
+        choose_game_button,
+        account_button,
+        exit_button,
+        circle_button
     ]
 
 
     """
     functions
     """
-
+    
 
 if __name__ == "__main__":
-    print("This file contains the description elements for the game choice menu.")
+    print("This file contains the description elements for the main menu.")
     

@@ -1,14 +1,11 @@
 """
 imports
 """
-from adapter import GuiBuilder
 from core_files import Game
 from communication import Sender, Reseiver
 from threading import Thread
 from time import sleep
 
-# AUSLAGERN - Erstellen des Fensters
-from gui import MainMenu
 
 class Multiplayer():
     """
@@ -26,6 +23,7 @@ class Multiplayer():
         self.sender = Sender()
         self.reseiver = Reseiver()
         self.active_relay = "not started"
+
 
     """
     functions
@@ -59,8 +57,9 @@ class Multiplayer():
         # set game info
         self.win_info = {'win':False, 'waiting_on_win':True, 'player_points':[]}
         # set game board
-        self.sender.send(category='game', name='setup values', info={'function':'game_setup_values', 'parameter':''})
-        self.sender.send(category='game', name='setup grafics', info={'function':'game_setup_grafics', 'parameter':''})
+        Game.game_setup_grafics
+        self.sender.send(category='game', name='setup values', info={'function':Game.game_setup_values.__name__, 'parameter':''})
+        self.sender.send(category='game', name='setup grafics', info={'function':Game.game_setup_grafics.__name__, 'parameter':''})
         # game course
         while self.game_is_running:
             # for every playerd
@@ -108,6 +107,7 @@ class Multiplayer():
                     self.game_is_running = False
                     self.active_relay = False
         print("\nclosing game relay thread\n")  #--> kommt der Thread zurück
+
 
     def stop_relay(self):
         self.active_relay = False

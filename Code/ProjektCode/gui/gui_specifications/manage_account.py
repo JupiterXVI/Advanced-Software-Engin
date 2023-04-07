@@ -9,13 +9,6 @@ class ManageAccount(): # muss ggf keine klasse ein
     """
     global variables
     """
-    window = {
-        "width": 900,
-        "height": 900,
-        "titel": "Spielebibliothek",
-        "color": (30, 30, 30)
-    }
-
     account_0_name = {
         "name": "account_0_name",
         "form": "rectangle",
@@ -42,6 +35,7 @@ class ManageAccount(): # muss ggf keine klasse ein
         ],
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
+
 
     account_0_delete = {
         "name": "account_0_delete",
@@ -70,6 +64,7 @@ class ManageAccount(): # muss ggf keine klasse ein
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
+   
     account_1_name = {
         "name": "account_1_name",
         "form": "rectangle",
@@ -97,6 +92,7 @@ class ManageAccount(): # muss ggf keine klasse ein
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
+    
     account_1_delete = {
         "name": "account_1_delete",
         "form": "rectangle",
@@ -124,6 +120,7 @@ class ManageAccount(): # muss ggf keine klasse ein
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
+    
     account_2_name = {
         "name": "account_2_name",
         "form": "rectangle",
@@ -151,6 +148,7 @@ class ManageAccount(): # muss ggf keine klasse ein
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
+    
     account_2_delete = {
         "name": "account_2_delete",
         "form": "rectangle",
@@ -178,6 +176,7 @@ class ManageAccount(): # muss ggf keine klasse ein
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
+    
     account_3_name = {
         "name": "account_3_name",
         "form": "rectangle",
@@ -205,6 +204,7 @@ class ManageAccount(): # muss ggf keine klasse ein
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
+    
     account_3_delete = {
         "name": "account_3_delete",
         "form": "rectangle",
@@ -232,6 +232,7 @@ class ManageAccount(): # muss ggf keine klasse ein
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
+    
     account_4_name = {
         "name": "account_4_name",
         "form": "rectangle",
@@ -259,6 +260,7 @@ class ManageAccount(): # muss ggf keine klasse ein
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
+    
     account_4_delete = {
         "name": "account_4_delete",
         "form": "rectangle",
@@ -286,8 +288,9 @@ class ManageAccount(): # muss ggf keine klasse ein
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
+    
     back_button = {
-        "name": "main_menu",
+        "name": "start_menu",
         "form": "rectangle",
         "text": {
             "content": "Zurück",
@@ -313,7 +316,7 @@ class ManageAccount(): # muss ggf keine klasse ein
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
-    # list which contains all element directories
+    
     account_button_list = [
         account_0_name,
         account_1_name,
@@ -322,7 +325,8 @@ class ManageAccount(): # muss ggf keine klasse ein
         account_4_name
     ]
 
-
+    
+    # list which contains all element directories
     window_elements = [
         account_0_name,
         account_0_delete,
@@ -337,5 +341,12 @@ class ManageAccount(): # muss ggf keine klasse ein
         back_button
     ]
 
+
+    """
+    functions
+    """
+    
+
 if __name__ == "__main__":
     print("This file contains the description elements for the account management menu.")
+    

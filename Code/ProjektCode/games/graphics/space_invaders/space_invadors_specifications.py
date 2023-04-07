@@ -18,6 +18,7 @@ class ChooseGraphicSI(): # muss ggf keine klasse ein
         "color": (255, 255, 255)
     }
 
+ 
     space_invaders_player = {
         "name": "space_invaders_player",
         "graphic": "/images/player.png",
@@ -28,6 +29,7 @@ class ChooseGraphicSI(): # muss ggf keine klasse ein
         "speed": 3,
         "laser_cooldown": 600,
     }
+
 
     space_invaders_extra = {
         "name": "space_invaders_player",
@@ -40,6 +42,7 @@ class ChooseGraphicSI(): # muss ggf keine klasse ein
         "speed": 3,
     }
 
+
     space_invaders_green = {
         "name": "space_invaders_player",
         "graphic": "/images/green.png",
@@ -50,6 +53,7 @@ class ChooseGraphicSI(): # muss ggf keine klasse ein
         "value": 200,
         "speed": 1,
     }
+
 
     space_invaders_red = {
         "name": "space_invaders_player",
@@ -62,6 +66,7 @@ class ChooseGraphicSI(): # muss ggf keine klasse ein
         "speed": 1,
     }
 
+
     space_invaders_yellow = {
         "name": "space_invaders_player",
         "graphic": "/images/yellow.png",
@@ -72,6 +77,7 @@ class ChooseGraphicSI(): # muss ggf keine klasse ein
         "value": 300,
         "speed": 1,
     }
+
 
     space_invaders_obstacles = {
         "name": "space_invaders_obstacles",
@@ -89,6 +95,7 @@ class ChooseGraphicSI(): # muss ggf keine klasse ein
         ],
     }
 
+
     space_invaders_laser ={
         "name": "space_invadors_laser",
         "position":[
@@ -100,7 +107,8 @@ class ChooseGraphicSI(): # muss ggf keine klasse ein
         "speed": 3,
     }
 
-        # list which contains all element directories
+
+    # list which contains all element directories
     game_elements = [
         space_invaders_player,
         space_invaders_extra,
@@ -110,6 +118,12 @@ class ChooseGraphicSI(): # muss ggf keine klasse ein
         space_invaders_obstacles,
         space_invaders_laser
     ]
+
+
+    """
+    functions
+    """
+
 
 if __name__ == "__main__":
     print("This file contains the description elements for the game graphics.")

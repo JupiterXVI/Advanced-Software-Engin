@@ -15,5 +15,11 @@ class Window(): # muss ggf keine klasse ein
         "color": (30, 30, 30)
     }
 
+
+    """
+    functions
+    """
+
 if __name__ == "__main__":
     print("This file contains the description of the initial window.")
+    

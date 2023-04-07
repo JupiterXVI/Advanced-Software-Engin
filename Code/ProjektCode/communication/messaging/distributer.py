@@ -1,10 +1,19 @@
+"""
+imports
+"""
+
+
 class Distributor: 
-  
-    
+    """
+    global variables
+    """
     def __init__(self): 
         self.observers = [] 
   
 
+    """
+    functions
+    """
     def message_to_observers(self, modifier = None): 
         for observer in self.observers: 
             if modifier != observer: 
@@ -21,3 +30,4 @@ class Distributor:
             self.observers.remove(observer) 
         except ValueError: 
             pass
+        

@@ -1,18 +1,27 @@
 """
-Interfaces zur Estellung eines Menüs
+imports
 """
 from abc import ABC, abstractmethod
 
-class Menu(ABC):
-    blocking_wait_seconds = 0.8
 
+class Menu(ABC):
+    """
+    global variables
+    """
+
+
+    """
+    functions
+    """
     @abstractmethod
     def change_menu(self):
         pass
 
+
     @abstractmethod
     def run(self):
         pass
+
 
     def get_button_from_position(self, button_list, position):
         x, y = position

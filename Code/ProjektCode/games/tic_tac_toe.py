@@ -1,14 +1,12 @@
 """
 imports
 """
-from os import path as os_path
-from sys import path as sys_path
-sys_path.append(os_path.join(sys_path[0], '..'))
 from adapter import GuiBuilder
 from core_files.game import Game
 from games.graphics import ChooseGraphicTTT
 
 DIMENSION = 3
+
 
 class TicTacToe(Game):
     """

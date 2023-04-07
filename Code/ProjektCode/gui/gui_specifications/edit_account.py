@@ -9,13 +9,6 @@ class EditAccount(): # muss ggf keine klasse ein
     """
     global variables
     """
-    window = {
-        "width": 900,
-        "height": 900,
-        "titel": "Spielebibliothek",
-        "color": (30, 30, 30)
-    }
-
     title_username = {
         "name": "title_username",
         "form": "rectangle",
@@ -42,6 +35,7 @@ class EditAccount(): # muss ggf keine klasse ein
         ],
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
+
 
     input_username = {
         "name": "input_username",
@@ -70,6 +64,7 @@ class EditAccount(): # muss ggf keine klasse ein
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
+
     title_password = {
         "name": "title_password",
         "form": "rectangle",
@@ -96,6 +91,7 @@ class EditAccount(): # muss ggf keine klasse ein
         ],
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
+
 
     input_password = {
         "name": "input_password",
@@ -124,6 +120,7 @@ class EditAccount(): # muss ggf keine klasse ein
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
+
     title_password_repeat = {
         "name": "title_password_repeat",
         "form": "rectangle",
@@ -150,6 +147,7 @@ class EditAccount(): # muss ggf keine klasse ein
         ],
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
+
 
     input_password_repeat = {
         "name": "input_password_repeat",
@@ -178,6 +176,7 @@ class EditAccount(): # muss ggf keine klasse ein
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
+
     title_age = {
         "name": "title_age",
         "form": "rectangle",
@@ -204,6 +203,7 @@ class EditAccount(): # muss ggf keine klasse ein
         ],
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
+
 
     input_age = {
         "name": "input_age",
@@ -232,6 +232,7 @@ class EditAccount(): # muss ggf keine klasse ein
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
+
     title_admin = {
         "name": "title_admin",
         "form": "rectangle",
@@ -258,6 +259,7 @@ class EditAccount(): # muss ggf keine klasse ein
         ],
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
+
 
     input_admin = {
         "name": "input_admin",
@@ -286,6 +288,7 @@ class EditAccount(): # muss ggf keine klasse ein
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
+
     save_button = {
         "name": "save",
         "form": "rectangle",
@@ -312,6 +315,7 @@ class EditAccount(): # muss ggf keine klasse ein
         ],
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
+
 
     cancel_button = {
         "name": "cancel",
@@ -340,8 +344,7 @@ class EditAccount(): # muss ggf keine klasse ein
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
-    #image_paths = {
-    #}
+
     input_fields = {
         "input_username" : input_username,
         "input_password" : input_password,
@@ -365,5 +368,12 @@ class EditAccount(): # muss ggf keine klasse ein
         cancel_button
     ]
 
+
+    """
+    functions
+    """
+
+    
 if __name__ == "__main__":
     print("This file contains the description elements for the game choice menu.")
+    

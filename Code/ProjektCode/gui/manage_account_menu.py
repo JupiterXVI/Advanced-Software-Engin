@@ -1,16 +1,11 @@
 """
 imports
 """
-from os import path as os_path
-from sys import path as sys_path
-sys_path.append(os_path.join(sys_path[0], '..'))
-
-from adapter import Menu
+from core_files import Menu
 from adapter import GuiBuilder
 from gui import ManageAccount
 from communication import Sender, Reseiver
 from re import search, findall
-
 
 FIRST_AVAILABLE_USERS = 3
 POSSIBLE_USERS = 5
@@ -55,7 +50,7 @@ class ManageAccountMenu(Menu):
 
     def check_menu_action(self, action):
         event = self.get_button_from_position(ManageAccount.window_elements, action)
-        if event == "main_menu":
+        if event == "start_menu":
                 self.sender.send(category='menu', name='change menu', info={'function':'button_event', 'parameter':event})
                 return True
         elif event != "no button":
