@@ -345,9 +345,8 @@ class EditAccount(): # muss ggf keine klasse ein
     input_fields = {
         "input_username" : input_username,
         "input_password" : input_password,
-        "input_passwort_repeat" : input_password_repeat,
-        "input_age" : input_age,
-        "input_admin" : input_admin
+        "input_password_repeat" : input_password_repeat,
+        "input_age" : input_age
     }
 
     # list which contains all element directories

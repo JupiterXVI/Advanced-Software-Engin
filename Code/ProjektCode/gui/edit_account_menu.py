@@ -6,8 +6,12 @@ from adapter import Menu
 from adapter import GuiBuilder
 from gui import EditAccount
 from communication import Sender, Reseiver
-
 from re import search
+from time import sleep
+
+LETTER = 1
+BACKSPACE = 9
+COORDINATES = 2
 
 
 class EditAccountMenu(Menu):
@@ -35,6 +39,7 @@ class EditAccountMenu(Menu):
 
     def run(self):
         print("start edit account")
+        self.edit_field = "not set"
         menu_in_use = True
         while menu_in_use:
             while self.reseiver.event_reseved:
@@ -43,17 +48,16 @@ class EditAccountMenu(Menu):
                     print(f"message['info']: {message['info']}")
                     if self.check_menu_action(message['info']):
                         menu_in_use = False
-                    
                 elif message['category'] == "exit":
                     menu_in_use = False
-                    print("closing menu thread")
+        sleep(0.01) # wait for account data to be set bevor leaving
         print("stop edit account")
 
 
     def check_menu_action(self, action):
-        if len(action) == 2:
+        if len(action) == COORDINATES:
             return self.click_action(action)
-        elif len(action) == 1:
+        elif len(action) in [LETTER, BACKSPACE]:
             self.type_action(action)
             self.update_screen_values()
             return False
@@ -61,38 +65,48 @@ class EditAccountMenu(Menu):
             
     def click_action(self, action):
         event = self.get_button_from_position(EditAccount.window_elements, action)
-        print(f"click on {event}")
+        self.text_fiel_active(False, self.edit_field)
         if event == "no button":
             self.edit_mode = False
+            self.edit_field = "not set"
             return False
         elif event == "cancel":
-            # was wenn direkt quit
-            self.save_changes = self.check_to_delete() 
-            self.sender.send(category='menu', name='change menu', info={'function':'button_event', 'parameter':'manage_account'})
-            return True
+            return self.cancel()
         elif event == "save":
-            self.save_changes = True #self.check_to_save()
-            if self.save_changes:
-                self.pass_canges_to_account()
-                self.sender.send(category='menu', name='change menu', info={'function':'button_event', 'parameter':'manage_account'})
-                return True
-            return False
+            return self.save()
         elif search("input_.*", event):
             self.edit_mode = True
             for field in EditAccount.input_fields:
                 if event == field:
                     self.edit_field = EditAccount.input_fields[field]
+                    self.text_fiel_active(True, self.edit_field)
+
+    
+    def save(self):
+        self.save_changes = self.check_to_save()
+        if self.save_changes:
+            self.pass_canges_to_account()
+            self.sender.send(category='menu', name='change menu', info={'function':'button_event', 'parameter':'manage_account'})
+            return True
+        return False
+    
+
+    def cancel(self):
+        self.get_current_account_values()
+        self.save_changes = self.check_to_delete() 
+        self.sender.send(category='menu', name='change menu', info={'function':'button_event', 'parameter':'manage_account'})
+        return True
 
 
     def type_action(self, action):
         if not self.edit_mode:
             return
+        print(self.edit_field['text']['content'])
         if action == "backspace":
             self.edit_field['text']['content'] = self.edit_field['text']['content'][:-1]
-            #EditAccount.input_fields[self.edit_field] = self.edit_field['text']['content']
         else:
             self.edit_field['text']['content'] = self.edit_field['text']['content']+action
-            #EditAccount.input_fields[self.edit_field] = self.edit_field['text']['content']
+        print(self.edit_field['text']['content'])
        
 
     def get_current_account_values(self):
@@ -117,37 +131,30 @@ class EditAccountMenu(Menu):
 
 
     def text_fiel_active(self, active, text_field):
-        if active:
-            # make the text field lighter
-            for color_index in range(3):
-                text_field["color"][color_index] += 30
-        else:
-            # make the text field darker
-            for color_index in range(3):
-                text_field["color"][color_index] -= 30
+        if self.edit_field != "not set":
+            if active:
+                # make the text field lighter
+                for color_index in range(3):
+                    text_field["color"][color_index] += 30
+            else:
+                # make the text field darker
+                for color_index in range(3):
+                    text_field["color"][color_index] -= 30
+                    self.edit_field = "not set"
+            self.update_screen_values()
+        
 
 
     def check_to_delete(self):
         if EditAccount.input_password['text']['content'] == str("") and EditAccount.input_username['text']['content'] == str(""):
-            print("delete")
             return False
-        print("ignore current input")
         return True
 
 
     def check_to_save(self):
         if EditAccount.input_password["text"]["content"] == EditAccount.input_password_repeat["text"]["content"] and EditAccount.input_username["text"]["content"] != str(""):
-            print("save")
-            return True
-        print("dont save")
-        return False
-
-    """
-    def check_valid_change(self):
-        if EditAccount.input_password["text"]["content"] == str("") and EditAccount.input_username["text"]["content"] == str(""):
             return True
         return False
-    """
 
 
     def has_been_changed(self):
