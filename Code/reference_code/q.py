@@ -1,11 +1,37 @@
-input_fields = {
-        "username" : "input_username",
-        "password" : "input_password",
-        "passwort_repeat" : "input_password_repeat",
-        "age" : "input_age",
-        "admin" : "input_admin"
-    }
+input_fields = [
+    {
+        "username" : "1",
+        "password" : "1",
+        "passwort_repeat" : "1"
+    },
+    {
+        "username" : "1",
+        "password" : "1",
+        "passwort_repeat" : "1"
+    },
+    {
+        "username" : "1",
+        "password" : "1",
+        "passwort_repeat" : "1"
+    }]
 
-for field in input_fields:
-    print(field)
-    print(input_fields[field])
+input_fields2 = [
+    {
+        "username" : "2",
+        "password" : "2",
+        "passwort_repeat" : "2"
+    },
+    {
+        "username" : "2",
+        "password" : "2",
+        "passwort_repeat" : "2"
+    },
+    {
+        "username" : "2",
+        "password" : "2",
+        "passwort_repeat" : "2"
+    }]
+
+print(input_fields + input_fields2)
+print()
+print(input_fields.extend(input_fields2))

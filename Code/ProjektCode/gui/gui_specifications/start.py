@@ -14,6 +14,7 @@ class Start(): # muss ggf keine klasse ein
         "form": "rectangle",
         "text": {
             "content": "Spiel wählen",
+            "font": 0,
             "color": [
                 0, # red
                 0, # green
@@ -42,6 +43,7 @@ class Start(): # muss ggf keine klasse ein
         "form": "rectangle",
         "text": {
             "content": "Benutzerverwaltung",
+            "font": 0,
             "color": [
                 0, # red
                 0, # green
@@ -69,6 +71,7 @@ class Start(): # muss ggf keine klasse ein
         "form": "rectangle",
         "text": {
             "content": "Beenden",
+            "font": 0,
             "color": [
                 0, # red
                 0, # green

@@ -4,14 +4,14 @@ imports
 from core_files import Menu
 from adapter import GuiBuilder
 from communication import Sender, Reseiver
-from gui import Window
+from gui import Window, ManageAccountMenu, EditAccountMenu
 
 
 class MenuManager():
     """
     global variables
     """
-    def __init__(self, gui:GuiBuilder, start_menu:Menu, choose_game:Menu, manage_account:Menu, edit_account:Menu):
+    def __init__(self, gui:GuiBuilder, start_menu:Menu, choose_game:Menu, manage_account:ManageAccountMenu, edit_account:EditAccountMenu):
         self.gui =  gui
         # objekt of a classes which can visualize the different menus
         self.start_menu = start_menu

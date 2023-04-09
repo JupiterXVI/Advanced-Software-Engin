@@ -14,6 +14,7 @@ class ChooseGame(): # muss ggf keine klasse ein
         "form": "rectangle",
         "text": {
             "content": "Space Invaders",
+            "font": 0,
             "color": [
                 0, # red
                 0, # green
@@ -42,6 +43,7 @@ class ChooseGame(): # muss ggf keine klasse ein
         "form": "rectangle",
         "text": {
             "content": "Tic Tac Toe",
+            "font": 0,
             "color": [
                 0, # red
                 0, # green
@@ -70,6 +72,7 @@ class ChooseGame(): # muss ggf keine klasse ein
         "form": "rectangle",
         "text": {
             "content": "Zurück",
+            "font": 0,
             "color": [
                 0, # red
                 0, # green

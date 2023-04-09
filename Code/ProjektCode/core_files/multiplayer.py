@@ -7,12 +7,16 @@ from threading import Thread
 from time import sleep
 
 
+#from core_files import AccountList
+#from adapter import PostgreSqlAdapter
+
+
 class Multiplayer():
     """
     global variables
     """
-    def __init__(self, game):
-        self.game = game
+    def __init__(self):
+        self.game = "not set"
         self.active_player = []
         self.player_points = []
         self.win_info = "not set"
@@ -23,36 +27,36 @@ class Multiplayer():
         self.sender = Sender()
         self.reseiver = Reseiver()
         self.active_relay = "not started"
+        self.interrupt_exit = False
 
 
     """
     functions
     """
-    def select_player(self):
-        for player in range(self.game.player_count):
-            print("select player in menu screen")
-            # select screen
-            self.add_player(f"Dummy_Player{player}")
+    def set_game(self, game):
+        self.game = game
 
+
+    def get_active_player(self):
+        return self.active_player
+    
+
+    def get_points(self):
+        return self.player_points
+    
 
     def add_player(self, new_player):
         self.active_player.append(new_player)
         self.player_points.append(0)
 
 
-    def show_result(self):
-        # show result screen
+    def save_result(self):
         self.player_points = self.win_info['player_points']
-        index = 0
-        for player in self.active_player:
-            print(f"{player} gets {self.player_points[index]} points")
-            index += 1
 
 
     def play(self):
         Thread(target=self.relay).start()
         Thread(target=self.game.run).start()
-        self.select_player()
         
         # set game info
         self.win_info = {'win':False, 'waiting_on_win':True, 'player_points':[]}
@@ -83,7 +87,7 @@ class Multiplayer():
                     self.game_is_running = False
                     break
                 self.win_info['waiting_on_win'] = True
-        self.show_result()
+        self.save_result()
 
 
     def relay(self):
@@ -103,14 +107,20 @@ class Multiplayer():
                 elif message['category'] == "win":
                     self.win_info = message['info']
                 elif message['category'] in ["exit", "close_game"]:
+                    if message['category'] == "exit":
+                        self.interrupt_exit = True
                     self.sender.send(category=message['category'], name=message['name'], info=message['info'])
                     self.game_is_running = False
                     self.active_relay = False
-        print("\nclosing game relay thread\n")  #--> kommt der Thread zurück
+        print("closing game relay thread")
 
 
     def stop_relay(self):
         self.active_relay = False
+
+
+    def get_interupt_exit(self):
+        return self.interrupt_exit
 
 # führe nur aus wenn die Datei direckt ausgeführt wird
 if __name__ == "__main__":
