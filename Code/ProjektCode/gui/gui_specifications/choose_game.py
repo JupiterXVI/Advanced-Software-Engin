@@ -9,18 +9,12 @@ class ChooseGame(): # muss ggf keine klasse ein
     """
     global variables
     """
-    window = {
-        "width": 900,
-        "height": 900,
-        "titel": "Spielebibliothek",
-        "color": (30, 30, 30)
-    }
-
     space_invaders = {
-        "name": "space_invaders_button",
+        "name": "space_invaders",
         "form": "rectangle",
         "text": {
             "content": "Space Invaders",
+            "font": 0,
             "color": [
                 0, # red
                 0, # green
@@ -43,12 +37,13 @@ class ChooseGame(): # muss ggf keine klasse ein
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
-    
+
     tic_tac_toe = {
-        "name": "tic_tac_toe_button",
+        "name": "tic_tac_toe",
         "form": "rectangle",
         "text": {
             "content": "Tic Tac Toe",
+            "font": 0,
             "color": [
                 0, # red
                 0, # green
@@ -71,11 +66,13 @@ class ChooseGame(): # muss ggf keine klasse ein
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
+
     back_button = {
-        "name": "back_button",
+        "name": "start_menu",
         "form": "rectangle",
         "text": {
             "content": "Zurück",
+            "font": 0,
             "color": [
                 0, # red
                 0, # green
@@ -98,8 +95,6 @@ class ChooseGame(): # muss ggf keine klasse ein
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
-    #image_paths = {
-    #}
 
     # list which contains all element directories
     window_elements = [
@@ -108,5 +103,12 @@ class ChooseGame(): # muss ggf keine klasse ein
         back_button
     ]
 
+
+    """
+    functions
+    """
+
+
 if __name__ == "__main__":
     print("This file contains the description elements for the game choice menu.")
+    

@@ -1,4 +1,4 @@
-from messaging import Distributor
+from .distributer import Distributor
 
 class Event(Distributor): 
   
@@ -21,8 +21,8 @@ class Event(Distributor):
         return self._information 
   
     @information.setter 
-    def information(self, value): 
-        self._information = value
+    def information(self, info): 
+        self._information = info
     
     def send(self):
         self.message_to_observers()

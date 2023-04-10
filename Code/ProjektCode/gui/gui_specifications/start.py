@@ -5,22 +5,16 @@ imports
 
 # This class discribes the struckture of the main menu
 # which can be accessed form outside
-class MainMenu(): # muss ggf keine klasse ein
+class Start(): # muss ggf keine klasse ein
     """
     global variables
     """
-    window = {
-        "width": 900,
-        "height": 900,
-        "titel": "Spielebibliothek",
-        "color": (30, 30, 30)
-    }
-
     choose_game_button = {
-        "name": "choose_game_button",
+        "name": "choose_game",
         "form": "rectangle",
         "text": {
             "content": "Spiel wählen",
+            "font": 0,
             "color": [
                 0, # red
                 0, # green
@@ -45,10 +39,11 @@ class MainMenu(): # muss ggf keine klasse ein
 
     
     account_button = {
-        "name": "account_button",
+        "name": "manage_account",
         "form": "rectangle",
         "text": {
             "content": "Benutzerverwaltung",
+            "font": 0,
             "color": [
                 0, # red
                 0, # green
@@ -72,10 +67,11 @@ class MainMenu(): # muss ggf keine klasse ein
     }
 
     exit_button = {
-        "name": "exit_button",
+        "name": "exit",
         "form": "rectangle",
         "text": {
             "content": "Beenden",
+            "font": 0,
             "color": [
                 0, # red
                 0, # green
@@ -100,11 +96,15 @@ class MainMenu(): # muss ggf keine klasse ein
 
 
     circle_button = {
-        "name": "circle_button",
+        "name": "circle",
         "form": "circle",
         "position": [
-            450,  # pos_x
-            650 # pos_y
+            430,  # pos_x
+            630 # pos_y
+        ],
+        "dimensions": [
+            40, # width
+            40  # heigth
         ],
         "radius": 20,
         "color": [
@@ -115,11 +115,6 @@ class MainMenu(): # muss ggf keine klasse ein
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
-    #image_paths = {
-    #    "start_button": sys_path[0] + "\image\start_btn.png",
-    #    "exit_button": sys_path[0] + "\image\exit_btn.png"
-    #}
-
     # list which contains all element directories
     window_elements = [
         choose_game_button,
@@ -128,5 +123,12 @@ class MainMenu(): # muss ggf keine klasse ein
         circle_button
     ]
 
+
+    """
+    functions
+    """
+    
+
 if __name__ == "__main__":
     print("This file contains the description elements for the main menu.")
+    

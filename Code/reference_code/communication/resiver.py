@@ -1,4 +1,4 @@
-from messaging import Listener
+from communication import Listener
 
 class Resiver(Listener):
     def __init__(self) -> None:

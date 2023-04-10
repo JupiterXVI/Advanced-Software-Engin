@@ -1,4 +1,4 @@
-from messaging import Event
+from communication import Event
 
 class Sender():
     def __init__(self):

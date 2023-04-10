@@ -11,9 +11,9 @@ class GameList():
     """
     # bei erstellen eines Objekts der Klasse werden die Angaben durch den Spieler getroffen und in die Datenbank geschoben
     # können bei bedarf aus datenbank erfragt werden
-    def __init__(self, games, datamanager: DatabaseAccess):
+    def __init__(self, datamanager: DatabaseAccess):
         self.datamanager = datamanager
-        self.games = games
+        self.games = []
 
 
     """
@@ -21,11 +21,11 @@ class GameList():
     """
     def add_game(self, game: Game):
         self.add_to_list(game)
-        self.add_to_database(game)
+        #self.add_to_database(game)
 
     def add_to_list(self,  game: Game):
         self.games.append(game)
 
-    def add_to_database(self):
+    def add_to_database(self, game):
         self.datamanager.get_game()
         #...
