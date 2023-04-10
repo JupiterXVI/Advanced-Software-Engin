@@ -57,6 +57,7 @@ class Playground():
         if play_pattern.get_interupt_exit():
             return
         self.show_results(play_pattern)
+        play_pattern.reset_game()
         
 
     def set_select_screen(self, screen):

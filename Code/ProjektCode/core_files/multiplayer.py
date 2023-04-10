@@ -48,6 +48,14 @@ class Multiplayer():
     def add_player(self, new_player):
         self.active_player.append(new_player)
         self.player_points.append(0)
+        
+
+    def reset_game(self):
+        self.active_player = []
+        self.player_points = []
+        self.game_is_running = True
+        self.valid_player_action = False
+        self.player_is_acting = False
 
 
     def save_result(self):
@@ -61,7 +69,7 @@ class Multiplayer():
         # set game info
         self.win_info = {'win':False, 'waiting_on_win':True, 'player_points':[]}
         # set game board
-        Game.game_setup_grafics
+             #Game.game_setup_grafics
         self.sender.send(category='game', name='setup values', info={'function':Game.game_setup_values.__name__, 'parameter':''})
         self.sender.send(category='game', name='setup grafics', info={'function':Game.game_setup_grafics.__name__, 'parameter':''})
         # game course

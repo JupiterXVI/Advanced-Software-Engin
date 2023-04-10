@@ -47,6 +47,11 @@ class Singleplayer():
         self.player_points.append(0)
 
 
+    def reset_player(self):
+        self.active_player = []
+        self.player_points = []
+        
+
     def player_act(self):
         print("singleplayer action")
 
