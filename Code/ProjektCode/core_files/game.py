@@ -20,6 +20,10 @@ class Game():
     """
     functions
     """
+    def get_id(self):
+        return self.game_id
+
+
     def get_name(self):
         return self.name
 

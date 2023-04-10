@@ -2,7 +2,7 @@
 imports
 """
 from adapter import PygameBuilder, PostgreSqlAdapter
-from core_files import AccountList, Playground, Singleplayer, Multiplayer, GameList
+from core_files import AccountList, Playground, Singleplayer, Multiplayer, GameList, Statistics
 from gui import StartMenu, ChooseGameMenu, AccountSelectionMenu, WinScreenMenu, ManageAccountMenu, EditAccountMenu, MenuManager
 from games import TicTacToe
 
@@ -42,6 +42,9 @@ class Main():
 
         ws_menu = WinScreenMenu()
 
+        stats = Statistics(PostgreSqlAdapter())
+        stats.get_statistics()
+
         # add all games to a list and make them playable through the playground
         game_list = GameList(PostgreSqlAdapter())
         game_list.add_game(TicTacToe())
@@ -51,6 +54,7 @@ class Main():
         
         playground.set_select_screen(as_menu)
         playground.set_win_screen(ws_menu)
+        playground.set_statistics(stats)
 
         menus = MenuManager(gui_builder, st_menu, cg_menu, ma_menu, ea_menu)
         Thread(target=menus.run_relay).start()
@@ -62,6 +66,9 @@ class Main():
         # open menu after game closes
         while menus.should_come_back_to_menu():
             menus.open_menus()
+
+            stats.get_statistics()
+            
             game = cg_menu.get_chousen_game()
             
             # select the chousen game
