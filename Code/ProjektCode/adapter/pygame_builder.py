@@ -21,13 +21,13 @@ class PygameBuilder(GuiBuilder):
         self.run_forever = True
         self.funktion_with_parameters = [
             'set_window_info','set_window_elements',
-            'set_game_elements','load_image_on_screen']
+            'set_game_elements','load_image_on_screen','set_font']
         # information for the gui-window
         self.window_info = "not set"
         # list of elements which make up the contence
         self.window_elements = "list of elements in menu"
         # font for text written on the menu
-        self.font = pygame.font.Font('freesansbold.ttf', 35)
+        self.fonts = [pygame.font.Font('freesansbold.ttf', 35), pygame.font.Font('freesansbold.ttf', 60), pygame.font.Font('freesansbold.ttf', 20)]
         self.window = "pygame_window_object"
 
     """
@@ -40,7 +40,6 @@ class PygameBuilder(GuiBuilder):
                 if message['category'] == 'gui':
                     self.react_to_request(request=message['info'])
                 if message['category'] == 'exit':
-                    # print("exit via message")
                     print("closing gui thread")
                     return
             window_event = self.check_events()
@@ -69,15 +68,15 @@ class PygameBuilder(GuiBuilder):
 
     # this funktion creates a window with a given sice and setz its title
     def create_window(self):
-        window = pygame.display.set_mode(size=(self.window_info["width"], self.window_info["height"]))
-        pygame.display.set_caption(self.window_info["titel"])
+        window = pygame.display.set_mode(size=(self.window_info['width'], self.window_info['height']))
+        pygame.display.set_caption(self.window_info['titel'])
         self.window = window
         self.clear_window()
 
 
     def clear_window(self):
         try:
-            self.window.fill(self.window_info["color"])
+            self.window.fill(self.window_info['color'])
         except:
             "window is still string"
 
@@ -90,18 +89,18 @@ class PygameBuilder(GuiBuilder):
     # this funktion uses the element list given at initilization, checks the form of the element,
     # draws them on the given window and returns a list of interactable surfaces aproximate to the drawn elemnets
     def create_window_interaction_elements(self):
-        elements_added_to_window = {"item_name": [], "item": []}
+        elements_added_to_window = {'item_name': [], 'item': []}
         for element in reversed(self.window_elements):
             intercaton_surface = pygame.Rect([0, 0, 0, 0])
-            if element["form"] == "rectangle":
-                intercaton_surface = pygame.Rect( element["position"], element["dimensions"])
-            if element["form"] == "circle":
-                rect_size = 2*element["radius"]
-                pos_x = element["position"][0] - element["radius"]
-                pos_y =element["position"][1] - element["radius"]
+            if element['form'] == "rectangle":
+                intercaton_surface = pygame.Rect( element['position'], element['dimensions'])
+            if element['form'] == "circle":
+                rect_size = 2*element['radius']
+                pos_x = element['position'][0] - element['radius']
+                pos_y =element['position'][1] - element['radius']
                 intercaton_surface = pygame.Rect([pos_x, pos_y, rect_size, rect_size])
-            elements_added_to_window["item_name"].append(element["name"])
-            elements_added_to_window["item"].append(intercaton_surface)
+            elements_added_to_window['item_name'].append(element['name'])
+            elements_added_to_window['item'].append(intercaton_surface)
         return elements_added_to_window
 
 
@@ -110,24 +109,25 @@ class PygameBuilder(GuiBuilder):
         self.clear_window()
         for element in self.window_elements:
             try:
-                if element["form"] == "rectangle":
-                    pygame.draw.rect(self.window, element["color"],[element["position"] ,element["dimensions"]], element["line_thickness"])
-                    text = self.font.render(element["text"]["content"], True, element["text"]["color"])
+                if element['form'] == "rectangle":
+                    pygame.draw.rect(self.window, element['color'],[element['position'] ,element['dimensions']], element['line_thickness'])
+                    #self.set_font(element['text']['font'])
+                    text = self.fonts[element['text']['font']].render(element['text']['content'], True, element['text']['color'])
                     text_box = text.get_rect()
-                    text_box.center = (element["position"][0] + (element["dimensions"][0]/2) , element["position"][1] + (element["dimensions"][1]/2))
+                    text_box.center = (element['position'][0] + (element['dimensions'][0]/2) , element['position'][1] + (element['dimensions'][1]/2))
                     self.window.blit(text, text_box)
-                if element["form"] == "circle":
-                    pygame.draw.circle(self.window, element["color"],
-                                    (element["position"][0]+element["radius"], element["position"][1]+element["radius"]), 
-                                    element["radius"], element["line_thickness"])
+                if element['form'] == "circle":
+                    pygame.draw.circle(self.window, element['color'],
+                                    (element['position'][0]+element['radius'], element['position'][1]+element['radius']), 
+                                    element['radius'], element['line_thickness'])
             except:
                 "window ist still string"
 
 
     def load_image_on_screen(self, game_element):
-            image = pygame.image.load(game_element["graphic"] )
-            intercaton_surface = pygame.Rect(game_element["position"], game_element["dimensions"])
-            image = pygame.image.load(game_element["graphic"] )
+            image = pygame.image.load(game_element['graphic'] )
+            intercaton_surface = pygame.Rect(game_element['position'], game_element['dimensions'])
+            image = pygame.image.load(game_element['graphic'] )
             self.window.blit(image, intercaton_surface.center)
 
 
@@ -150,7 +150,6 @@ class PygameBuilder(GuiBuilder):
             if event.type == pygame.QUIT:
                 self.sender.send(category="exit", name="exit_event", info="window_closed")
                 self.run_forever = False
-                # print("exit via event")
             if event.type == pygame.KEYDOWN:
                 return self.check_key_tap(event)
             if event.type == pygame.MOUSEBUTTONDOWN:

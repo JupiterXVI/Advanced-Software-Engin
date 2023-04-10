@@ -9,67 +9,320 @@ class WinScreen(): # muss ggf keine klasse ein
     """
     global variables
     """
-    space_invaders = {
-        "name": "space_invaders",
+    congretulation = {
+        "name": "congretulation",
         "form": "rectangle",
         "text": {
-            "content": "Space Invaders",
+            "content": "Glückwunsch",
+            "font": 1,
             "color": [
-                0, # red
-                0, # green
-                0  # blue
+                230, # red
+                180, # green
+                10  # blue
             ],
         },
         "position":[
             200,  # pos_x
-            200 # pos_y
+            150 # pos_y
         ],
         "dimensions": [
             500, # width
             100  # heigth
         ],
         "color": [
-            150, # red
-            150, # green
-            220  # blue
+            0, # red
+            0, # green
+            0  # blue
         ],
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
-    
-    tic_tac_toe = {
-        "name": "tic_tac_toe",
+    player0 = {
+        "name": "player",
         "form": "rectangle",
         "text": {
-            "content": "Tic Tac Toe",
+            "content": "Player",
+            "font": 2,
             "color": [
-                0, # red
-                0, # green
-                0  # blue
+                255, # red
+                255, # green
+                255  # blue
             ],
         },
         "position":[
-            200,  # pos_x
-            350 # pos_y
+            210,  # pos_x
+            250 # pos_y
         ],
         "dimensions": [
-            500, # width
-            100  # heigth
+            200, # width
+            50  # heigth
         ],
         "color": [
-            100, # red
-            100, # green
-            100  # blue
+            0, # red
+            0, # green
+            0  # blue
         ],
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
+    points0 = {
+        "name": "points",
+        "form": "rectangle",
+        "text": {
+            "content": "Points",
+            "font": 2,
+            "color": [
+                255, # red
+                255, # green
+                255  # blue
+            ],
+        },
+        "position":[
+            550,  # pos_x
+            250 # pos_y
+        ],
+        "dimensions": [
+            100, # width
+            50  # heigth
+        ],
+        "color": [
+            0, # red
+            0, # green
+            0  # blue
+        ],
+        "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
+    }
+
+    player1 = {
+        "name": "player",
+        "form": "rectangle",
+        "text": {
+            "content": "Player",
+            "font": 2,
+            "color": [
+                255, # red
+                255, # green
+                255  # blue
+            ],
+        },
+        "position":[
+            210,  # pos_x
+            290 # pos_y
+        ],
+        "dimensions": [
+            200, # width
+            50  # heigth
+        ],
+        "color": [
+            0, # red
+            0, # green
+            0  # blue
+        ],
+        "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
+    }
+
+    points1 = {
+        "name": "points",
+        "form": "rectangle",
+        "text": {
+            "content": "Points",
+            "font": 2,
+            "color": [
+                255, # red
+                255, # green
+                255  # blue
+            ],
+        },
+        "position":[
+            550,  # pos_x
+            290 # pos_y
+        ],
+        "dimensions": [
+            100, # width
+            50  # heigth
+        ],
+        "color": [
+            0, # red
+            0, # green
+            0  # blue
+        ],
+        "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
+    }
+
+    player2 = {
+        "name": "player",
+        "form": "rectangle",
+        "text": {
+            "content": "Player",
+            "font": 2,
+            "color": [
+                255, # red
+                255, # green
+                255  # blue
+            ],
+        },
+        "position":[
+            210,  # pos_x
+            330 # pos_y
+        ],
+        "dimensions": [
+            200, # width
+            50  # heigth
+        ],
+        "color": [
+            0, # red
+            0, # green
+            0  # blue
+        ],
+        "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
+    }
+
+    points2 = {
+        "name": "points",
+        "form": "rectangle",
+        "text": {
+            "content": "Points",
+            "font": 2,
+            "color": [
+                255, # red
+                255, # green
+                255  # blue
+            ],
+        },
+        "position":[
+            550,  # pos_x
+            330 # pos_y
+        ],
+        "dimensions": [
+            100, # width
+            50  # heigth
+        ],
+        "color": [
+            0, # red
+            0, # green
+            0  # blue
+        ],
+        "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
+    }
+
+    player3 = {
+        "name": "player",
+        "form": "rectangle",
+        "text": {
+            "content": "Player",
+            "font": 2,
+            "color": [
+                255, # red
+                255, # green
+                255  # blue
+            ],
+        },
+        "position":[
+            210,  # pos_x
+            370 # pos_y
+        ],
+        "dimensions": [
+            200, # width
+            50  # heigth
+        ],
+        "color": [
+            0, # red
+            0, # green
+            0  # blue
+        ],
+        "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
+    }
+
+    points3 = {
+        "name": "points",
+        "form": "rectangle",
+        "text": {
+            "content": "Points",
+            "font": 2,
+            "color": [
+                255, # red
+                255, # green
+                255  # blue
+            ],
+        },
+        "position":[
+            550,  # pos_x
+            370 # pos_y
+        ],
+        "dimensions": [
+            100, # width
+            50  # heigth
+        ],
+        "color": [
+            0, # red
+            0, # green
+            0  # blue
+        ],
+        "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
+    }
+
+    player4 = {
+        "name": "player",
+        "form": "rectangle",
+        "text": {
+            "content": "Player",
+            "font": 2,
+            "color": [
+                255, # red
+                255, # green
+                255  # blue
+            ],
+        },
+        "position":[
+            210,  # pos_x
+            410 # pos_y
+        ],
+        "dimensions": [
+            200, # width
+            50  # heigth
+        ],
+        "color": [
+            0, # red
+            0, # green
+            0  # blue
+        ],
+        "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
+    }
+
+    points4 = {
+        "name": "points",
+        "form": "rectangle",
+        "text": {
+            "content": "Points",
+            "font": 2,
+            "color": [
+                255, # red
+                255, # green
+                255  # blue
+            ],
+        },
+        "position":[
+            550,  # pos_x
+            410 # pos_y
+        ],
+        "dimensions": [
+            100, # width
+            50  # heigth
+        ],
+        "color": [
+            0, # red
+            0, # green
+            0  # blue
+        ],
+        "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
+    }
 
     back_button = {
         "name": "start_menu",
         "form": "rectangle",
         "text": {
-            "content": "Zurück",
+            "content": "Weiter",
+            "font": 0,
             "color": [
                 0, # red
                 0, # green
@@ -77,25 +330,40 @@ class WinScreen(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            200,  # pos_x
-            500 # pos_y
+            250,  # pos_x
+            580 # pos_y
         ],
         "dimensions": [
-            500, # width
+            400, # width
             100  # heigth
         ],
         "color": [
-            220, # red
-            150, # green
-            150  # blue
+            150, # red
+            120, # green
+            100  # blue
         ],
         "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
     }
 
+    player_list = [
+        player0,
+        player1,
+        player2,
+        player3,
+        player4
+        ]
+    
+    points_list = [
+        points0,
+        points1,
+        points2,
+        points3,
+        points4
+    ]
+
     # list which contains all element directories
     window_elements = [
-        space_invaders,
-        tic_tac_toe,
+        congretulation,
         back_button
     ]
 

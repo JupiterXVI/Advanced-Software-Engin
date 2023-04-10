@@ -14,6 +14,7 @@ class ManageAccount(): # muss ggf keine klasse ein
         "form": "rectangle",
         "text": {
             "content": "account_1",
+            "font": 0,
             "color": [
                 0, # red
                 0, # green
@@ -42,6 +43,7 @@ class ManageAccount(): # muss ggf keine klasse ein
         "form": "rectangle",
         "text": {
             "content": "X",
+            "font": 0,
             "color": [
                 0, # red
                 0, # green
@@ -70,6 +72,7 @@ class ManageAccount(): # muss ggf keine klasse ein
         "form": "rectangle",
         "text": {
             "content": "account_2",
+            "font": 0,
             "color": [
                 0, # red
                 0, # green
@@ -98,6 +101,7 @@ class ManageAccount(): # muss ggf keine klasse ein
         "form": "rectangle",
         "text": {
             "content": "X",
+            "font": 0,
             "color": [
                 0, # red
                 0, # green
@@ -126,6 +130,7 @@ class ManageAccount(): # muss ggf keine klasse ein
         "form": "rectangle",
         "text": {
             "content": "account_3",
+            "font": 0,
             "color": [
                 0, # red
                 0, # green
@@ -154,6 +159,7 @@ class ManageAccount(): # muss ggf keine klasse ein
         "form": "rectangle",
         "text": {
             "content": "X",
+            "font": 0,
             "color": [
                 0, # red
                 0, # green
@@ -182,6 +188,7 @@ class ManageAccount(): # muss ggf keine klasse ein
         "form": "rectangle",
         "text": {
             "content": "account_4",
+            "font": 0,
             "color": [
                 0, # red
                 0, # green
@@ -210,6 +217,7 @@ class ManageAccount(): # muss ggf keine klasse ein
         "form": "rectangle",
         "text": {
             "content": "X",
+            "font": 0,
             "color": [
                 0, # red
                 0, # green
@@ -238,6 +246,7 @@ class ManageAccount(): # muss ggf keine klasse ein
         "form": "rectangle",
         "text": {
             "content": "account_5",
+            "font": 0,
             "color": [
                 0, # red
                 0, # green
@@ -266,6 +275,7 @@ class ManageAccount(): # muss ggf keine klasse ein
         "form": "rectangle",
         "text": {
             "content": "X",
+            "font": 0,
             "color": [
                 0, # red
                 0, # green
@@ -294,6 +304,7 @@ class ManageAccount(): # muss ggf keine klasse ein
         "form": "rectangle",
         "text": {
             "content": "Zurück",
+            "font": 0,
             "color": [
                 0, # red
                 0, # green

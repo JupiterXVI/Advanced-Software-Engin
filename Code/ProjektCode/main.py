@@ -1,12 +1,8 @@
 """
 imports
 """
-#from os import path as os_path
-#from sys import path as sys_path
-#sys_path.append(os_path.join(sys_path[0], '..'))
-
 from adapter import PygameBuilder, PostgreSqlAdapter
-from core_files import AccountList, Playground, GameList
+from core_files import AccountList, Playground, Singleplayer, Multiplayer, GameList
 from gui import StartMenu, ChooseGameMenu, AccountSelectionMenu, WinScreenMenu, ManageAccountMenu, EditAccountMenu, MenuManager
 from games import TicTacToe
 
@@ -30,28 +26,33 @@ class Main():
         gui_builder = PygameBuilder()
         Thread(target=gui_builder.run).start()
 
-        # add all games to a list and make them playable through the playground
-        game_list = GameList(PostgreSqlAdapter())
-        game_list.add_game(TicTacToe())
-        playground = Playground(game_list.games, gui_builder)
-
         # connect menus and start up menu interaction
         st_menu = StartMenu()
 
         cg_menu = ChooseGameMenu()
 
-        # as_menu = AccountSelectionMenu()
-
-        # ws_menu = WinScreenMenu()
-
         ma_menu = ManageAccountMenu()
         ac_list = AccountList(PostgreSqlAdapter())
         ac_list.get_accounts()
         ma_menu.set_account_list(ac_list)
-        
+
         ea_menu = EditAccountMenu()
 
-        menus = MenuManager(gui_builder, st_menu, cg_menu, ma_menu, ea_menu) # as_menu, ws_menu
+        as_menu = AccountSelectionMenu(ac_list)
+
+        ws_menu = WinScreenMenu()
+
+        # add all games to a list and make them playable through the playground
+        game_list = GameList(PostgreSqlAdapter())
+        game_list.add_game(TicTacToe())
+        s_player = Singleplayer()
+        m_player = Multiplayer()
+        playground = Playground(game_list.games, gui_builder, s_player, m_player)
+        
+        playground.set_select_screen(as_menu)
+        playground.set_win_screen(ws_menu)
+
+        menus = MenuManager(gui_builder, st_menu, cg_menu, ma_menu, ea_menu)
         Thread(target=menus.run_relay).start()
 
         # open gui window

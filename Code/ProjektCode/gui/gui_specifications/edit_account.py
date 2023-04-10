@@ -14,6 +14,7 @@ class EditAccount(): # muss ggf keine klasse ein
         "form": "rectangle",
         "text": {
             "content": "Username:",
+            "font": 0,
             "color": [
                 250, # red
                 250, # green
@@ -42,6 +43,7 @@ class EditAccount(): # muss ggf keine klasse ein
         "form": "rectangle",
         "text": {
             "content": "USERNAME",
+            "font": 0,
             "color": [
                 0, # red
                 0, # green
@@ -70,6 +72,7 @@ class EditAccount(): # muss ggf keine klasse ein
         "form": "rectangle",
         "text": {
             "content": "Passwort:",
+            "font": 0,
             "color": [
                 250, # red
                 250, # green
@@ -98,6 +101,7 @@ class EditAccount(): # muss ggf keine klasse ein
         "form": "rectangle",
         "text": {
             "content": "Passwort",
+            "font": 0,
             "color": [
                 0, # red
                 0, # green
@@ -126,6 +130,7 @@ class EditAccount(): # muss ggf keine klasse ein
         "form": "rectangle",
         "text": {
             "content": "Wiederhole PW:",
+            "font": 0,
             "color": [
                 250, # red
                 250, # green
@@ -154,6 +159,7 @@ class EditAccount(): # muss ggf keine klasse ein
         "form": "rectangle",
         "text": {
             "content": "Passwort",
+            "font": 0,
             "color": [
                 0, # red
                 0, # green
@@ -182,6 +188,7 @@ class EditAccount(): # muss ggf keine klasse ein
         "form": "rectangle",
         "text": {
             "content": "Age:",
+            "font": 0,
             "color": [
                 250, # red
                 250, # green
@@ -210,6 +217,7 @@ class EditAccount(): # muss ggf keine klasse ein
         "form": "rectangle",
         "text": {
             "content": "Age",
+            "font": 0,
             "color": [
                 0, # red
                 0, # green
@@ -238,6 +246,7 @@ class EditAccount(): # muss ggf keine klasse ein
         "form": "rectangle",
         "text": {
             "content": "is Admin:",
+            "font": 0,
             "color": [
                 250, # red
                 250, # green
@@ -266,6 +275,7 @@ class EditAccount(): # muss ggf keine klasse ein
         "form": "rectangle",
         "text": {
             "content": "Admin",
+            "font": 0,
             "color": [
                 0, # red
                 0, # green
@@ -294,6 +304,7 @@ class EditAccount(): # muss ggf keine klasse ein
         "form": "rectangle",
         "text": {
             "content": "Speichern",
+            "font": 0,
             "color": [
                 0, # red
                 0, # green
@@ -322,6 +333,7 @@ class EditAccount(): # muss ggf keine klasse ein
         "form": "rectangle",
         "text": {
             "content": "Abbrechen",
+            "font": 0,
             "color": [
                 0, # red
                 0, # green

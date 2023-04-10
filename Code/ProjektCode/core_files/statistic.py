@@ -1,7 +1,7 @@
 """
 imports
 """
-from core_files.account import Account
+from core_files import AccountList
 
 
 class Statistic():
