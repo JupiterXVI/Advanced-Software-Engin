@@ -131,6 +131,8 @@ class TicTacToe(Game):
                 for col in range(DIMENSION):
                     if self.board[row][col] != 'x' and self.board[row][col] != 'o':
                         return "no winner"
+            self.sender.send(category="win", name="winning info", info={'win':True, 'waiting_on_win':False, 'player_points':[1,1]})
+                    
         else:
             points = [0,0]
             if self.win['winner'] in ['X','x']:

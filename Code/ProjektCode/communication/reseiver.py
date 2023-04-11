@@ -26,7 +26,7 @@ class Reseiver(Listener):
         
 
     def listen(self, send_event):
-        print(f'event: {send_event.name} has been reseved')
+        # print(f'event: {send_event.name} has been reseved')
         self.message_queue.append({'category':send_event.category, 'name': send_event.name, 'info': send_event.info})
 
 

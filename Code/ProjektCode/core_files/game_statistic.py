@@ -1,23 +1,30 @@
 """
 imports
 """
-from core_files import AccountList
 
 
-class Statistic():
+class GameStatistic():
     """
     global variables
     """
-    def __init__(self, game_id, player_id):
-        self.game_id = game_id
+    def __init__(self, player_id, game_id, wins, losses):
         self.player_id = player_id
-        self.wins = 0
-        self.losses = 0
+        self.game_id = game_id
+        self.wins = wins
+        self.losses = losses
 
 
     """
     functions
     """
+    def get_player_id(self):
+        return self.player_id
+    
+
+    def get_game_id(self):
+        return self.game_id
+    
+
     def get_wins(self):
         return self.wins
 
@@ -33,10 +40,6 @@ class Statistic():
     def increase_losses(self):
         self.losses += 1
 
-
-    def reset_stats(self):
-        self.wins = 0
-        self.losses = 0
 
 
 # führe nur aus wenn die Datei direckt ausgeführt wird

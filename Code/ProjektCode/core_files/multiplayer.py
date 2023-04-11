@@ -36,6 +36,10 @@ class Multiplayer():
     def set_game(self, game):
         self.game = game
 
+    
+    def get_game(self):
+        return self.game
+
 
     def get_active_player(self):
         return self.active_player
