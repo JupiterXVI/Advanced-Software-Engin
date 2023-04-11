@@ -6,7 +6,7 @@ import pygame
 from communication import Sender, Reseiver
 
 
-# class used to build menu objekts
+# class used to build visualize menues and games
 # - gui/menu builder using the pygame library
 # - takes information about the window and its contence and creates it using those specifications
 class PygameBuilder(GuiBuilder):
@@ -33,6 +33,8 @@ class PygameBuilder(GuiBuilder):
     """
     functions
     """
+    # this funktion runs untill stoped and reakts to messages send with category gui
+    # - it checks for interaktion with gui and sends a message
     def run(self):
         while self.run_forever:
             while self.reseiver.event_reseved:
@@ -50,7 +52,8 @@ class PygameBuilder(GuiBuilder):
         print("closing gui thread")
         
 
-
+    # this funktion takes the information from message and starts the requested funktion with the given parameters
+    # - takes dictionary with funktion and parameter
     def react_to_request(self, request):
         if request["function"] in self.funktion_with_parameters:
             eval(f"self.{request['function']}")(request['parameter'])
@@ -58,22 +61,26 @@ class PygameBuilder(GuiBuilder):
             eval(f"self.{request['function']}")()
 
 
+    # this funktion sets the window deskribing elements with the given parameter
+    # - takes list of diskription elements
     def set_window_info(self, window_info):
         self.window_info = window_info
 
 
+    # this funktion sets the content deskribing elements with the given parameter
+    # - takes list of diskription elements
     def set_window_elements(self, window_elements):
         self.window_elements = window_elements
 
 
-    # this funktion creates a window with a given sice and setz its title
+    # this funktion creates a window with set infromation and saves the objekt
     def create_window(self):
         window = pygame.display.set_mode(size=(self.window_info['width'], self.window_info['height']))
         pygame.display.set_caption(self.window_info['titel'])
         self.window = window
         self.clear_window()
 
-
+    # this funktion 
     def clear_window(self):
         try:
             self.window.fill(self.window_info['color'])
@@ -124,6 +131,7 @@ class PygameBuilder(GuiBuilder):
                 "window ist still string"
 
 
+    # this funktion 
     def load_image_on_screen(self, game_element):
             image = pygame.image.load(game_element['graphic'] )
             intercaton_surface = pygame.Rect(game_element['position'], game_element['dimensions'])
@@ -136,6 +144,7 @@ class PygameBuilder(GuiBuilder):
         pygame.display.update()
 
 
+    # this funktion 
     def check_key_tap(self, event):
         if event.key == pygame.K_BACKSPACE:
             return "backspace"
@@ -144,7 +153,6 @@ class PygameBuilder(GuiBuilder):
 
 
     # this funktion checks if the menubar was used or one of the interactable surfaces was ckicked
-    # and returns the name of the interaction
     def check_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -158,6 +166,6 @@ class PygameBuilder(GuiBuilder):
         
 
 if __name__ == "__main__":
-    print("This file contains the class to build and run menus")
+    print("The PygameBuilder is a class used to visualize menues and games")
 
     

@@ -4,6 +4,7 @@ Interfaces zur Estellung eines Menüs
 from abc import ABC, abstractmethod
 
 
+# astablish all funktions an visualisation plug in has to provide
 class GuiBuilder(ABC):
     @abstractmethod
     def run(self):
@@ -48,3 +49,6 @@ class GuiBuilder(ABC):
     @abstractmethod
     def check_events(self):
         pass
+
+if __name__ == "__main__":
+    print("The GuiBuilder Interface astablishes all funktions an visualisation plug in has to provide.")

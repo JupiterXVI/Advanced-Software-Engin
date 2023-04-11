@@ -4,6 +4,7 @@ Interfaces zur Estellung eines Menüs
 from abc import ABC, abstractmethod
 
 
+# astablish all funktions which a database connector has to provide
 class DatabaseAccess(ABC):
     @abstractmethod
     def add_account(self, username, password, age, is_admin):
@@ -56,3 +57,6 @@ class DatabaseAccess(ABC):
     @abstractmethod
     def add_loss(self, player_id, game_id):
         pass
+
+if __name__ == "__main__":
+    print("The DatabaseAccess Interface astablishs all funktions which a database connector has to provide.")

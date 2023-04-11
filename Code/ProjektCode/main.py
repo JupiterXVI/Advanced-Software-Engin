@@ -26,7 +26,7 @@ class Main():
         gui_builder = PygameBuilder()
         Thread(target=gui_builder.run).start()
 
-        # connect menus and start up menu interaction
+        # create menu instances and sync with data from database
         st_menu = StartMenu()
 
         cg_menu = ChooseGameMenu()
@@ -56,6 +56,7 @@ class Main():
         playground.set_win_screen(ws_menu)
         playground.set_statistics(stats)
 
+        # connect menus and start up menu interaction
         menus = MenuManager(gui_builder, st_menu, cg_menu, ma_menu, ea_menu)
         Thread(target=menus.run_relay).start()
 
@@ -68,7 +69,7 @@ class Main():
             menus.open_menus()
 
             stats.get_statistics()
-            
+
             game = cg_menu.get_chousen_game()
             
             # select the chousen game
