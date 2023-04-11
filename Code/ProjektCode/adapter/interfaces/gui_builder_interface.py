@@ -29,10 +29,6 @@ class GuiBuilder(ABC):
     @abstractmethod
     def terminate_window(self):
         pass
-        
-    @abstractmethod
-    def create_window_interaction_elements(self):
-        pass
 
     @abstractmethod
     def set_element_styles(self):
