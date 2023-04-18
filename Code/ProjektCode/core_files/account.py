@@ -50,8 +50,4 @@ class Account():
 
     def get_admin(self):
         return self.is_admin
-
-# die funktionen sollen vermutlich nicht hier her
-    def save_user_stats(self):
-        pass
     

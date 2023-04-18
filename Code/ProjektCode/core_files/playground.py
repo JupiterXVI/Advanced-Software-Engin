@@ -24,7 +24,6 @@ class Playground():
         self.statistics = "not set"
         self.sender = Sender()
         self.resiever = Reseiver()
-        self.interruptung_exit = False
 
 
     """
@@ -39,7 +38,7 @@ class Playground():
         play_pattern.play()
         self.clean_up(play_pattern)
         self.remove_from_gui(play_pattern)
-        if play_pattern.get_interupt_exit():
+        if play_pattern.was_exited_by_interrupt():
             return
         self.save_results(play_pattern)
         self.show_results(play_pattern)

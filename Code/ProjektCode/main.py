@@ -4,7 +4,7 @@ imports
 from adapter import PygameBuilder, PostgreSqlAdapter
 from core_files import AccountList, Playground, Singleplayer, Multiplayer, GameList, Statistics
 from gui import StartMenu, ChooseGameMenu, AccountSelectionMenu, WinScreenMenu, ManageAccountMenu, EditAccountMenu, MenuManager
-from games import TicTacToe
+from games import TicTacToe 
 
 from threading import Thread
 

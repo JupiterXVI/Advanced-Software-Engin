@@ -131,7 +131,7 @@ class Multiplayer():
         self.active_relay = False
 
 
-    def get_interupt_exit(self):
+    def was_exited_by_interrupt(self):
         return self.interrupt_exit
 
 # führe nur aus wenn die Datei direckt ausgeführt wird

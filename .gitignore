@@ -1,8 +1,15 @@
 Code/env/
+Code/.vscode/
+Code/ProjektCode/__pycache__/
 Code/ProjektCode/adapter/__pycache__/
 Code/ProjektCode/adapter/interfaces/__pycache__/
+Code/ProjektCode/communication/__pycache__/
+Code/ProjektCode/communication/messaging/__pycache__/
 Code/ProjektCode/core_files/__pycache__/
 Code/ProjektCode/games/__pycache__/
-Code/ProjektCode/gamestats/__pycache__/
+Code/ProjektCode/games/graphics/__pycache__/
+Code/ProjektCode/games/graphics/space_invaders/__pycache__/
+Code/ProjektCode/games/graphics/tic_tac_toe/__pycache__/
 Code/ProjektCode/gui/__pycache__/
 Code/ProjektCode/gui/gui_specifications/__pycache__/
+Code/ProjektCode/test/__pycache__/
