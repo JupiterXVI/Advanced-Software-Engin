@@ -1,18 +1,17 @@
 """
 imports
 """
-from core_files import Menu
-from adapter import GuiBuilder
-from gui import ChooseGame
+from adapter import GenericMenu
+from gui import ChooseGame, MenuActions
 from communication import Sender, Reseiver
 
 
-class ChooseGameMenu(Menu):
+class ChooseGameMenu(GenericMenu):
     """
     global variables
     """
     def __init__(self):
-        self.chousen_game = "no game chousen"
+        self.chosen_game = "no game chosen"
         self.sender = Sender()
         self.reseiver = Reseiver()
 
@@ -21,8 +20,7 @@ class ChooseGameMenu(Menu):
     functions
     """
     def change_menu(self):
-        self.sender.send(category='gui', name='send element_info', info={'function':GuiBuilder.set_window_elements.__name__, 'parameter':ChooseGame.window_elements})
-        self.sender.send(category='gui', name='set element style', info={'function':GuiBuilder.set_element_styles.__name__, 'parameter':''})
+        MenuActions.get_window_elements_on_screen(ChooseGame.window_elements, self.sender)
 
 
     def run(self):
@@ -40,19 +38,19 @@ class ChooseGameMenu(Menu):
                     
     
     def check_menu_action(self, action):
-        event = self.get_button_from_position(ChooseGame.window_elements, action)
+        event = MenuActions.get_button_from_position(ChooseGame.window_elements, action)
         if event != "no button":
             if event == "start_menu":
                 self.sender.send(category='menu', name='change menu', info={'function':'button_event', 'parameter':event})
             else:
-                self.set_chousen_game(event) 
+                self.set_chosen_game(event) 
                 self.sender.send(category='menu', name='game start', info={'function':'button_event', 'parameter':'game'})
             return True
         
 
-    def set_chousen_game(self, game):
-        self.chousen_game = game
+    def set_chosen_game(self, game):
+        self.chosen_game = game
     
 
-    def get_chousen_game(self):
-        return self.chousen_game
+    def get_chosen_game(self):
+        return self.chosen_game

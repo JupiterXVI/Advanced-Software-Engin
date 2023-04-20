@@ -1,9 +1,8 @@
 """
 imports
 """
-from core_files import Menu
-from adapter import GuiBuilder
-from gui import EditAccount
+from adapter import EditMenu
+from gui import EditAccount, MenuActions
 from communication import Sender, Reseiver
 from re import search
 from time import sleep
@@ -13,7 +12,7 @@ BACKSPACE = 9
 COORDINATES = 2
 
 
-class EditAccountMenu(Menu):
+class EditAccountMenu(EditMenu):
     """
     global variables
     """
@@ -32,12 +31,7 @@ class EditAccountMenu(Menu):
     def change_menu(self):
         print("open edit account")
         self.get_current_account_values()
-        self.update_screen_values()
-        
-
-    def update_screen_values(self):
-        self.sender.send(category='gui', name='send element_info', info={'function':GuiBuilder.set_window_elements.__name__, 'parameter':EditAccount.window_elements})
-        self.sender.send(category='gui', name='set element style', info={'function':GuiBuilder.set_element_styles.__name__, 'parameter':''})
+        MenuActions.get_window_elements_on_screen(EditAccount.window_elements, self.sender)
 
 
     def run(self):
@@ -48,7 +42,6 @@ class EditAccountMenu(Menu):
             while self.reseiver.event_reseved:
                 message = self.reseiver.get_message()
                 if message['category'] == "input":
-                    print(f"message['info']: {message['info']}")
                     if self.check_menu_action(message['info']):
                         menu_in_use = False
                 elif message['category'] == "exit":
@@ -62,12 +55,12 @@ class EditAccountMenu(Menu):
             return self.click_action(action)
         elif len(action) in [LETTER, BACKSPACE]:
             self.type_action(action)
-            self.update_screen_values()
+            MenuActions.get_window_elements_on_screen(EditAccount.window_elements, self.sender)
             return False
             
             
     def click_action(self, action):
-        event = self.get_button_from_position(EditAccount.window_elements, action)
+        event = MenuActions.get_button_from_position(EditAccount.window_elements, action)
         self.text_fiel_active(False, self.edit_field)
         if event == "no button":
             self.edit_mode = False
@@ -104,12 +97,10 @@ class EditAccountMenu(Menu):
     def type_action(self, action):
         if not self.edit_mode:
             return
-        print(self.edit_field['text']['content'])
         if action == "backspace":
             self.edit_field['text']['content'] = self.edit_field['text']['content'][:-1]
         else:
             self.edit_field['text']['content'] = self.edit_field['text']['content']+action
-        print(self.edit_field['text']['content'])
        
 
     def get_current_account_values(self):
@@ -144,8 +135,7 @@ class EditAccountMenu(Menu):
                 for color_index in range(3):
                     text_field["color"][color_index] -= 30
                     self.edit_field = "not set"
-            self.update_screen_values()
-        
+            MenuActions.get_window_elements_on_screen(EditAccount.window_elements, self.sender)
 
 
     def check_to_delete(self):

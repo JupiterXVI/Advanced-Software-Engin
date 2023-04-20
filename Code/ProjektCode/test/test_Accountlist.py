@@ -11,6 +11,7 @@ from os import path as os_path
 from sys import path as sys_path
 sys_path.append(os_path.join(sys_path[0], '..'))
 
+#import coverage
 import unittest
 from unittest.mock import Mock
 
@@ -18,9 +19,6 @@ from adapter import DatabaseAccess
 from core_files import Account
 from core_files import AccountList
 
-import coverage
-cov = coverage.Coverage()
-cov.start()
 
 class test_AccountList(unittest.TestCase):
 
@@ -67,11 +65,3 @@ class test_AccountList(unittest.TestCase):
         self.account_list.save_account_data(mock_account)
         #assert
         self.mock_datamanager.update_account.assert_called_once_with(1, 'user1', 'pass1', 25, False)
-
-
-if __name__ == "__main__":
-    unittest.main()
-
-cov.stop()
-cov.save()
-cov.report()

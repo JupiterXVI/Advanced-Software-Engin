@@ -1,26 +1,24 @@
 """
 imports
 """
-from core_files import Menu
-from adapter import GuiBuilder
+from adapter import Manager, GenericMenu, ManageMenu, EditMenu, GuiBuilder
 from communication import Sender, Reseiver
-from gui import Window, ManageAccountMenu, EditAccountMenu
+from gui import Window
 
 
-class MenuManager():
+class MenuManager(Manager):
     """
     global variables
     """
-    def __init__(self, gui:GuiBuilder, start_menu:Menu, choose_game:Menu, manage_account:ManageAccountMenu, edit_account:EditAccountMenu):
+    def __init__(self, gui:GuiBuilder, start_menu:GenericMenu, choose_game:GenericMenu, manage_account:ManageMenu, edit_account:EditMenu):
         self.gui =  gui
-        # objekt of a classes which can visualize the different menus
+        
         self.start_menu = start_menu
         self.choose_game = choose_game
         self.manage_account = manage_account
         self.edit_account = edit_account
-        # menu which will be opend next, after cleanup of communication
+        
         self.next_menu = self.start_menu
-        # allow communication via messaging
         self.sender = Sender()
         self.reseiver = Reseiver()
         # if set to false, gui will close because main loop ends  

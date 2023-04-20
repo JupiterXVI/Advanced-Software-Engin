@@ -1,7 +1,11 @@
 """
 imports
 """
-#from sys import path as sys_path
+X_OFFSET = 200
+Y_OFFSET = 200
+GAME_BUTTON_WIDTH = 500
+GAME_BUTTON_HEIGHT = 100
+GAME_BUTTON_OFFSET = 50
 
 # This class discribes the struckture of the main menu
 # which can be accessed form outside
@@ -22,12 +26,12 @@ class ChooseGame(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            200,  # pos_x
-            200 # pos_y
+            X_OFFSET,  # pos_x
+            Y_OFFSET # pos_y
         ],
         "dimensions": [
-            500, # width
-            100  # heigth
+            GAME_BUTTON_WIDTH, # width
+            GAME_BUTTON_HEIGHT  # heigth
         ],
         "color": [
             150, # red
@@ -51,12 +55,12 @@ class ChooseGame(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            200,  # pos_x
-            350 # pos_y
+            X_OFFSET,  # pos_x
+            Y_OFFSET + (1*(GAME_BUTTON_HEIGHT+GAME_BUTTON_OFFSET)) # pos_y
         ],
         "dimensions": [
-            500, # width
-            100  # heigth
+            GAME_BUTTON_WIDTH, # width
+            GAME_BUTTON_HEIGHT  # heigth
         ],
         "color": [
             100, # red
@@ -80,12 +84,12 @@ class ChooseGame(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            200,  # pos_x
-            500 # pos_y
+            X_OFFSET,  # pos_x
+            Y_OFFSET + (2*(GAME_BUTTON_HEIGHT+GAME_BUTTON_OFFSET)) # pos_y
         ],
         "dimensions": [
-            500, # width
-            100  # heigth
+            GAME_BUTTON_WIDTH, # width
+            GAME_BUTTON_HEIGHT  # heigth
         ],
         "color": [
             220, # red

@@ -1,9 +1,8 @@
 """
 imports
 """
-from core_files import Menu
-from adapter import GuiBuilder
-from gui import ManageAccount
+from adapter import ManageMenu
+from gui import ManageAccount, MenuActions
 from communication import Sender, Reseiver
 from re import search, findall
 
@@ -11,7 +10,7 @@ FIRST_AVAILABLE_USERS = 3
 POSSIBLE_USERS = 5
 
 
-class ManageAccountMenu(Menu):
+class ManageAccountMenu(ManageMenu):
     """
     global variables
     """
@@ -29,9 +28,7 @@ class ManageAccountMenu(Menu):
     def change_menu(self):
         print("open manage accounts")
         self.handle_previous_edit()
-        self.get_account_list_on_screan()
-        self.sender.send(category='gui', name='send element_info', info={'function':GuiBuilder.set_window_elements.__name__, 'parameter':ManageAccount.window_elements})
-        self.sender.send(category='gui', name='set element style', info={'function':GuiBuilder.set_element_styles.__name__, 'parameter':''})
+        self.update_menu_screen()
              
 
     def run(self):
@@ -49,7 +46,7 @@ class ManageAccountMenu(Menu):
 
 
     def check_menu_action(self, action):
-        event = self.get_button_from_position(ManageAccount.window_elements, action)
+        event = MenuActions.get_button_from_position(ManageAccount.window_elements, action)
         if event == "start_menu":
                 self.sender.send(category='menu', name='change menu', info={'function':'button_event', 'parameter':event})
                 return True
@@ -63,7 +60,7 @@ class ManageAccountMenu(Menu):
         return False
         
 
-    def get_account_list_on_screan(self):
+    def get_account_list_on_screen(self):
         for account_index in range(POSSIBLE_USERS):
             try:
                 ManageAccount.account_button_list[account_index]['text']['content'] = self.account_list.account[FIRST_AVAILABLE_USERS + account_index].get_name()
@@ -103,8 +100,8 @@ class ManageAccountMenu(Menu):
 
 
     def update_menu_screen(self):
-        self.get_account_list_on_screan()
-        self.sender.send(category='gui', name='set element style', info={'function':GuiBuilder.set_element_styles.__name__, 'parameter':''})
+        self.get_account_list_on_screen()
+        MenuActions.get_window_elements_on_screen(ManageAccount.window_elements, self.sender)
 
 
     def set_selected_account(self, account):

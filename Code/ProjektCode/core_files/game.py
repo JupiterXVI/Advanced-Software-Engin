@@ -43,6 +43,14 @@ class Game():
     def run(self):
         print(self.name + " has been started")
 
+    
+    def player_act(self):
+        pass
+
+
+    def check_win(self):
+        pass
+
 
     def react_to_request(self, request):
         if request["function"] in self.funktion_with_parameters:
@@ -51,9 +59,4 @@ class Game():
             eval(f"self.{request['function']}")()
 
 
-    def player_act(self):
-        pass
-
-
-    def check_win(self):
-        pass
+    

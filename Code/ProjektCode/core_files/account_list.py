@@ -4,13 +4,12 @@ imports
 from adapter import DatabaseAccess
 from core_files import Account
 
+MAX_NUMBER_OF_ACCOUNTS = 8
 
 class AccountList():
     """
     global variables
     """
-    # bei erstellen eines Objekts der Klasse werden die Angaben durch den Spieler getroffen und in die Datenbank geschoben
-    # können bei bedarf aus datenbank erfragt werden
     def __init__(self, datamanager: DatabaseAccess):
         self.datamanager = datamanager
         self.account = []
@@ -26,9 +25,9 @@ class AccountList():
             player_list.append(Account(player[0], player[1], player[2], player[3], player[4]))
         self.account = player_list
 
-    # add account to local account list and to database
+
     def add_account(self, username, password, age, is_admin):
-        if len(self.account) <= 8:
+        if len(self.account) <= MAX_NUMBER_OF_ACCOUNTS:
             self.datamanager.add_account(username, password, age, is_admin)
             player_id = self.datamanager.last_added_account()
             self.datamanager.add_account_gamestats(player_id)
@@ -36,11 +35,12 @@ class AccountList():
         else:
             print("maximum of usable accounts has been reached")
 
-    # save local data to database
-    def save_account_data(self, account: Account):
-        self.datamanager.update_account(account.player_id, account.name, account.password, account.age, account.is_admin)
 
-    # remove account from local list and from database
+    def save_account_data(self, account: Account):
+        self.datamanager.update_account(account.player_id, account.name, 
+                                        account.password, account.age, account.is_admin)
+
+
     def delete_account(self, account):
         self.datamanager.delete_account(account.get_id())
         self.get_accounts()

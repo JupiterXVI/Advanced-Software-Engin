@@ -11,14 +11,10 @@ from os import path as os_path
 from sys import path as sys_path
 sys_path.append(os_path.join(sys_path[0], '..'))
 
+#import coverage
 import unittest
-from unittest.mock import Mock, MagicMock
-
 from core_files import Account
 
-import coverage
-cov = coverage.Coverage()
-cov.start()
 
 class test_Account(unittest.TestCase):
 
@@ -39,10 +35,3 @@ class test_Account(unittest.TestCase):
         self.account = Account(2, "name", "password", 15, 0)
         self.account.set_password("newpassword")
         self.assertEqual(self.account.password, "newpassword")
-
-if __name__ == "__main__":
-    unittest.main()
-
-cov.stop()
-cov.save()
-cov.report()

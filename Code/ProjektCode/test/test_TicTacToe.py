@@ -5,12 +5,10 @@ from os import path as os_path
 from sys import path as sys_path
 sys_path.append(os_path.join(sys_path[0], '..'))
 
+#import coverage
 import unittest
 from games import TicTacToe
 
-import coverage
-cov = coverage.Coverage()
-cov.start()
 
 class test_TicTacToe(unittest.TestCase):
 
@@ -22,9 +20,3 @@ class test_TicTacToe(unittest.TestCase):
         self.game.change_symbols()
         self.assertEqual(self.game.active_player, 'O')
             
-if __name__ == '__main__':
-    unittest.main()
-
-cov.stop()
-cov.save()
-cov.report()

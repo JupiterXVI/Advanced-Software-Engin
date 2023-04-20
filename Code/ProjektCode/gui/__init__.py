@@ -3,8 +3,9 @@ from .gui_specifications import ChooseGame
 from .gui_specifications import EditAccount
 from .gui_specifications import Start
 from .gui_specifications import ManageAccount
-from . gui_specifications import WinScreen
+from .gui_specifications import WinScreen
 from .gui_specifications import Window
+from .menu_actions import MenuActions
 from .account_secetion_menu import AccountSelectionMenu
 from .choose_game_menu import ChooseGameMenu
 from .edit_account_menu import EditAccountMenu

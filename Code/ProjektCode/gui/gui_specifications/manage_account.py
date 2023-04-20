@@ -1,7 +1,20 @@
 """
 imports
 """
-#from sys import path as sys_path
+ACCOUNT_BUTTON_WIDTH = 480
+ACCOUNT_BUTTON_HEIGHT = 100
+ACCOUNT_X_OFFSET = 150
+ACCOUNT_Y_OFFSET = 100
+DELETE_BUTTON_WIDTH = 100
+DELETE_BUTTON_HEIGHT = 100
+DELETE_X_OFFSET = 650
+DELETE_Y_OFFSET = 100
+BUTTON_OFFSET = 25
+BACK_BUTTON_WIDTH = 500
+BACK_BUTTON_HEIGHT = 100
+BACK_X_OFFSET = 200
+BACK_Y_OFFSET = 725
+
 
 # This class discribes the struckture of the main menu
 # which can be accessed form outside
@@ -22,12 +35,12 @@ class ManageAccount(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            150,  # pos_x
-            100   # pos_y
+            ACCOUNT_X_OFFSET,  # pos_x
+            ACCOUNT_Y_OFFSET   # pos_y
         ],
         "dimensions": [
-            480, # width
-            100  # heigth
+            ACCOUNT_BUTTON_WIDTH, # width
+            ACCOUNT_BUTTON_HEIGHT  # heigth
         ],
         "color": [
             180, # red
@@ -51,12 +64,12 @@ class ManageAccount(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            650,  # pos_x
-            100   # pos_y
+            DELETE_X_OFFSET,  # pos_x
+            DELETE_Y_OFFSET   # pos_y
         ],
         "dimensions": [
-            100, # width
-            100  # heigth
+            DELETE_BUTTON_WIDTH, # width
+            DELETE_BUTTON_HEIGHT  # heigth
         ],
         "color": [
             180, # red
@@ -80,12 +93,12 @@ class ManageAccount(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            150,  # pos_x
-            225   # pos_y
+            ACCOUNT_X_OFFSET,  # pos_x
+            ACCOUNT_Y_OFFSET + (1*(ACCOUNT_BUTTON_HEIGHT+BUTTON_OFFSET)) # pos_y
         ],
         "dimensions": [
-            480, # width
-            100  # heigth
+            ACCOUNT_BUTTON_WIDTH, # width
+            ACCOUNT_BUTTON_HEIGHT  # heigth
         ],
         "color": [
             220, # red
@@ -109,12 +122,12 @@ class ManageAccount(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            650,  # pos_x
-            225   # pos_y
+            DELETE_X_OFFSET,  # pos_x
+            DELETE_Y_OFFSET + (1*(DELETE_BUTTON_HEIGHT+BUTTON_OFFSET)) # pos_y
         ],
         "dimensions": [
-            100, # width
-            100  # heigth
+            DELETE_BUTTON_WIDTH, # width
+            DELETE_BUTTON_HEIGHT  # heigth
         ],
         "color": [
             220, # red
@@ -138,12 +151,12 @@ class ManageAccount(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            150,  # pos_x
-            350   # pos_y
+            ACCOUNT_X_OFFSET,  # pos_x
+            ACCOUNT_Y_OFFSET + (2*(ACCOUNT_BUTTON_HEIGHT+BUTTON_OFFSET)) # pos_y
         ],
         "dimensions": [
-            480, # width
-            100  # heigth
+            ACCOUNT_BUTTON_WIDTH, # width
+            ACCOUNT_BUTTON_HEIGHT  # heigth
         ],
         "color": [
             220, # red
@@ -167,12 +180,12 @@ class ManageAccount(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            650,  # pos_x
-            350   # pos_y
+            DELETE_X_OFFSET,  # pos_x
+            DELETE_Y_OFFSET + (2*(DELETE_BUTTON_HEIGHT+BUTTON_OFFSET)) # pos_y
         ],
         "dimensions": [
-            100, # width
-            100  # heigth
+            DELETE_BUTTON_WIDTH, # width
+            DELETE_BUTTON_HEIGHT  # heigth
         ],
         "color": [
             220, # red
@@ -196,12 +209,12 @@ class ManageAccount(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            150,  # pos_x
-            475   # pos_y
+            ACCOUNT_X_OFFSET,  # pos_x
+            ACCOUNT_Y_OFFSET + (3*(ACCOUNT_BUTTON_HEIGHT+BUTTON_OFFSET)) # pos_y
         ],
         "dimensions": [
-            480, # width
-            100  # heigth
+            ACCOUNT_BUTTON_WIDTH, # width
+            ACCOUNT_BUTTON_HEIGHT  # heigth
         ],
         "color": [
             220, # red
@@ -225,12 +238,12 @@ class ManageAccount(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            650,  # pos_x
-            475   # pos_y
+            DELETE_X_OFFSET,  # pos_x
+            DELETE_Y_OFFSET + (3*(DELETE_BUTTON_HEIGHT+BUTTON_OFFSET)) # pos_y
         ],
         "dimensions": [
-            100, # width
-            100  # heigth
+            DELETE_BUTTON_WIDTH, # width
+            DELETE_BUTTON_HEIGHT  # heigth
         ],
         "color": [
             220, # red
@@ -254,12 +267,12 @@ class ManageAccount(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            150,  # pos_x
-            600   # pos_y
+            ACCOUNT_X_OFFSET,  # pos_x
+            ACCOUNT_Y_OFFSET + (4*(ACCOUNT_BUTTON_HEIGHT+BUTTON_OFFSET)) # pos_y
         ],
         "dimensions": [
-            480, # width
-            100  # heigth
+            ACCOUNT_BUTTON_WIDTH, # width
+            ACCOUNT_BUTTON_HEIGHT  # heigth
         ],
         "color": [
             180, # red
@@ -283,12 +296,12 @@ class ManageAccount(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            650,  # pos_x
-            600   # pos_y
+            DELETE_X_OFFSET,  # pos_x
+            DELETE_Y_OFFSET + (4*(DELETE_BUTTON_HEIGHT+BUTTON_OFFSET)) # pos_y
         ],
         "dimensions": [
-            100, # width
-            100  # heigth
+            DELETE_BUTTON_WIDTH, # width
+            DELETE_BUTTON_HEIGHT  # heigth
         ],
         "color": [
             180, # red
@@ -312,12 +325,12 @@ class ManageAccount(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            200,  # pos_x
-            725   # pos_y
+            BACK_X_OFFSET,  # pos_x
+            BACK_Y_OFFSET   # pos_y
         ],
         "dimensions": [
-            500, # width
-            100  # heigth
+            BACK_BUTTON_WIDTH, # width
+            BACK_BUTTON_HEIGHT  # heigth
         ],
         "color": [
             220, # red

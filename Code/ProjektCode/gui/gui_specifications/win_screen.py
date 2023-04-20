@@ -1,7 +1,22 @@
 """
 imports
 """
-#from sys import path as sys_path
+HEADLINE_WIDTH = 500
+HEADLINE_HEIGHT = 100
+HEADLINE_X_OFFSET = 200
+HEADLINE_Y_OFFSET = 150
+NAME_WIDTH = 200
+NAME_HEIGHT = 50
+POINT_WIDTH = 100
+NAME_X_OFFSET = 210
+NAME_Y_OFFSET = 250
+POINT_X_OFFSET = 550
+ROW_OFFSET = -10
+BUTTON_WIDTH = 400
+BUTTON_HEIGHT = 100
+BUTTON_X_OFFSET = 250
+BUTTON_Y_OFFSET = 580
+
 
 # This class discribes the struckture of the main menu
 # which can be accessed form outside
@@ -22,12 +37,12 @@ class WinScreen(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            200,  # pos_x
-            150 # pos_y
+            HEADLINE_X_OFFSET,  # pos_x
+            HEADLINE_Y_OFFSET # pos_y
         ],
         "dimensions": [
-            500, # width
-            100  # heigth
+            HEADLINE_WIDTH, # width
+            HEADLINE_HEIGHT  # heigth
         ],
         "color": [
             0, # red
@@ -50,12 +65,12 @@ class WinScreen(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            210,  # pos_x
-            250 # pos_y
+            NAME_X_OFFSET,  # pos_x
+            NAME_Y_OFFSET # pos_y
         ],
         "dimensions": [
-            200, # width
-            50  # heigth
+            NAME_WIDTH, # width
+            NAME_HEIGHT  # heigth
         ],
         "color": [
             0, # red
@@ -78,12 +93,12 @@ class WinScreen(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            550,  # pos_x
-            250 # pos_y
+            POINT_X_OFFSET,  # pos_x
+            NAME_Y_OFFSET # pos_y
         ],
         "dimensions": [
-            100, # width
-            50  # heigth
+            POINT_WIDTH, # width
+            NAME_HEIGHT  # heigth
         ],
         "color": [
             0, # red
@@ -106,12 +121,12 @@ class WinScreen(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            210,  # pos_x
-            290 # pos_y
+            NAME_X_OFFSET,  # pos_x
+            NAME_Y_OFFSET + (1*(NAME_HEIGHT+ROW_OFFSET)) # pos_y
         ],
         "dimensions": [
-            200, # width
-            50  # heigth
+            NAME_WIDTH, # width
+            NAME_HEIGHT  # heigth
         ],
         "color": [
             0, # red
@@ -134,12 +149,12 @@ class WinScreen(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            550,  # pos_x
-            290 # pos_y
+            POINT_X_OFFSET,  # pos_x
+            NAME_Y_OFFSET + (1*(NAME_HEIGHT+ROW_OFFSET)) # pos_y
         ],
         "dimensions": [
-            100, # width
-            50  # heigth
+            POINT_WIDTH, # width
+            NAME_HEIGHT  # heigth
         ],
         "color": [
             0, # red
@@ -162,12 +177,12 @@ class WinScreen(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            210,  # pos_x
-            330 # pos_y
+            NAME_X_OFFSET,  # pos_x
+            NAME_Y_OFFSET + (2*(NAME_HEIGHT+ROW_OFFSET)) # pos_y
         ],
         "dimensions": [
-            200, # width
-            50  # heigth
+            NAME_WIDTH, # width
+            NAME_HEIGHT  # heigth
         ],
         "color": [
             0, # red
@@ -190,12 +205,12 @@ class WinScreen(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            550,  # pos_x
-            330 # pos_y
+            POINT_X_OFFSET,  # pos_x
+            NAME_Y_OFFSET + (2*(NAME_HEIGHT+ROW_OFFSET)) # pos_y
         ],
         "dimensions": [
-            100, # width
-            50  # heigth
+            POINT_WIDTH, # width
+            NAME_HEIGHT  # heigth
         ],
         "color": [
             0, # red
@@ -218,12 +233,12 @@ class WinScreen(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            210,  # pos_x
-            370 # pos_y
+            NAME_X_OFFSET,  # pos_x
+            NAME_Y_OFFSET + (3*(NAME_HEIGHT+ROW_OFFSET)) # pos_y
         ],
         "dimensions": [
-            200, # width
-            50  # heigth
+            NAME_WIDTH, # width
+            NAME_HEIGHT  # heigth
         ],
         "color": [
             0, # red
@@ -246,12 +261,12 @@ class WinScreen(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            550,  # pos_x
-            370 # pos_y
+            POINT_X_OFFSET,  # pos_x
+            NAME_Y_OFFSET + (3*(NAME_HEIGHT+ROW_OFFSET)) # pos_y
         ],
         "dimensions": [
-            100, # width
-            50  # heigth
+            POINT_WIDTH, # width
+            NAME_HEIGHT  # heigth
         ],
         "color": [
             0, # red
@@ -274,12 +289,12 @@ class WinScreen(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            210,  # pos_x
-            410 # pos_y
+            NAME_X_OFFSET,  # pos_x
+            NAME_Y_OFFSET + (4*(NAME_HEIGHT+ROW_OFFSET)) # pos_y
         ],
         "dimensions": [
-            200, # width
-            50  # heigth
+            NAME_WIDTH, # width
+            NAME_HEIGHT  # heigth
         ],
         "color": [
             0, # red
@@ -302,12 +317,12 @@ class WinScreen(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            550,  # pos_x
-            410 # pos_y
+            POINT_X_OFFSET,  # pos_x
+            NAME_Y_OFFSET + (4*(NAME_HEIGHT+ROW_OFFSET)) # pos_y
         ],
         "dimensions": [
-            100, # width
-            50  # heigth
+            POINT_WIDTH, # width
+            NAME_HEIGHT  # heigth
         ],
         "color": [
             0, # red
@@ -330,12 +345,12 @@ class WinScreen(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            250,  # pos_x
-            580 # pos_y
+            BUTTON_X_OFFSET,  # pos_x
+            BUTTON_Y_OFFSET # pos_y
         ],
         "dimensions": [
-            400, # width
-            100  # heigth
+            BUTTON_WIDTH, # width
+            BUTTON_HEIGHT  # heigth
         ],
         "color": [
             150, # red

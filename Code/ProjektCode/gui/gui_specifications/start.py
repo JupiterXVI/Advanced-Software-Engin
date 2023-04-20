@@ -1,7 +1,14 @@
 """
 imports
 """
-#from sys import path as sys_path
+X_OFFSET = 200
+Y_OFFSET = 200
+BUTTON_WIDTH = 500
+BUTTON_HEIGHT = 100
+BUTTON_OFFSET = 50
+CIRCLE_RADIUS = 20
+CIRCLE_X_OFFSET = 430
+CIRCLE_Y_OFFSET = 630
 
 # This class discribes the struckture of the main menu
 # which can be accessed form outside
@@ -22,12 +29,12 @@ class Start(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            200,  # pos_x
-            200 # pos_y
+            X_OFFSET,  # pos_x
+            Y_OFFSET # pos_y
         ],
         "dimensions": [
-            500, # width
-            100  # heigth
+            BUTTON_WIDTH, # width
+            BUTTON_HEIGHT  # heigth
         ],
         "color": [
             220, # red
@@ -51,12 +58,12 @@ class Start(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            200,  # pos_x
-            350 # pos_y
+            X_OFFSET,  # pos_x
+            Y_OFFSET + (1*(BUTTON_HEIGHT+BUTTON_OFFSET))  # pos_y
         ],
         "dimensions": [
-            500, # width
-            100  # heigth
+            BUTTON_WIDTH, # width
+            BUTTON_HEIGHT # heigth
         ],
         "color": [
             180, # red
@@ -79,12 +86,12 @@ class Start(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            200,  # pos_x
-            500 # pos_y
+            X_OFFSET,  # pos_x
+            Y_OFFSET + (2*(BUTTON_HEIGHT+BUTTON_OFFSET))  # pos_y
         ],
         "dimensions": [
-            500, # width
-            100  # heigth
+            BUTTON_WIDTH, # width
+            BUTTON_HEIGHT # heigth
         ],
         "color": [
             180, # red
@@ -99,14 +106,14 @@ class Start(): # muss ggf keine klasse ein
         "name": "circle",
         "form": "circle",
         "position": [
-            430,  # pos_x
-            630 # pos_y
+            CIRCLE_X_OFFSET,  # pos_x
+            CIRCLE_Y_OFFSET # pos_y
         ],
         "dimensions": [
-            40, # width
-            40  # heigth
+            2*CIRCLE_RADIUS, # width
+            2*CIRCLE_RADIUS  # heigth
         ],
-        "radius": 20,
+        "radius": CIRCLE_RADIUS,
         "color": [
             220, # red
             220, # green

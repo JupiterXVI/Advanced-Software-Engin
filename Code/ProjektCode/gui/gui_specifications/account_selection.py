@@ -1,16 +1,15 @@
 """
 imports
 """
-#from sys import path as sys_path
+X_OFFSET = 200
+Y_OFFSET = 100
+ACCOUNT_BUTTON_WIDTH = 500
+ACCOUNT_BUTTON_HEIGHT = 80
+ACCOUNT_BUTTON_OFFSET = 20
 
 # This class discribes the struckture of the main menu
 # which can be accessed form outside
-class AccountSelection(): # muss ggf keine klasse ein
-    """
-    global variables
-    """
-
-
+class AccountSelection():
     """
     global variables
     """
@@ -27,19 +26,19 @@ class AccountSelection(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            200,  # pos_x
-            100   # pos_y
+            X_OFFSET,  # pos_x
+            Y_OFFSET   # pos_y
         ],
         "dimensions": [
-            500, # width
-            80  # heigth
+            ACCOUNT_BUTTON_WIDTH, # width
+            ACCOUNT_BUTTON_HEIGHT  # heigth
         ],
         "color": [
             175, # red
             201, # green
             147  # blue
         ],
-        "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
+        "line_thickness": 0  
     }
    
     account_1 = {
@@ -55,19 +54,19 @@ class AccountSelection(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            200,  # pos_x
-            200   # pos_y
+            X_OFFSET,  # pos_x
+            Y_OFFSET + (1*(ACCOUNT_BUTTON_HEIGHT+ACCOUNT_BUTTON_OFFSET))   # pos_y
         ],
         "dimensions": [
-            500, # width
-            80  # heigth
+            ACCOUNT_BUTTON_WIDTH, # width
+            ACCOUNT_BUTTON_HEIGHT  # heigth
         ],
         "color": [
             54, # red
             76, # green
             139  # blue
         ],
-        "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
+        "line_thickness": 0  
     }
 
     
@@ -84,19 +83,19 @@ class AccountSelection(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            200,  # pos_x
-            300   # pos_y
+            X_OFFSET,  # pos_x
+            Y_OFFSET + (2*(ACCOUNT_BUTTON_HEIGHT+ACCOUNT_BUTTON_OFFSET))   # pos_y
         ],
         "dimensions": [
-            500, # width
-            80  # heigth
+            ACCOUNT_BUTTON_WIDTH, # width
+            ACCOUNT_BUTTON_HEIGHT  # heigth
         ],
         "color": [
             110, # red
             80, # green
             95  # blue
         ],
-        "line_thickness": 0  # 0 -> filled; 1 -> thin, 2 -> thicker
+        "line_thickness": 0  
     }
 
     account_3 = {
@@ -112,12 +111,12 @@ class AccountSelection(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            200,  # pos_x
-            400   # pos_y
+            X_OFFSET,  # pos_x
+            Y_OFFSET + (3*(ACCOUNT_BUTTON_HEIGHT+ACCOUNT_BUTTON_OFFSET))   # pos_y
         ],
         "dimensions": [
-            500, # width
-            80  # heigth
+            ACCOUNT_BUTTON_WIDTH, # width
+            ACCOUNT_BUTTON_HEIGHT  # heigth
         ],
         "color": [
             251, # red
@@ -140,12 +139,12 @@ class AccountSelection(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            200,  # pos_x
-            500   # pos_y
+            X_OFFSET,  # pos_x
+            Y_OFFSET + (4*(ACCOUNT_BUTTON_HEIGHT+ACCOUNT_BUTTON_OFFSET))   # pos_y
         ],
         "dimensions": [
-            500, # width
-            80  # heigth
+            ACCOUNT_BUTTON_WIDTH, # width
+            ACCOUNT_BUTTON_HEIGHT  # heigth
         ],
         "color": [
             232, # red
@@ -168,12 +167,12 @@ class AccountSelection(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            200,  # pos_x
-            600   # pos_y
+            X_OFFSET,  # pos_x
+            Y_OFFSET + (5*(ACCOUNT_BUTTON_HEIGHT+ACCOUNT_BUTTON_OFFSET))   # pos_y
         ],
         "dimensions": [
-            500, # width
-            80  # heigth
+            ACCOUNT_BUTTON_WIDTH, # width
+            ACCOUNT_BUTTON_HEIGHT  # heigth
         ],
         "color": [
             29, # red
@@ -196,12 +195,12 @@ class AccountSelection(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            200,  # pos_x
-            700   # pos_y
+            X_OFFSET,  # pos_x
+            Y_OFFSET + (6*(ACCOUNT_BUTTON_HEIGHT+ACCOUNT_BUTTON_OFFSET))   # pos_y
         ],
         "dimensions": [
-            500, # width
-            80  # heigth
+            ACCOUNT_BUTTON_WIDTH, # width
+            ACCOUNT_BUTTON_HEIGHT  # heigth
         ],
         "color": [
             216, # red

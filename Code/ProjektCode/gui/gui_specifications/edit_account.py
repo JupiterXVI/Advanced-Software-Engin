@@ -1,7 +1,14 @@
 """
 imports
 """
-#from sys import path as sys_path
+TEXT_WIDTH = 1
+TEXT_X_OFFSET = 200
+TEXT_Y_OFFSET = 100
+INPUT_WIDTH = 375
+INPUT_HEIGHT = 100
+INPUT_X_OFFSET = 410
+ROW_OFFSET = 25
+
 
 # This class discribes the struckture of the main menu
 # which can be accessed form outside
@@ -23,11 +30,11 @@ class EditAccount(): # muss ggf keine klasse ein
         },
         "position":[
             200,  # pos_x
-            100   # pos_y
+            TEXT_Y_OFFSET # pos_y
         ],
         "dimensions": [
-            1, # width
-            100  # heigth
+            TEXT_WIDTH, # width
+            INPUT_HEIGHT  # heigth
         ],
         "color": [
             30, # red
@@ -51,12 +58,12 @@ class EditAccount(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            410,  # pos_x
-            100   # pos_y
+            INPUT_X_OFFSET,  # pos_x
+            TEXT_Y_OFFSET   # pos_y
         ],
         "dimensions": [
-            375, # width
-            100  # heigth
+            INPUT_WIDTH, # width
+            INPUT_HEIGHT  # heigth
         ],
         "color": [
             220, # red
@@ -81,11 +88,11 @@ class EditAccount(): # muss ggf keine klasse ein
         },
         "position":[
             190,  # pos_x
-            225   # pos_y
+            TEXT_Y_OFFSET + (1*(INPUT_HEIGHT+ROW_OFFSET))  # pos_y
         ],
         "dimensions": [
-            1, # width
-            100  # heigth
+            TEXT_WIDTH, # width
+            INPUT_HEIGHT  # heigth
         ],
         "color": [
             30, # red
@@ -109,12 +116,12 @@ class EditAccount(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            410,  # pos_x
-            225   # pos_y
+            INPUT_X_OFFSET,  # pos_x
+            TEXT_Y_OFFSET + (1*(INPUT_HEIGHT+ROW_OFFSET))  # pos_y
         ],
         "dimensions": [
-            375, # width
-            100  # heigth
+            INPUT_WIDTH, # width
+            INPUT_HEIGHT  # heigth
         ],
         "color": [
             220, # red
@@ -139,11 +146,11 @@ class EditAccount(): # muss ggf keine klasse ein
         },
         "position":[
             245,  # pos_x
-            350   # pos_y
+            TEXT_Y_OFFSET + (2*(INPUT_HEIGHT+ROW_OFFSET))  # pos_y
         ],
         "dimensions": [
-            1, # width
-            100  # heigth
+            TEXT_WIDTH, # width
+            INPUT_HEIGHT  # heigth
         ],
         "color": [
             30, # red
@@ -167,12 +174,12 @@ class EditAccount(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            410,  # pos_x
-            350   # pos_y
+            INPUT_X_OFFSET,  # pos_x
+            TEXT_Y_OFFSET + (2*(INPUT_HEIGHT+ROW_OFFSET))  # pos_y
         ],
         "dimensions": [
-            375, # width
-            100  # heigth
+            INPUT_WIDTH, # width
+            INPUT_HEIGHT  # heigth
         ],
         "color": [
             220, # red
@@ -197,11 +204,11 @@ class EditAccount(): # muss ggf keine klasse ein
         },
         "position":[
             150,  # pos_x
-            475   # pos_y
+            TEXT_Y_OFFSET + (3*(INPUT_HEIGHT+ROW_OFFSET))  # pos_y
         ],
         "dimensions": [
-            1, # width
-            100  # heigth
+            TEXT_WIDTH, # width
+            INPUT_HEIGHT  # heigth
         ],
         "color": [
             30, # red
@@ -225,12 +232,12 @@ class EditAccount(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            410,  # pos_x
-            475   # pos_y
+            INPUT_X_OFFSET,  # pos_x
+            TEXT_Y_OFFSET + (3*(INPUT_HEIGHT+ROW_OFFSET))  # pos_y
         ],
         "dimensions": [
-            375, # width
-            100  # heigth
+            INPUT_WIDTH, # width
+            INPUT_HEIGHT  # heigth
         ],
         "color": [
             220, # red
@@ -255,11 +262,11 @@ class EditAccount(): # muss ggf keine klasse ein
         },
         "position":[
             195,  # pos_x
-            600   # pos_y
+            TEXT_Y_OFFSET + (4*(INPUT_HEIGHT+ROW_OFFSET))  # pos_y
         ],
         "dimensions": [
-            1, # width
-            100  # heigth
+            TEXT_WIDTH, # width
+            INPUT_HEIGHT  # heigth
         ],
         "color": [
             30, # red
@@ -283,12 +290,12 @@ class EditAccount(): # muss ggf keine klasse ein
             ],
         },
         "position":[
-            410,  # pos_x
-            600   # pos_y
+            INPUT_X_OFFSET,  # pos_x
+            TEXT_Y_OFFSET + (4*(INPUT_HEIGHT+ROW_OFFSET))  # pos_y
         ],
         "dimensions": [
-            375, # width
-            100  # heigth
+            INPUT_WIDTH, # width
+            INPUT_HEIGHT  # heigth
         ],
         "color": [
             220, # red

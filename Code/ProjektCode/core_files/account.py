@@ -7,9 +7,7 @@ class Account():
     """
     global variables
     """
-    # bei erstellen eines Objekts der Klasse werden die Angaben durch den Spieler getroffen und in die Datenbank geschoben
-    # können bei bedarf aus datenbank erfragt werden
-    def __init__(self, player_id, name, password, age, is_admin): #datamanager: DatabaseAccess
+    def __init__(self, player_id, name, password, age, is_admin):
         self.player_id = player_id
         self.name = name
         self.password = password
@@ -20,9 +18,6 @@ class Account():
     """
     functions
     """
-    def refresh_account_data(self):
-        pass
-
     def get_id(self):
         return self.player_id
 
@@ -44,7 +39,6 @@ class Account():
     def get_age(self):
         return self.age
 
-# koherenz erhöhen durch auslagerung des Adminkontents in eigenes Element 
     def set_admin(self, is_admin):
         self.is_admin = is_admin
 

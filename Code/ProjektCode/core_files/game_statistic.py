@@ -41,7 +41,5 @@ class GameStatistic():
         self.losses += 1
 
 
-
-# führe nur aus wenn die Datei direckt ausgeführt wird
 if __name__ == "__main__":
     pass

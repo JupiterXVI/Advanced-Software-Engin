@@ -14,12 +14,10 @@ from core_files import Statistics
 from adapter import DatabaseAccess
 from core_files import GameStatistic
 
+#import coverage
 import unittest
 from unittest.mock import MagicMock
 
-import coverage
-cov = coverage.Coverage()
-cov.start()
 
 class TestStatistics(unittest.TestCase):
     def setUp(self):
@@ -49,11 +47,3 @@ class TestStatistics(unittest.TestCase):
         self.database_access.add_loss.return_value = None
         self.stats.increase_losses(1, 1)
         self.assertEqual(self.stats.player_game_stats[0].get_losses(), 3)
-
-
-if __name__ == '__main__':
-    unittest.main()
-
-cov.stop()
-cov.save()
-cov.report()

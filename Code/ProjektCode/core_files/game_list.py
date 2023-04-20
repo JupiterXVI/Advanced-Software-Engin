@@ -9,8 +9,6 @@ class GameList():
     """
     global variables
     """
-    # bei erstellen eines Objekts der Klasse werden die Angaben durch den Spieler getroffen und in die Datenbank geschoben
-    # können bei bedarf aus datenbank erfragt werden
     def __init__(self, datamanager: DatabaseAccess):
         self.datamanager = datamanager
         self.games = []

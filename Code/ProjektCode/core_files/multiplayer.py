@@ -70,29 +70,27 @@ class Multiplayer():
         Thread(target=self.relay).start()
         Thread(target=self.game.run).start()
         
-        # set game info
         self.win_info = {'win':False, 'waiting_on_win':True, 'player_points':[]}
-        # set game board
-             #Game.game_setup_grafics
+    
         self.sender.send(category='game', name='setup values', info={'function':Game.game_setup_values.__name__, 'parameter':''})
         self.sender.send(category='game', name='setup grafics', info={'function':Game.game_setup_grafics.__name__, 'parameter':''})
-        # game course
+        
         while self.game_is_running:
-            # for every playerd
             for player in self.active_player:
-                # waiting on responce about action validity
                 while not self.valid_player_action:
                     if self.player_is_acting:
-                        self.sender.send(category='game', name='player act', info={'function':Game.player_act.__name__, 'parameter':self.player_action['info']})
+                        self.sender.send(category='game', 
+                                         name='player act',
+                                         info={'function':Game.player_act.__name__, 'parameter':self.player_action['info']})
                         self.player_is_acting = False
                     sleep(0.1)
-                    # allow to exit game
                     if not self.game_is_running:
                         return
                 self.valid_player_action = False
 
-                # waiting on responce about end of game
-                self.sender.send(category='game', name=f'check win for player {player}', info={'function':Game.check_win.__name__, 'parameter':''})
+                self.sender.send(category='game', 
+                                 name=f'check win for player {player}', 
+                                 info={'function':Game.check_win.__name__, 'parameter':''})
                 while self.win_info['waiting_on_win']:
                     sleep(0.1)
                 if self.win_info['win']:

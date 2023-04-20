@@ -1,15 +1,14 @@
 """
 imports
 """
-from core_files import Menu
-from adapter import GuiBuilder
-from gui import Start
+from adapter import GenericMenu
+from gui import Start, MenuActions
 from communication import Sender, Reseiver
 
 
 # this class is the zentral menu from which the user can access the games and other options,
 # as well as the zentrall data forwareder between games and the playground
-class StartMenu(Menu):
+class StartMenu(GenericMenu):
     """
     global variables
     """
@@ -25,8 +24,7 @@ class StartMenu(Menu):
     # -> eine Liste mit bilding-functions um das Menu stück für Stück zu bauen
     # this funktion uses the gui objekt to create a menu form the class parameters
     def change_menu(self):
-        self.sender.send(category='gui', name='send element_info', info={'function':GuiBuilder.set_window_elements.__name__, 'parameter':Start.window_elements})
-        self.sender.send(category='gui', name='set element style', info={'function':GuiBuilder.set_element_styles.__name__, 'parameter':''})
+        MenuActions.get_window_elements_on_screen(Start.window_elements, self.sender)
 
 
     def run(self):
@@ -44,7 +42,7 @@ class StartMenu(Menu):
 
 
     def check_menu_action(self, action):
-        event = self.get_button_from_position(Start.window_elements, action)
+        event = MenuActions.get_button_from_position(Start.window_elements, action)
         if event != "no button":
             if event == "exit":
                 self.sender.send(category="exit", name="exit_event", info="window_closed")

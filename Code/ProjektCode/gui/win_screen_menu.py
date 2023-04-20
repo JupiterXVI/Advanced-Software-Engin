@@ -1,15 +1,14 @@
 """
 imports
 """
-from core_files import Menu
-from adapter import GuiBuilder
-from gui import WinScreen
+from adapter import GenericMenu
+from gui import WinScreen, MenuActions
 from communication import Sender, Reseiver
 
 Y_AXIS = 1
 PLAYER_ENTRY_OFFSET = 30
 
-class WinScreenMenu(Menu):
+class WinScreenMenu(GenericMenu):
     """
     global variables
     """
@@ -28,8 +27,7 @@ class WinScreenMenu(Menu):
         print("open win screen")
         self.get_player_score()
         self.player_score_elements = WinScreen.window_elements + self.player_score_elements
-        self.sender.send(category='gui', name='send element_info', info={'function':GuiBuilder.set_window_elements.__name__, 'parameter':self.player_score_elements})
-        self.sender.send(category='gui', name='set element style', info={'function':GuiBuilder.set_element_styles.__name__, 'parameter':''})
+        MenuActions.get_window_elements_on_screen(self.player_score_elements, self.sender)
 
 
     def run(self):
@@ -48,7 +46,7 @@ class WinScreenMenu(Menu):
                     
     
     def check_menu_action(self, action):
-        event = self.get_button_from_position(WinScreen.window_elements, action)
+        event = MenuActions.get_button_from_position(WinScreen.window_elements, action)
         if event == "start_menu":
             return True
         return False

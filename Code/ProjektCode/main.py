@@ -70,10 +70,10 @@ class Main():
 
             stats.get_statistics()
 
-            game = cg_menu.get_chousen_game()
+            game = cg_menu.get_chosen_game()
             
-            # select the chousen game
-            if game != "no game chousen":    
+            # select the chosen game
+            if game != "no game chosen":    
                 game_index = 0
                 for games in game_list.games:
                     if games.get_name() == game:
@@ -84,8 +84,8 @@ class Main():
                     playground.play(game_id = game_index)
                 else:
                     print(f"{game} is currently not available")
-                # allow for different game to be chousen
-                cg_menu.set_chousen_game("no game chousen")
+                # allow for different game to be chosen
+                cg_menu.set_chosen_game("no game chosen")
 
         print("end")
 
