@@ -11,7 +11,6 @@ from os import path as os_path
 from sys import path as sys_path
 sys_path.append(os_path.join(sys_path[0], '..'))
 
-#import coverage
 import unittest
 from unittest.mock import Mock
 
@@ -30,8 +29,10 @@ class test_AccountList(unittest.TestCase):
             (1, 'user1', 'pass1', 25, False),
             (2, 'user2', 'pass2', 30, True)
         ]
+
         #act
         self.account_list.get_accounts()
+
         #assert
         self.assertEqual(len(self.account_list.account), 2)
         self.assertEqual(self.account_list.account[0].player_id, 1)
@@ -39,17 +40,21 @@ class test_AccountList(unittest.TestCase):
         self.assertEqual(self.account_list.account[1].player_id, 2)
         self.assertEqual(self.account_list.account[1].name, 'user2')
 
+
     def test_add_account(self):
         #arrange
         self.mock_datamanager = Mock(spec=DatabaseAccess)
         self.account_list = AccountList(self.mock_datamanager)
         self.mock_datamanager.last_added_account.return_value = 3
+
         #act
         self.account_list.add_account('user3', 'pass3', 35, True)
+
         #assert
         self.assertEqual(len(self.account_list.account), 1)
         self.assertEqual(self.account_list.account[0].player_id, 3)
         self.assertEqual(self.account_list.account[0].name, 'user3')
+
 
     def test_save_account_data(self):
         #arrange
@@ -61,7 +66,9 @@ class test_AccountList(unittest.TestCase):
         mock_account.password = 'pass1'
         mock_account.age = 25
         mock_account.is_admin = False
+
         #act
         self.account_list.save_account_data(mock_account)
         #assert
+
         self.mock_datamanager.update_account.assert_called_once_with(1, 'user1', 'pass1', 25, False)

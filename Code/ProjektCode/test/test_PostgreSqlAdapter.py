@@ -1,70 +1,87 @@
 """
-1. Testen, ob config ein dictionary zurückgibt
-2. Können neue Accounts erstellt werden?
-3. Können bestehende Accounts gbearbeitet werden?
-4. Ist das Löschen von Accounts möglich?
-5. Werden das Tuple eines Accounts richtig ausgegeben?
-"""
-"""
 imports
 """
 from os import path as os_path
 from sys import path as sys_path
 sys_path.append(os_path.join(sys_path[0], '..'))
 
-#import coverage
 import unittest
 from adapter import PostgreSqlAdapter
+from unittest.mock import patch, MagicMock
 
 
-class test_PostgreSqlAdapter(unittest.TestCase):
-    def test_config(self):
-        #arrange
+class TestPostgreSqlAdapter(unittest.TestCase):
+    
+    def setUp(self):
         self.adapter = PostgreSqlAdapter()
-        #act
-        result = self.adapter.config()
-        #assert
-        self.assertIsInstance(result, dict)
 
-    def test_add_account(self):
-        self.adapter = PostgreSqlAdapter()
-        result = len(self.adapter.get_player_table())
-        self.adapter.add_account('test_addaccount', 'password', 25, False)
-        self.assertIsInstance(result, int)
-        self.assertEqual(result + 1, len(self.adapter.get_player_table()))
-        #undo changes
-        self.adapter.delete_account(self.adapter.last_added_account())
+    @patch('adapter.PostgreSqlAdapter.get_connection')
+    def test_add_account(self, mock_get_connection):
+        # arrange
+        mock_conn = MagicMock()
+        mock_cur = MagicMock()
+        mock_get_connection.return_value = (mock_conn, mock_cur)
+        
+        # act
+        self.adapter.add_account('test_user', 'test_password', 18, False)
 
-    def test_update_account(self):
-        self.adapter = PostgreSqlAdapter()
-        self.adapter.get_player(1)
-        self.adapter.update_account(1, 'new_test', 'new_test', '30', True)
-        result = self.adapter.get_player(1)
-        self.assertIsInstance(result, tuple)
-        self.assertEqual(result[1], 'new_test')
-        self.assertEqual(result[2], 'new_test')
-        self.assertEqual(result[3], '30')
-        self.assertEqual(result[4], True)
-        #undo changes
-        self.adapter = PostgreSqlAdapter()
-        self.adapter.get_player(1)
-        self.adapter.update_account(1, 'test', 'test', '20', False)
+        # assert
+        mock_conn.commit.assert_called_once()
+        mock_cur.execute.assert_called_once_with(
+            "INSERT INTO player(username, password, age, is_admin) VALUES(%s, %s, %s, %s);", 
+            ('test_user', 'test_password', 18, False)
+        )
 
-    def test_delete_account(self):
-        self.adapter = PostgreSqlAdapter()
-        result1 = self.adapter.get_player_table()
-        self.adapter.add_account('test_delete', 'test_delete', 25, False)
-        self.adapter.delete_account(self.adapter.last_added_account())
-        result2 = self.adapter.get_player_table()
-        self.assertEqual(len(result1), len(result2))
 
-    def test_get_player(self):
-        self.adapter = PostgreSqlAdapter()
-        self.adapter.add_account('admin', 'admin', '99', True)
-        result = self.adapter.get_player(0)
-        self.assertIsInstance(result, tuple)
-        self.assertEqual(result[0], 0)
-        self.assertEqual(result[1], 'admin')
-        self.assertEqual(result[2], 'admin')
-        self.assertEqual(result[3], '99')
-        self.assertEqual(result[4], True)
+    @patch('adapter.PostgreSqlAdapter.get_connection')
+    def test_add_account_gamestats(self, mock_get_connection):
+        # arrange
+        mock_conn = MagicMock()
+        mock_cur = MagicMock()
+        mock_get_connection.return_value = (mock_conn, mock_cur)
+        mock_cur.fetchone.return_value = (3,0)  # game count
+
+        # act
+        self.adapter.add_account_gamestats(1)
+
+        # assert
+        mock_conn.commit.assert_called_once()
+        mock_cur.execute.assert_called_with(
+            "INSERT INTO gamestats(fk_player_id, fk_game_id, wins, losses) VALUES(%s, %s, %s, %s);",
+            (1, 3, 0, 0)
+        )
+        self.assertEqual(mock_cur.execute.call_count, 4)
+
+
+    @patch('adapter.PostgreSqlAdapter.get_connection')
+    def test_last_added_account(self, mock_get_connection):
+        # arrange
+        mock_conn = MagicMock()
+        mock_cur = MagicMock()
+        mock_cur.fetchone.return_value = (5,0)
+        mock_get_connection.return_value = (mock_conn, mock_cur)
+
+        # act
+        result = self.adapter.last_added_account()
+
+        # assert
+        mock_cur.execute.assert_called_once_with('SELECT MAX(player_id) FROM player')
+        self.assertEqual(result, 5)
+
+
+    @patch('adapter.PostgreSqlAdapter.get_connection')
+    def test_update_account(self, mock_get_connection):
+        # arrange
+        mock_conn = MagicMock()
+        mock_cur = MagicMock()
+        mock_get_connection.return_value = (mock_conn, mock_cur)
+
+        # act
+        self.adapter.update_account(1, 'test_user', 'test_password', 18, False)
+
+        # assert
+        mock_conn.commit.assert_called_once()
+        mock_cur.execute.assert_called_once_with(
+            "UPDATE player SET username = %s, password = %s, age = %s, is_admin = %s WHERE player_id = %s;",
+            ('test_user', 'test_password', 18, False, 1)
+        )

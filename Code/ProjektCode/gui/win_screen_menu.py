@@ -5,8 +5,6 @@ from adapter import GenericMenu
 from gui import WinScreen, MenuActions
 from communication import Sender, Reseiver
 
-Y_AXIS = 1
-PLAYER_ENTRY_OFFSET = 30
 
 class WinScreenMenu(GenericMenu):
     """

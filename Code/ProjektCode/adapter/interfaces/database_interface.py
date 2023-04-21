@@ -1,10 +1,9 @@
 """
-Interfaces zur Estellung eines Menüs
+Interface do guarante database funktions
 """
 from abc import ABC, abstractmethod
 
 
-# astablish all funktions which a database connector has to provide
 class DatabaseAccess(ABC):
     @abstractmethod
     def add_account(self, username, password, age, is_admin):

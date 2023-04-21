@@ -13,3 +13,4 @@ from .start_menu import StartMenu
 from .manage_account_menu import ManageAccountMenu
 from .menu_manager import MenuManager
 from .win_screen_menu import WinScreenMenu
+from .win_screen_menu_disco import WinScreenMenuDisco

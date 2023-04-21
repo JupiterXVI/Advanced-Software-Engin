@@ -1,10 +1,9 @@
 """
-Interfaces zur Estellung eines Menüs
+Interface to guarante gui funktions
 """
 from abc import ABC, abstractmethod
 
 
-# astablish all funktions an visualisation plug in has to provide
 class GuiBuilder(ABC):
     @abstractmethod
     def run(self):

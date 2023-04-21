@@ -11,7 +11,6 @@ from os import path as os_path
 from sys import path as sys_path
 sys_path.append(os_path.join(sys_path[0], '..'))
 
-#import coverage
 import unittest
 from core_files import Account
 
@@ -26,10 +25,12 @@ class test_Account(unittest.TestCase):
         #assert
         self.assertEqual(id, 2)
 
+
     def test_set_age(self):
         self.account = Account(2, "name", "password", 15, 0)
         self.account.set_age(30)
         self.assertEqual(self.account.age, 30)
+
 
     def test_set_password(self):
         self.account = Account(2, "name", "password", 15, 0)

@@ -3,7 +3,7 @@ imports
 """
 from adapter import PygameBuilder, PostgreSqlAdapter
 from core_files import AccountList, Playground, Singleplayer, Multiplayer, GameList, Statistics
-from gui import StartMenu, ChooseGameMenu, AccountSelectionMenu, WinScreenMenu, ManageAccountMenu, EditAccountMenu, MenuManager
+from gui import StartMenu, ChooseGameMenu, AccountSelectionMenu, WinScreenMenu, WinScreenMenuDisco, ManageAccountMenu, EditAccountMenu, MenuManager
 from games import TicTacToe 
 
 from threading import Thread
@@ -41,6 +41,7 @@ class Main():
         as_menu = AccountSelectionMenu(ac_list)
 
         ws_menu = WinScreenMenu()
+        ## disco = WinScreenMenuDisco()
 
         stats = Statistics(PostgreSqlAdapter())
         stats.get_statistics()

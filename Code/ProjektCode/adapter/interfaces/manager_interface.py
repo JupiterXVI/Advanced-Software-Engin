@@ -1,9 +1,8 @@
 """
-Interfaces zur Estellung eines Menüs
+Interface to guarante menu management
 """
 from abc import ABC, abstractmethod
 
-# astablish all funktions which a database connector has to provide
 class Manager():
     @abstractmethod
     def setup_window(self):
@@ -20,3 +19,4 @@ class Manager():
     @abstractmethod
     def run_relay(self):
         pass
+    
