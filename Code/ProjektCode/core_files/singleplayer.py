@@ -1,7 +1,7 @@
 """
 imports
 """
-from adapter import GuiBuilder
+from game import Game
 from communication import Sender, Reseiver
 
 

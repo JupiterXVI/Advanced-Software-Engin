@@ -7,10 +7,6 @@ from threading import Thread
 from time import sleep
 
 
-#from core_files import AccountList
-#from adapter import PostgreSqlAdapter
-
-
 class Multiplayer():
     """
     global variables

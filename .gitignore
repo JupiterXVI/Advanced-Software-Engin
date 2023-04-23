@@ -13,3 +13,5 @@ Code/ProjektCode/games/graphics/tic_tac_toe/__pycache__/
 Code/ProjektCode/gui/__pycache__/
 Code/ProjektCode/gui/gui_specifications/__pycache__/
 Code/ProjektCode/test/__pycache__/
+Code/ProjektCode/test/.coverage
+Code/ProjektCode/test/htmlcov/

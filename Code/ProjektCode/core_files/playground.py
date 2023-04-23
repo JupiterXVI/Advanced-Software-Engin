@@ -4,10 +4,7 @@ imports
 from adapter import GuiBuilder
 from core_files import Singleplayer, Multiplayer
 from communication import Sender, Reseiver
-from gui import AccountSelectionMenu
-
-from core_files import AccountList
-from adapter import PostgreSqlAdapter
+from gui import AccountSelection
 
 
 class Playground():

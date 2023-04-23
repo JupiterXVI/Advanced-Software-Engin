@@ -40,8 +40,8 @@ class Main():
 
         as_menu = AccountSelectionMenu(ac_list)
 
-        ws_menu = WinScreenMenu()
-        ## disco = WinScreenMenuDisco()
+        #ws_menu = WinScreenMenu()
+        disco = WinScreenMenuDisco()
 
         stats = Statistics(PostgreSqlAdapter())
         stats.get_statistics()
@@ -54,7 +54,7 @@ class Main():
         playground = Playground(game_list.games, gui_builder, s_player, m_player)
         
         playground.set_select_screen(as_menu)
-        playground.set_win_screen(ws_menu)
+        playground.set_win_screen(disco)
         playground.set_statistics(stats)
 
         # connect menus and start up menu interaction
