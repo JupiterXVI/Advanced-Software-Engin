@@ -1,7 +1,7 @@
 """
 imports
 """
-from game import Game
+#from game import Game
 from communication import Sender, Reseiver
 
 
