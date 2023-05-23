@@ -32,7 +32,9 @@ wenn der Docker-Container mit der Postgres-Datenbank läuft.
   - docker rm player_db_container
 - Entferne Image:
   - docker image rm player_db
-
+<br/>
+Oder:<br/>
+$ docker pull ghcr.io/jupiterxvi/advanced-software-engin:main :<br/>
 _______________________________________________________________________
 Zusammenarbeit im GitHub: <br/>
 !! Main bleibt eine lauffähige Version !! 
