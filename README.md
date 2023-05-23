@@ -34,8 +34,9 @@ wenn der Docker-Container mit der Postgres-Datenbank läuft.
   - docker image rm player_db
 <br/>
 Oder:<br/>
-$ docker pull ghcr.io/jupiterxvi/advanced-software-engin:main
-_______________________________________________________________________
+$ docker pull ghcr.io/jupiterxvi/advanced-software-engin:main <br/>
+<br/>
+_______________________________________________________________________ <br/>
 Zusammenarbeit im GitHub: <br/>
 !! Main bleibt eine lauffähige Version !! 
 - Von main pullen:
